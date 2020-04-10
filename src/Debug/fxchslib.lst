@@ -1,0 +1,797 @@
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 10-Apr-2020 21:05:11  PAGE    1
+
+************ OBJECT LISTING ************
+
+FILE NAME: D:\用户目录\我的文档\CASIO\fx-9860G SDK\DL2Rev\Chinese-Reader~-\fxchslib.c
+
+SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
+
+      fxchslib.c     1    /*
+      fxchslib.c     2        Chinese Display Library
+      fxchslib.c     3    
+      fxchslib.c     4            by Anderain Lovelace 2012.8.19
+      fxchslib.c     5    */
+      fxchslib.c     6    
+      fxchslib.c     7    #include <stdio.h>
+      fxchslib.c     8    #include <fxlib.h>
+      fxchslib.c     9    
+      fxchslib.c    10    #include "fxchslib.h"
+      fxchslib.c    11    
+      fxchslib.c    12    #define is_chschar(c) ((c) & 0x80)
+      fxchslib.c    13    
+      fxchslib.c    14    
+      fxchslib.c    15    typedef FONTCHARACTER fontc;
+      fxchslib.c    16    
+      fxchslib.c    17    const FONTFILE * def_font = NULL;
+      fxchslib.c    18    const FONTFILE * sys_font = NULL, * usr_font = NULL;
+      fxchslib.c    19    
+      fxchslib.c    20    static void draw_picture (int x,int y,int width,int height,int mode,unsigned char * pGraph)
+P   00000000              __$draw_picture:                 ; function: draw_picture
+                                                           ; frame size=28
+    00000000 4F22                   STS.L       PR,@-R15
+      fxchslib.c    21    {
+      fxchslib.c    22            DISPGRAPH dg;
+      fxchslib.c    23    
+      fxchslib.c    24            dg.x                                    = x;
+      fxchslib.c    25            dg.y                                    = y;
+      fxchslib.c    26            dg.GraphData.width              = width;
+      fxchslib.c    27            dg.GraphData.height             = height;
+      fxchslib.c    28            dg.GraphData.pBitmap    = pGraph;
+      fxchslib.c    29            dg.WriteModify                  = mode+1;
+    00000002 E014                   MOV         #20,R0
+    00000004 7FE8                   ADD         #-24,R15
+    00000006 2F42                   MOV.L       R4,@R15
+    00000008 1F51                   MOV.L       R5,@(4,R15)
+    0000000A 1F62                   MOV.L       R6,@(8,R15)
+    0000000C 1F73                   MOV.L       R7,@(12,R15)
+    0000000E 53F8                   MOV.L       @(32,R15),R3
+    00000010 1F34                   MOV.L       R3,@(16,R15)
+      fxchslib.c    30            dg.WriteKind                    = IMB_WRITEKIND_OVER;
+    00000012 E301                   MOV         #1,R3
+    00000014 52F7                   MOV.L       @(28,R15),R2
+    00000016 7201                   ADD         #1,R2
+    00000018 0F24                   MOV.B       R2,@(R0,R15)
+    0000001A E015                   MOV         #21,R0
+    0000001C 0F34                   MOV.B       R3,@(R0,R15)
+      fxchslib.c    31    
+      fxchslib.c    32            Bdisp_WriteGraph_VRAM(&dg);
+    0000001E D34B                   MOV.L       L447+2,R3  ; _Bdisp_WriteGraph_VRAM
+    00000020 430B                   JSR         @R3
+    00000022 64F3                   MOV         R15,R4
+      fxchslib.c    33    }
+    00000024 7F18                   ADD         #24,R15
+
+
+
+
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 10-Apr-2020 21:05:11  PAGE    2
+
+
+SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
+
+    00000026 4F26                   LDS.L       @R15+,PR
+    00000028 000B                   RTS
+    0000002A 0009                   NOP
+      fxchslib.c    34    
+      fxchslib.c    35    static unsigned int x86_dword_to_sh (unsigned int d)
+    0000002C              __$x86_dword_to_sh:              ; function: x86_dword_to_sh
+                                                           ; frame size=0
+      fxchslib.c    36    {
+      fxchslib.c    37            unsigned char c1,c2,c3,c4;
+      fxchslib.c    38            unsigned int  r;
+      fxchslib.c    39    
+      fxchslib.c    40            c1 = d>>24      ;
+      fxchslib.c    41            c2 = (d & 0xFF0000)             >>16;
+    0000002C D548                   MOV.L       L447+6,R5  ; H'00FF0000
+    0000002E 6643                   MOV         R4,R6
+      fxchslib.c    42            c3 = (d & 0xFF00)               >>8     ;
+    00000030 D748                   MOV.L       L447+10,R7 ; H'0000FF00
+    00000032 2549                   AND         R4,R5
+    00000034 4629                   SHLR16      R6
+    00000036 4619                   SHLR8       R6
+    00000038 4529                   SHLR16      R5
+    0000003A 2749                   AND         R4,R7
+    0000003C 4719                   SHLR8       R7
+      fxchslib.c    43            c4 = (d & 0xFF)                         ;
+      fxchslib.c    44            
+      fxchslib.c    45            r = c1 + (c2<<8) + (c3<<16) + (c4<<24);
+    0000003E 655C                   EXTU.B      R5,R5
+    00000040 4518                   SHLL8       R5
+    00000042 677C                   EXTU.B      R7,R7
+    00000044 4728                   SHLL16      R7
+    00000046 357C                   ADD         R7,R5
+    00000048 644C                   EXTU.B      R4,R4
+    0000004A 4428                   SHLL16      R4
+    0000004C 4418                   SHLL8       R4
+    0000004E 354C                   ADD         R4,R5
+    00000050 666C                   EXTU.B      R6,R6
+    00000052 6453                   MOV         R5,R4
+    00000054 346C                   ADD         R6,R4
+      fxchslib.c    46    
+      fxchslib.c    47            return r;
+      fxchslib.c    48    }
+    00000056 000B                   RTS
+    00000058 6043                   MOV         R4,R0
+      fxchslib.c    49    
+      fxchslib.c    50    static fontc * char_to_font(const char *cfname,fontc *ffname)
+    0000005A              __$char_to_font:                 ; function: char_to_font
+                                                           ; frame size=12
+    0000005A 2FE6                   MOV.L       R14,@-R15
+    0000005C 2FD6                   MOV.L       R13,@-R15
+    0000005E 6D43                   MOV         R4,R13
+      fxchslib.c    51    {
+      fxchslib.c    52            int i,len = strlen(cfname);
+    00000060 D33D                   MOV.L       L447+14,R3 ; _strlen
+    00000062 4F22                   STS.L       PR,@-R15
+    00000064 430B                   JSR         @R3
+    00000066 6E53                   MOV         R5,R14
+    00000068 6503                   MOV         R0,R5
+
+
+
+
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 10-Apr-2020 21:05:11  PAGE    3
+
+
+SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
+
+      fxchslib.c    53    
+      fxchslib.c    54            for(i=0; i<len ;++i)
+    0000006A E600                   MOV         #0,R6
+    0000006C 4515                   CMP/PL      R5
+    0000006E 8F09                   BF/S        L419
+    00000070 6463                   MOV         R6,R4
+    00000072              L420:                             
+      fxchslib.c    55                    ffname[i] = cfname[i];
+    00000072 6343                   MOV         R4,R3
+    00000074 4300                   SHLL        R3
+    00000076 33EC                   ADD         R14,R3
+    00000078 6043                   MOV         R4,R0
+    0000007A 7401                   ADD         #1,R4
+    0000007C 02DC                   MOV.B       @(R0,R13),R2
+    0000007E 3453                   CMP/GE      R5,R4
+    00000080 2321                   MOV.W       R2,@R3
+    00000082 8BF6                   BF          L420
+    00000084              L419:                             
+      fxchslib.c    56    
+      fxchslib.c    57            ffname[i]=0;
+    00000084 6043                   MOV         R4,R0
+    00000086 4000                   SHLL        R0
+    00000088 0E65                   MOV.W       R6,@(R0,R14)
+      fxchslib.c    58            return ffname;
+    0000008A 60E3                   MOV         R14,R0
+      fxchslib.c    59    }
+    0000008C 4F26                   LDS.L       @R15+,PR
+    0000008E 6DF6                   MOV.L       @R15+,R13
+    00000090 000B                   RTS
+    00000092 6EF6                   MOV.L       @R15+,R14
+      fxchslib.c    60    
+      fxchslib.c    61    FONTFILE * open_font(const char * cfname)
+    00000094              _open_font:                      ; function: open_font
+                                                           ; frame size=80
+    00000094 2FE6                   MOV.L       R14,@-R15
+    00000096 2FD6                   MOV.L       R13,@-R15
+    00000098 4F22                   STS.L       PR,@-R15
+    0000009A 4F12                   STS.L       MACL,@-R15
+    0000009C 7FC0                   ADD         #-64,R15
+      fxchslib.c    62    {
+      fxchslib.c    63            int                     fh,r;
+      fxchslib.c    64            FONTFILE        *ff;
+      fxchslib.c    65            fontc           ffname[32];
+      fxchslib.c    66    
+      fxchslib.c    67            char_to_font(cfname,ffname);
+    0000009E BFDC                   BSR         __$char_to_font
+    000000A0 65F3                   MOV         R15,R5
+      fxchslib.c    68    
+      fxchslib.c    69            fh = Bfile_OpenFile(ffname,_OPENMODE_READ_SHARE);
+    000000A2 9552                   MOV.W       L447,R5    ; H'0080
+    000000A4 D22D                   MOV.L       L447+18,R2 ; _Bfile_OpenFile
+    000000A6 420B                   JSR         @R2
+    000000A8 64F3                   MOV         R15,R4
+    000000AA 6D03                   MOV         R0,R13
+      fxchslib.c    70    
+      fxchslib.c    71            if (fh<=0) return NULL;
+    000000AC 4D15                   CMP/PL      R13
+
+
+
+
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 10-Apr-2020 21:05:11  PAGE    4
+
+
+SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
+
+    000000AE 8901                   BT          L422
+    000000B0 A03B                   BRA         L423
+    000000B2 E000                   MOV         #0,R0
+    000000B4              L422:                             
+      fxchslib.c    72    
+      fxchslib.c    73            ff                                      = (FONTFILE*)malloc(sizeof(FONTFILE));
+    000000B4 D22A                   MOV.L       L447+22,R2 ; _malloc
+    000000B6 420B                   JSR         @R2
+    000000B8 E430                   MOV         #48,R4
+    000000BA 6E03                   MOV         R0,R14
+      fxchslib.c    74            Bfile_ReadFile (fh,ff,sizeof(FONTFILE)-2*sizeof(int),0);
+    000000BC D329                   MOV.L       L447+26,R3 ; _Bfile_ReadFile
+    000000BE E700                   MOV         #0,R7
+    000000C0 E628                   MOV         #40,R6
+    000000C2 6503                   MOV         R0,R5
+    000000C4 430B                   JSR         @R3
+    000000C6 64D3                   MOV         R13,R4
+      fxchslib.c    75    
+      fxchslib.c    76            ff->file_handle         = fh;
+    000000C8 1ED9                   MOV.L       R13,@(36,R14)
+      fxchslib.c    77    
+      fxchslib.c    78            ff->awidth                      = x86_dword_to_sh(ff->awidth);
+    000000CA BFAF                   BSR         __$x86_dword_to_sh
+    000000CC 54E5                   MOV.L       @(20,R14),R4
+    000000CE 1E05                   MOV.L       R0,@(20,R14)
+      fxchslib.c    79            ff->cwidth                      = x86_dword_to_sh(ff->cwidth);
+    000000D0 BFAC                   BSR         __$x86_dword_to_sh
+    000000D2 54E4                   MOV.L       @(16,R14),R4
+    000000D4 1E04                   MOV.L       R0,@(16,R14)
+      fxchslib.c    80            ff->height                      = x86_dword_to_sh(ff->height);  
+    000000D6 BFA9                   BSR         __$x86_dword_to_sh
+    000000D8 54E6                   MOV.L       @(24,R14),R4
+    000000DA 1E06                   MOV.L       R0,@(24,R14)
+      fxchslib.c    81            ff->asc_offset          = x86_dword_to_sh(ff->asc_offset);
+    000000DC BFA6                   BSR         __$x86_dword_to_sh
+    000000DE 54E7                   MOV.L       @(28,R14),R4
+    000000E0 1E07                   MOV.L       R0,@(28,R14)
+      fxchslib.c    82            ff->chs_offset          = x86_dword_to_sh(ff->chs_offset);
+    000000E2 BFA3                   BSR         __$x86_dword_to_sh
+    000000E4 54E8                   MOV.L       @(32,R14),R4
+      fxchslib.c    83    
+      fxchslib.c    84            r                                       = ff->awidth/8 + (ff->awidth % 8 ? 1 : 0);
+    000000E6 E407                   MOV         #7,R4
+    000000E8 1E08                   MOV.L       R0,@(32,R14)
+    000000EA 55E5                   MOV.L       @(20,R14),R5
+    000000EC 6353                   MOV         R5,R3
+    000000EE 4309                   SHLR2       R3
+    000000F0 4301                   SHLR        R3
+    000000F2 6053                   MOV         R5,R0
+    000000F4 2048                   TST         R4,R0
+    000000F6 8D02                   BT/S        L424
+    000000F8 6533                   MOV         R3,R5
+    000000FA A001                   BRA         L425
+    000000FC E101                   MOV         #1,R1
+    000000FE              L424:                             
+    000000FE E100                   MOV         #0,R1
+    00000100              L425:                             
+
+
+
+
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 10-Apr-2020 21:05:11  PAGE    5
+
+
+SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
+
+      fxchslib.c    85            ff->afont_size          = r*ff->height;
+    00000100 53E6                   MOV.L       @(24,R14),R3
+    00000102 351C                   ADD         R1,R5
+    00000104 0537                   MUL.L       R3,R5
+    00000106 051A                   STS         MACL,R5
+    00000108 1E5B                   MOV.L       R5,@(44,R14)
+      fxchslib.c    86            r                                       = ff->cwidth/8 + (ff->cwidth % 8 ? 1 : 0);
+    0000010A 55E4                   MOV.L       @(16,R14),R5
+    0000010C 6253                   MOV         R5,R2
+    0000010E 4209                   SHLR2       R2
+    00000110 4201                   SHLR        R2
+    00000112 2458                   TST         R5,R4
+    00000114 8D02                   BT/S        L426
+    00000116 6423                   MOV         R2,R4
+    00000118 A001                   BRA         L427
+    0000011A E101                   MOV         #1,R1
+    0000011C              L426:                             
+    0000011C E100                   MOV         #0,R1
+    0000011E              L427:                             
+    0000011E 341C                   ADD         R1,R4
+      fxchslib.c    87            ff->cfont_size          = r*ff->height;
+    00000120 53E6                   MOV.L       @(24,R14),R3
+      fxchslib.c    88            return ff;
+    00000122 60E3                   MOV         R14,R0
+    00000124 0437                   MUL.L       R3,R4
+    00000126 041A                   STS         MACL,R4
+    00000128 1E4A                   MOV.L       R4,@(40,R14)
+      fxchslib.c    89    }
+    0000012A              L423:                             
+    0000012A 7F40                   ADD         #64,R15
+    0000012C 4F16                   LDS.L       @R15+,MACL
+    0000012E 4F26                   LDS.L       @R15+,PR
+    00000130 6DF6                   MOV.L       @R15+,R13
+    00000132 000B                   RTS
+    00000134 6EF6                   MOV.L       @R15+,R14
+      fxchslib.c    90    
+      fxchslib.c    91    void close_font (const FONTFILE * ff)
+    00000136              _close_font:                     ; function: close_font
+                                                           ; frame size=8
+    00000136 4F22                   STS.L       PR,@-R15
+    00000138 2F46                   MOV.L       R4,@-R15
+      fxchslib.c    92    {
+      fxchslib.c    93            Bfile_CloseFile(ff->file_handle);
+    0000013A D30B                   MOV.L       L447+30,R3 ; _Bfile_CloseFile
+    0000013C 430B                   JSR         @R3
+    0000013E 5449                   MOV.L       @(36,R4),R4
+      fxchslib.c    94            free(ff);
+    00000140 64F2                   MOV.L       @R15,R4
+    00000142 7F04                   ADD         #4,R15
+    00000144 D309                   MOV.L       L447+34,R3 ; _free
+    00000146 432B                   JMP         @R3
+    00000148 4F26                   LDS.L       @R15+,PR
+    0000014A              L447:                             
+    0000014A 0080                   .DATA.W     H'0080
+    0000014C <00000000>             .DATA.L     _Bdisp_WriteGraph_VRAM
+    00000150 00FF0000               .DATA.L     H'00FF0000
+    00000154 0000FF00               .DATA.L     H'0000FF00
+
+
+
+
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 10-Apr-2020 21:05:11  PAGE    6
+
+
+SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
+
+    00000158 <00000000>             .DATA.L     _strlen
+    0000015C <00000000>             .DATA.L     _Bfile_OpenFile
+    00000160 <00000000>             .DATA.L     _malloc
+    00000164 <00000000>             .DATA.L     _Bfile_ReadFile
+    00000168 <00000000>             .DATA.L     _Bfile_CloseFile
+    0000016C <00000000>             .DATA.L     _free
+      fxchslib.c    95    }
+      fxchslib.c    96    
+      fxchslib.c    97    
+      fxchslib.c    98    void select_font (const FONTFILE * font)
+    00000170              _select_font:                    ; function: select_font
+                                                           ; frame size=0
+      fxchslib.c    99    {
+      fxchslib.c   100            def_font = font;
+    00000170 D34C                   MOV.L       L448+12,R3 ; _def_font
+      fxchslib.c   101    }
+    00000172 000B                   RTS
+    00000174 2342                   MOV.L       R4,@R3
+      fxchslib.c   102    
+      fxchslib.c   103    void print_chs_char (int x,int y,int sel,unsigned char c1,unsigned char c2)
+    00000176              _print_chs_char:                 ; function: print_chs_char
+                                                           ; frame size=176
+    00000176 2FE6                   MOV.L       R14,@-R15
+    00000178 2FD6                   MOV.L       R13,@-R15
+    0000017A 4F22                   STS.L       PR,@-R15
+    0000017C 4F12                   STS.L       MACL,@-R15
+    0000017E 908B                   MOV.W       L448,R0    ; H'FF68
+    00000180 DD48                   MOV.L       L448+12,R13; _def_font
+    00000182 3F0C                   ADD         R0,R15
+    00000184 1F42                   MOV.L       R4,@(8,R15)
+    00000186 1F51                   MOV.L       R5,@(4,R15)
+    00000188 2F62                   MOV.L       R6,@R15
+    0000018A 6ED2                   MOV.L       @R13,R14
+    0000018C 2EE8                   TST         R14,R14
+    0000018E 8926                   BT          L429
+      fxchslib.c   104    {
+      fxchslib.c   105            unsigned char mat[128];
+      fxchslib.c   106            int sec,pot;
+      fxchslib.c   107    
+      fxchslib.c   108            if (def_font==NULL) return;
+      fxchslib.c   109    
+      fxchslib.c   110            sec = c1-0xa1;
+    00000190 9483                   MOV.W       L448+2,R4  ; H'FF5F
+    00000192 677C                   EXTU.B      R7,R7
+      fxchslib.c   111            pot = c2-0xa1;
+    00000194 9082                   MOV.W       L448+4,R0  ; H'00AB
+      fxchslib.c   112    
+      fxchslib.c   113            Bfile_ReadFile( def_font->file_handle,
+      fxchslib.c   114                                            mat,
+      fxchslib.c   115                                            def_font->cfont_size,
+      fxchslib.c   116                                            (94*sec+pot)*def_font->cfont_size + def_font->chs_offset);
+    00000196 E25E                   MOV         #94,R2
+    00000198 374C                   ADD         R4,R7
+    0000019A 65F3                   MOV         R15,R5
+    0000019C 1F75                   MOV.L       R7,@(20,R15)
+    0000019E 7518                   ADD         #24,R5
+    000001A0 03FC                   MOV.B       @(R0,R15),R3
+
+
+
+
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 10-Apr-2020 21:05:11  PAGE    7
+
+
+SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
+
+    000001A2 633C                   EXTU.B      R3,R3
+    000001A4 334C                   ADD         R4,R3
+    000001A6 1F34                   MOV.L       R3,@(16,R15)
+    000001A8 51F5                   MOV.L       @(20,R15),R1
+    000001AA 0127                   MUL.L       R2,R1
+    000001AC 52EA                   MOV.L       @(40,R14),R2
+    000001AE 071A                   STS         MACL,R7
+    000001B0 1F23                   MOV.L       R2,@(12,R15)
+    000001B2 6623                   MOV         R2,R6
+    000001B4 373C                   ADD         R3,R7
+    000001B6 0727                   MUL.L       R2,R7
+    000001B8 53E8                   MOV.L       @(32,R14),R3
+    000001BA 071A                   STS         MACL,R7
+    000001BC 373C                   ADD         R3,R7
+    000001BE D33A                   MOV.L       L448+16,R3 ; _Bfile_ReadFile
+    000001C0 430B                   JSR         @R3
+    000001C2 54E9                   MOV.L       @(36,R14),R4
+      fxchslib.c   117    
+      fxchslib.c   118            draw_picture(x,y,def_font->cwidth,def_font->height,sel,mat);
+    000001C4 62F3                   MOV         R15,R2
+    000001C6 7218                   ADD         #24,R2
+    000001C8 2F26                   MOV.L       R2,@-R15
+    000001CA 53F1                   MOV.L       @(4,R15),R3
+    000001CC 2F36                   MOV.L       R3,@-R15
+    000001CE 67D2                   MOV.L       @R13,R7
+    000001D0 66D2                   MOV.L       @R13,R6
+    000001D2 5776                   MOV.L       @(24,R7),R7
+    000001D4 5664                   MOV.L       @(16,R6),R6
+    000001D6 55F3                   MOV.L       @(12,R15),R5
+    000001D8 BF12                   BSR         __$draw_picture
+    000001DA 54F4                   MOV.L       @(16,R15),R4
+    000001DC 7F08                   ADD         #8,R15
+      fxchslib.c   119    }
+    000001DE              L429:                             
+    000001DE 915E                   MOV.W       L448+6,R1  ; H'0098
+    000001E0 3F1C                   ADD         R1,R15
+    000001E2 4F16                   LDS.L       @R15+,MACL
+    000001E4 4F26                   LDS.L       @R15+,PR
+    000001E6 6DF6                   MOV.L       @R15+,R13
+    000001E8 000B                   RTS
+    000001EA 6EF6                   MOV.L       @R15+,R14
+      fxchslib.c   120    
+      fxchslib.c   121    void print_asc_char (int x,int y,int sel,unsigned char c)
+    000001EC              _print_asc_char:                 ; function: print_asc_char
+                                                           ; frame size=172
+    000001EC 2FE6                   MOV.L       R14,@-R15
+    000001EE 2FD6                   MOV.L       R13,@-R15
+    000001F0 4F22                   STS.L       PR,@-R15
+    000001F2 4F12                   STS.L       MACL,@-R15
+    000001F4 9054                   MOV.W       L448+8,R0  ; H'FF6C
+    000001F6 3F0C                   ADD         R0,R15
+    000001F8 1F42                   MOV.L       R4,@(8,R15)
+    000001FA 6073                   MOV         R7,R0
+    000001FC DD29                   MOV.L       L448+12,R13; _def_font
+    000001FE 1F51                   MOV.L       R5,@(4,R15)
+    00000200 2F62                   MOV.L       R6,@R15
+    00000202 80FC                   MOV.B       R0,@(12,R15)
+
+
+
+
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 10-Apr-2020 21:05:11  PAGE    8
+
+
+SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
+
+    00000204 6ED2                   MOV.L       @R13,R14
+    00000206 2EE8                   TST         R14,R14
+    00000208 891A                   BT          L431
+      fxchslib.c   122    {
+      fxchslib.c   123            unsigned char mat[128];
+      fxchslib.c   124    
+      fxchslib.c   125            if (def_font==NULL) return;
+      fxchslib.c   126    
+      fxchslib.c   127    
+      fxchslib.c   128            Bfile_ReadFile( def_font->file_handle,
+      fxchslib.c   129                                            mat,
+      fxchslib.c   130                                            def_font->afont_size,
+      fxchslib.c   131                                            c*def_font->afont_size + def_font->asc_offset);
+    0000020A 65F3                   MOV         R15,R5
+    0000020C 84FC                   MOV.B       @(12,R15),R0
+    0000020E 7514                   ADD         #20,R5
+    00000210 57EB                   MOV.L       @(44,R14),R7
+    00000212 600C                   EXTU.B      R0,R0
+    00000214 1F74                   MOV.L       R7,@(16,R15)
+    00000216 0077                   MUL.L       R7,R0
+    00000218 53E7                   MOV.L       @(28,R14),R3
+    0000021A 071A                   STS         MACL,R7
+    0000021C 56F4                   MOV.L       @(16,R15),R6
+    0000021E 373C                   ADD         R3,R7
+    00000220 D321                   MOV.L       L448+16,R3 ; _Bfile_ReadFile
+    00000222 430B                   JSR         @R3
+    00000224 54E9                   MOV.L       @(36,R14),R4
+      fxchslib.c   132    
+      fxchslib.c   133            draw_picture(x,y,def_font->awidth,def_font->height,sel,mat);
+    00000226 62F3                   MOV         R15,R2
+    00000228 7214                   ADD         #20,R2
+    0000022A 2F26                   MOV.L       R2,@-R15
+    0000022C 53F1                   MOV.L       @(4,R15),R3
+    0000022E 2F36                   MOV.L       R3,@-R15
+    00000230 67D2                   MOV.L       @R13,R7
+    00000232 5776                   MOV.L       @(24,R7),R7
+    00000234 66D2                   MOV.L       @R13,R6
+    00000236 5665                   MOV.L       @(20,R6),R6
+    00000238 55F3                   MOV.L       @(12,R15),R5
+    0000023A BEE1                   BSR         __$draw_picture
+    0000023C 54F4                   MOV.L       @(16,R15),R4
+    0000023E 7F08                   ADD         #8,R15
+      fxchslib.c   134    }
+    00000240              L431:                             
+    00000240 912F                   MOV.W       L448+10,R1 ; H'0094
+    00000242 3F1C                   ADD         R1,R15
+    00000244 4F16                   LDS.L       @R15+,MACL
+    00000246 4F26                   LDS.L       @R15+,PR
+    00000248 6DF6                   MOV.L       @R15+,R13
+    0000024A 000B                   RTS
+    0000024C 6EF6                   MOV.L       @R15+,R14
+      fxchslib.c   135    
+      fxchslib.c   136    void print_chs_str (int x,int y,int sel,const unsigned char * str)
+    0000024E              _print_chs_str:                  ; function: print_chs_str
+                                                           ; frame size=36
+    0000024E 2FE6                   MOV.L       R14,@-R15
+    00000250 2FD6                   MOV.L       R13,@-R15
+
+
+
+
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 10-Apr-2020 21:05:11  PAGE    9
+
+
+SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
+
+    00000252 2FC6                   MOV.L       R12,@-R15
+    00000254 2FB6                   MOV.L       R11,@-R15
+    00000256 2FA6                   MOV.L       R10,@-R15
+    00000258 2F96                   MOV.L       R9,@-R15
+    0000025A 6A73                   MOV         R7,R10
+      fxchslib.c   137    {
+      fxchslib.c   138            int             i;
+      fxchslib.c   139            int             l = 0;
+      fxchslib.c   140            int             cx = x;
+      fxchslib.c   141    
+      fxchslib.c   142            if (! def_font) return ;
+    0000025C DD11                   MOV.L       L448+12,R13; _def_font
+    0000025E 6953                   MOV         R5,R9
+    00000260 2F86                   MOV.L       R8,@-R15
+    00000262 6863                   MOV         R6,R8
+    00000264 4F22                   STS.L       PR,@-R15
+    00000266 63D2                   MOV.L       @R13,R3
+    00000268 2338                   TST         R3,R3
+    0000026A 8D33                   BT/S        L433
+    0000026C 6C43                   MOV         R4,R12
+      fxchslib.c   143    
+      fxchslib.c   144            for (i=0;str[i];l++)
+    0000026E A02C                   BRA         L434
+    00000270 EE00                   MOV         #0,R14
+    00000272              L435:                             
+    00000272 6BE3                   MOV         R14,R11
+    00000274 3BAC                   ADD         R10,R11
+    00000276 60B0                   MOV.B       @R11,R0
+    00000278 600C                   EXTU.B      R0,R0
+    0000027A C880                   TST         #128,R0
+    0000027C 8916                   BT          L436
+      fxchslib.c   145            {
+      fxchslib.c   146                    if (is_chschar(str[i]))
+      fxchslib.c   147                    {
+      fxchslib.c   148                            print_chs_char (cx,y,sel,str[i],str[i+1]);
+    0000027E 6683                   MOV         R8,R6
+    00000280 84B1                   MOV.B       @(1,R11),R0
+    00000282 6593                   MOV         R9,R5
+    00000284 2F06                   MOV.L       R0,@-R15
+    00000286 6203                   MOV         R0,R2
+    00000288 67B0                   MOV.B       @R11,R7
+    0000028A BF74                   BSR         _print_chs_char
+    0000028C 64C3                   MOV         R12,R4
+    0000028E 7F04                   ADD         #4,R15
+      fxchslib.c   149                            ++i,++i;
+      fxchslib.c   150                            cx += def_font->cwidth;
+    00000290 62D2                   MOV.L       @R13,R2
+    00000292 5324                   MOV.L       @(16,R2),R3
+    00000294 A018                   BRA         L445
+    00000296 7E02                   ADD         #2,R14
+    00000298              L448:                             
+    00000298 FF68                   .DATA.W     H'FF68
+    0000029A FF5F                   .DATA.W     H'FF5F
+    0000029C 00AB                   .DATA.W     H'00AB
+    0000029E 0098                   .DATA.W     H'0098
+    000002A0 FF6C                   .DATA.W     H'FF6C
+    000002A2 0094                   .DATA.W     H'0094
+
+
+
+
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 10-Apr-2020 21:05:11  PAGE   10
+
+
+SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
+
+    000002A4 <00000000>             .DATA.L     _def_font
+    000002A8 <00000000>             .DATA.L     _Bfile_ReadFile
+    000002AC              L436:                             
+      fxchslib.c   151                    }
+      fxchslib.c   152                    else
+      fxchslib.c   153                    {
+      fxchslib.c   154                            ++i;
+      fxchslib.c   155                            if (! def_font->asc_offset) continue;
+    000002AC 63D2                   MOV.L       @R13,R3
+    000002AE 5237                   MOV.L       @(28,R3),R2
+    000002B0 2228                   TST         R2,R2
+    000002B2 8D0A                   BT/S        L434
+    000002B4 7E01                   ADD         #1,R14
+      fxchslib.c   156                            print_asc_char (cx,y,sel,str[i-1]);
+    000002B6 60E3                   MOV         R14,R0
+    000002B8 70FF                   ADD         #-1,R0
+    000002BA 6683                   MOV         R8,R6
+    000002BC 07AC                   MOV.B       @(R0,R10),R7
+    000002BE 6593                   MOV         R9,R5
+    000002C0 BF94                   BSR         _print_asc_char
+    000002C2 64C3                   MOV         R12,R4
+      fxchslib.c   157                            cx += def_font->awidth;
+    000002C4 62D2                   MOV.L       @R13,R2
+    000002C6 5325                   MOV.L       @(20,R2),R3
+    000002C8              L445:                             
+    000002C8 3C3C                   ADD         R3,R12
+    000002CA              L434:                             
+    000002CA 60E3                   MOV         R14,R0
+    000002CC 03AC                   MOV.B       @(R0,R10),R3
+    000002CE 633C                   EXTU.B      R3,R3
+    000002D0 2338                   TST         R3,R3
+    000002D2 8BCE                   BF          L435
+    000002D4              L433:                             
+      fxchslib.c   158                    }               
+      fxchslib.c   159            }
+      fxchslib.c   160    }
+    000002D4 4F26                   LDS.L       @R15+,PR
+    000002D6 68F6                   MOV.L       @R15+,R8
+    000002D8 69F6                   MOV.L       @R15+,R9
+    000002DA 6AF6                   MOV.L       @R15+,R10
+    000002DC 6BF6                   MOV.L       @R15+,R11
+    000002DE 6CF6                   MOV.L       @R15+,R12
+    000002E0 6DF6                   MOV.L       @R15+,R13
+    000002E2 000B                   RTS
+    000002E4 6EF6                   MOV.L       @R15+,R14
+      fxchslib.c   161    
+      fxchslib.c   162    int get_str_width (const unsigned char * str)
+    000002E6              _get_str_width:                  ; function: get_str_width
+                                                           ; frame size=0
+    000002E6 D00A                   MOV.L       L449+2,R0  ; _def_font
+    000002E8 9711                   MOV.W       L449,R7    ; H'0080
+      fxchslib.c   163    {
+      fxchslib.c   164            int width = 0;
+      fxchslib.c   165            while(*str)
+    000002EA A00B                   BRA         L440
+    000002EC E500                   MOV         #0,R5
+    000002EE              L441:                             
+
+
+
+
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 10-Apr-2020 21:05:11  PAGE   11
+
+
+SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
+
+    000002EE 6240                   MOV.B       @R4,R2
+    000002F0 622C                   EXTU.B      R2,R2
+    000002F2 2278                   TST         R7,R2
+    000002F4 8D03                   BT/S        L442
+    000002F6 6602                   MOV.L       @R0,R6
+      fxchslib.c   166            {
+      fxchslib.c   167                    if (is_chschar(*str))
+      fxchslib.c   168                    {
+      fxchslib.c   169                            str++;str++;width+=def_font->cwidth;
+    000002F8 7402                   ADD         #2,R4
+    000002FA A002                   BRA         L446
+    000002FC 5264                   MOV.L       @(16,R6),R2
+    000002FE              L442:                             
+      fxchslib.c   170                    }
+      fxchslib.c   171                    else
+      fxchslib.c   172                    {
+      fxchslib.c   173                            str++;width+=def_font->awidth;
+    000002FE 7401                   ADD         #1,R4
+    00000300 5265                   MOV.L       @(20,R6),R2
+    00000302              L446:                             
+    00000302 352C                   ADD         R2,R5
+    00000304              L440:                             
+    00000304 6340                   MOV.B       @R4,R3
+    00000306 2338                   TST         R3,R3
+    00000308 8BF1                   BF          L441
+      fxchslib.c   174                    }
+      fxchslib.c   175            }
+      fxchslib.c   176            return width;
+      fxchslib.c   177    }
+    0000030A 000B                   RTS
+    0000030C 6053                   MOV         R5,R0
+    0000030E              L449:                             
+    0000030E 0080                   .DATA.W     H'0080
+    00000310 <00000000>             .DATA.L     _def_font
+      fxchslib.c   178    
+D   00000000              _def_font:                       ; static: def_font
+    00000000 00000000               .DATA.L     H'00000000
+    00000004              _sys_font:                       ; static: sys_font
+    00000004 00000000               .DATA.L     H'00000000
+    00000008              _usr_font:                       ; static: usr_font
+    00000008 00000000               .DATA.L     H'00000000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 10-Apr-2020 21:05:11  PAGE    1
+
+
+******** STATISTICS INFORMATION ********
+
+
+********** ERROR INFORMATION ***********
+
+NUMBER OF ERRORS:           0
+NUMBER OF WARNINGS:         0
+
+
+
+
+******* SOURCE LINE INFORMATION ********
+
+COMPILED SOURCE LINE:      178
+
+
+
+******* SECTION SIZE INFORMATION *******
+
+PROGRAM  SECTION (P):                               00000314 Byte(s)
+CONSTANT SECTION (C):                               00000000 Byte(s)
+DATA     SECTION (D):                               0000000C Byte(s)
+BSS      SECTION (B):                               00000000 Byte(s)
+
+ TOTAL PROGRAM SIZE: 00000320 Byte(s)
+
+
+
+********** LABEL INFORMATION ***********
+
+NUMBER OF EXTERNAL REFERENCE SYMBOLS:            7
+NUMBER OF EXTERNAL DEFINITION SYMBOLS:          10
+NUMBER OF INTERNAL/EXTERNAL SYMBOLS:            39
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*** COMMAND PARAMETER ***
+
+
+  -subcommand=C:\Users\ADMINI~1\AppData\Local\Temp\hmkD797.tmp 
+

@@ -1,0 +1,12 @@
+//------------------------------------------------------------------
+// Addin-Application header control file, created with the CASIO SDK
+//------------------------------------------------------------------
+[OUTPUT]     : "CHREADER.G1A"
+[BINDATA]    : "FXADDINror.bin"
+[DISPNAME]   : "ChReader"
+[APPNAME]    : "@CHREADE"
+[VERSION]    : "02.01.0001"
+[APL_ICON]   : "MainIcon.bmp"
+[MODULE_NUM] : 0
+[MOD1_TITLE] : "ChReader"
+[MOD1_ICON]  : "eActivityIcon.bmp"
