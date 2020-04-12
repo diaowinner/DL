@@ -10,7 +10,7 @@ if exist FXADDINror.bin  del FXADDINror.bin
 cd ..
 if not exist debug\FXADDINror.bin  goto error
 
-"F:\SDKcalc\Tools\MakeAddinHeader363.exe" "D:\用户目录\我的文档\CASIO\fx-9860G SDK\DL2Rev\Chinese-Reader~-"
+"F:\SDKcalc\Tools\MakeAddinHeader363.exe" "C:\Users\Administrator\Desktop\DL-master\src"
 if not exist CHREADER.G1A  goto error
 echo Build has completed.
 goto end

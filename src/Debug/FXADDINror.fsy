@@ -1,4 +1,4 @@
-;HITACHI OPTIMIZING LINKAGE EDITOR GENERATED FILE 2020.04.10
+;HITACHI OPTIMIZING LINKAGE EDITOR GENERATED FILE 2020.04.12
 ;fsymbol = P
 
 ;SECTION NAME = P
@@ -43,263 +43,263 @@ _select_page_mark: .equ h'00300cc0
  .export _start_read
 _start_read: .equ h'00300de4
  .export _show_menu
-_show_menu: .equ h'00301154
+_show_menu: .equ h'00301200
  .export _start_read_text
-_start_read_text: .equ h'0030109e
+_start_read_text: .equ h'00301120
  .export _AddIn_main
-_AddIn_main: .equ h'003012bc
+_AddIn_main: .equ h'00301368
  .export _open_font
-_open_font: .equ h'00301544
+_open_font: .equ h'00301628
  .export _close_font
-_close_font: .equ h'003015e6
+_close_font: .equ h'003016ca
  .export _select_font
-_select_font: .equ h'00301620
+_select_font: .equ h'00301704
  .export _print_chs_char
-_print_chs_char: .equ h'00301626
+_print_chs_char: .equ h'0030170a
  .export _print_asc_char
-_print_asc_char: .equ h'0030169c
+_print_asc_char: .equ h'00301780
  .export _print_chs_str
-_print_chs_str: .equ h'003016fe
+_print_chs_str: .equ h'003017e2
  .export _get_str_width
-_get_str_width: .equ h'00301796
+_get_str_width: .equ h'0030187a
  .export ___LINK_PROTECT
-___LINK_PROTECT: .equ h'003017c4
+___LINK_PROTECT: .equ h'003018a8
  .export _SetQuitHandler
-_SetQuitHandler: .equ h'003017c8
+_SetQuitHandler: .equ h'003018ac
  .export _OnAppCloseDefault
-_OnAppCloseDefault: .equ h'003017ce
+_OnAppCloseDefault: .equ h'003018b2
  .export __INITSCT_ADDIN
-__INITSCT_ADDIN: .equ h'00301822
+__INITSCT_ADDIN: .equ h'00301906
  .export _INIT_ADDIN_APPLICATION
-_INIT_ADDIN_APPLICATION: .equ h'0030186a
+_INIT_ADDIN_APPLICATION: .equ h'0030194e
  .export __slow_strcpy
-__slow_strcpy: .equ h'003018e0
+__slow_strcpy: .equ h'003019c4
  .export _atol
-_atol: .equ h'00301930
+_atol: .equ h'00301a14
  .export _memcpy
-_memcpy: .equ h'0030193c
+_memcpy: .equ h'00301a20
  .export _sprintf
-_sprintf: .equ h'003019fc
+_sprintf: .equ h'00301ae0
  .export _strlen
-_strlen: .equ h'00301a38
+_strlen: .equ h'00301b1c
  .export _strstr
-_strstr: .equ h'00301a48
+_strstr: .equ h'00301b2c
  .export _Bdel_cychdr
-_Bdel_cychdr: .equ h'00301ac4
+_Bdel_cychdr: .equ h'00301ba8
  .export _Bdisp_AllClr_VRAM
-_Bdisp_AllClr_VRAM: .equ h'00301ad4
+_Bdisp_AllClr_VRAM: .equ h'00301bb8
  .export _Bdisp_AreaClr_VRAM
-_Bdisp_AreaClr_VRAM: .equ h'00301ae4
+_Bdisp_AreaClr_VRAM: .equ h'00301bc8
  .export _Bdisp_AreaReverseVRAM
-_Bdisp_AreaReverseVRAM: .equ h'00301af4
+_Bdisp_AreaReverseVRAM: .equ h'00301bd8
  .export _Bdisp_PutDisp_DD
-_Bdisp_PutDisp_DD: .equ h'00301b04
+_Bdisp_PutDisp_DD: .equ h'00301be8
  .export _Bdisp_DrawLineVRAM
-_Bdisp_DrawLineVRAM: .equ h'00301b14
+_Bdisp_DrawLineVRAM: .equ h'00301bf8
  .export _Bdisp_WriteGraph_VRAM
-_Bdisp_WriteGraph_VRAM: .equ h'00301b24
+_Bdisp_WriteGraph_VRAM: .equ h'00301c08
  .export _Bfile_FindClose
-_Bfile_FindClose: .equ h'00301b34
+_Bfile_FindClose: .equ h'00301c18
  .export _Bfile_FindFirst
-_Bfile_FindFirst: .equ h'00301b44
+_Bfile_FindFirst: .equ h'00301c28
  .export _Bfile_FindNext
-_Bfile_FindNext: .equ h'00301b54
+_Bfile_FindNext: .equ h'00301c38
  .export _BfileFLS_CloseFile
-_BfileFLS_CloseFile: .equ h'00301b64
+_BfileFLS_CloseFile: .equ h'00301c48
  .export _Bkey_Set_RepeatTime_Default
-_Bkey_Set_RepeatTime_Default: .equ h'00301b74
+_Bkey_Set_RepeatTime_Default: .equ h'00301c58
  .export _CallbackAtQuitMainFunction
-_CallbackAtQuitMainFunction: .equ h'00301b84
+_CallbackAtQuitMainFunction: .equ h'00301c68
  .export _calloc
-_calloc: .equ h'00301b94
+_calloc: .equ h'00301c78
  .export _flsFindClose
-_flsFindClose: .equ h'00301ba4
+_flsFindClose: .equ h'00301c88
  .export _free
-_free: .equ h'00301bb4
+_free: .equ h'00301c98
  .export _GetKey
-_GetKey: .equ h'00301bc4
+_GetKey: .equ h'00301ca8
  .export _GLibAddinAplExecutionCheck
-_GLibAddinAplExecutionCheck: .equ h'00301bd4
+_GLibAddinAplExecutionCheck: .equ h'00301cb8
  .export _Hmem_SetMMU
-_Hmem_SetMMU: .equ h'00301be4
+_Hmem_SetMMU: .equ h'00301cc8
  .export _malloc
-_malloc: .equ h'00301bf4
+_malloc: .equ h'00301cd8
  .export _Print
-_Print: .equ h'00301c04
+_Print: .equ h'00301ce8
  .export _PrintXY
-_PrintXY: .equ h'00301c14
+_PrintXY: .equ h'00301cf8
  .export _PrintMini
-_PrintMini: .equ h'00301c24
+_PrintMini: .equ h'00301d08
  .export _locate
-_locate: .equ h'00301c40
+_locate: .equ h'00301d24
  .export _Bdisp_ReadArea_DD
-_Bdisp_ReadArea_DD: .equ h'00301c68
+_Bdisp_ReadArea_DD: .equ h'00301d4c
  .export _BfileMCS_GetFileHandle
-_BfileMCS_GetFileHandle: .equ h'00301d9c
+_BfileMCS_GetFileHandle: .equ h'00301e80
  .export _BfileMCS_HandleCheck
-_BfileMCS_HandleCheck: .equ h'00301e78
+_BfileMCS_HandleCheck: .equ h'00301f5c
  .export _Bfile_CloseFile
-_Bfile_CloseFile: .equ h'00301e0a
+_Bfile_CloseFile: .equ h'00301eee
  .export _MCSFile_InitAll
-_MCSFile_InitAll: .equ h'00301eb8
+_MCSFile_InitAll: .equ h'00301f9c
  .export _Bfile_ReadFile
-_Bfile_ReadFile: .equ h'00301ef4
+_Bfile_ReadFile: .equ h'00301fd8
  .export _Bfile_WriteFile
-_Bfile_WriteFile: .equ h'00301fdc
+_Bfile_WriteFile: .equ h'003020c0
  .export _Bfile_SeekFile
-_Bfile_SeekFile: .equ h'003020ba
+_Bfile_SeekFile: .equ h'0030219e
  .export _Bfile_OpenMainMemory
-_Bfile_OpenMainMemory: .equ h'00302124
+_Bfile_OpenMainMemory: .equ h'00302208
  .export _Bfile_OpenFile
-_Bfile_OpenFile: .equ h'00302166
+_Bfile_OpenFile: .equ h'0030224a
  .export _Bfile_GetMediaFree
-_Bfile_GetMediaFree: .equ h'0030216c
+_Bfile_GetMediaFree: .equ h'00302250
  .export _Bfile_GetFileSize
-_Bfile_GetFileSize: .equ h'00302238
+_Bfile_GetFileSize: .equ h'0030231c
  .export _Bfile_CreateMainMemory
-_Bfile_CreateMainMemory: .equ h'003022b2
+_Bfile_CreateMainMemory: .equ h'00302396
  .export _Bfile_CreateFile
-_Bfile_CreateFile: .equ h'00302336
+_Bfile_CreateFile: .equ h'0030241a
  .export _Bfile_CreateDirectory
-_Bfile_CreateDirectory: .equ h'0030234c
+_Bfile_CreateDirectory: .equ h'00302430
  .export _Bfile_RenameMainMemory
-_Bfile_RenameMainMemory: .equ h'00302354
+_Bfile_RenameMainMemory: .equ h'00302438
  .export _Bfile_DeleteMainMemory
-_Bfile_DeleteMainMemory: .equ h'003023be
+_Bfile_DeleteMainMemory: .equ h'003024a2
  .export _Bfile_DeleteFile
-_Bfile_DeleteFile: .equ h'00302428
+_Bfile_DeleteFile: .equ h'0030250c
  .export _Bfile_DeleteDirectory
-_Bfile_DeleteDirectory: .equ h'00302468
+_Bfile_DeleteDirectory: .equ h'0030254c
  .export __divls
-__divls: .equ h'003024cc
+__divls: .equ h'003025b0
  .export __quick_strcpy
-__quick_strcpy: .equ h'00302580
+__quick_strcpy: .equ h'00302664
  .export _quick_strcpy1
-_quick_strcpy1: .equ h'00302584
+_quick_strcpy1: .equ h'00302668
  .export __slow_mvn
-__slow_mvn: .equ h'003025e8
+__slow_mvn: .equ h'003026cc
  .export __fmtout
-__fmtout: .equ h'00302620
+__fmtout: .equ h'00302704
  .export _memcmp
-_memcmp: .equ h'0030370c
+_memcmp: .equ h'003037f0
  .export _strncmp
-_strncmp: .equ h'00303740
+_strncmp: .equ h'00303824
  .export _strtol
-_strtol: .equ h'00303780
+_strtol: .equ h'00303864
  .export _Bfile_CloseFile_OS
-_Bfile_CloseFile_OS: .equ h'00303a44
+_Bfile_CloseFile_OS: .equ h'00303b28
  .export _Bfile_CreateEntry
-_Bfile_CreateEntry: .equ h'00303a54
+_Bfile_CreateEntry: .equ h'00303b38
  .export _Bfile_DeleteEntry
-_Bfile_DeleteEntry: .equ h'00303a64
+_Bfile_DeleteEntry: .equ h'00303b48
  .export _Bfile_GetFileSize_OS
-_Bfile_GetFileSize_OS: .equ h'00303a74
+_Bfile_GetFileSize_OS: .equ h'00303b58
  .export _Bfile_GetMediaFree_OS
-_Bfile_GetMediaFree_OS: .equ h'00303a84
+_Bfile_GetMediaFree_OS: .equ h'00303b68
  .export _Bfile_OpenFile_OS
-_Bfile_OpenFile_OS: .equ h'00303a94
+_Bfile_OpenFile_OS: .equ h'00303b78
  .export _Bfile_ReadFile_OS
-_Bfile_ReadFile_OS: .equ h'00303aa4
+_Bfile_ReadFile_OS: .equ h'00303b88
  .export _Bfile_SeekFile_OS
-_Bfile_SeekFile_OS: .equ h'00303ab4
+_Bfile_SeekFile_OS: .equ h'00303b98
  .export _Bfile_WriteFile_OS
-_Bfile_WriteFile_OS: .equ h'00303ac4
+_Bfile_WriteFile_OS: .equ h'00303ba8
  .export _BMCSRenameVariable
-_BMCSRenameVariable: .equ h'00303ad4
+_BMCSRenameVariable: .equ h'00303bb8
  .export _DD_GET
-_DD_GET: .equ h'00303ae4
+_DD_GET: .equ h'00303bc8
  .export _GetAppName
-_GetAppName: .equ h'00303af4
+_GetAppName: .equ h'00303bd8
  .export _locate_OS
-_locate_OS: .equ h'00303b04
+_locate_OS: .equ h'00303be8
  .export _MCSDelVar2
-_MCSDelVar2: .equ h'00303b14
+_MCSDelVar2: .equ h'00303bf8
  .export _MCSGetCapa
-_MCSGetCapa: .equ h'00303b24
+_MCSGetCapa: .equ h'00303c08
  .export _MCSGetData1
-_MCSGetData1: .equ h'00303b34
+_MCSGetData1: .equ h'00303c18
  .export _MCSGetDlen2
-_MCSGetDlen2: .equ h'00303b44
+_MCSGetDlen2: .equ h'00303c28
  .export _MCSOvwDat2
-_MCSOvwDat2: .equ h'00303b54
+_MCSOvwDat2: .equ h'00303c38
  .export _MCSPutVar2
-_MCSPutVar2: .equ h'00303b64
+_MCSPutVar2: .equ h'00303c48
  .export _PrintMiniSd
-_PrintMiniSd: .equ h'00303b74
+_PrintMiniSd: .equ h'00303c58
  .export __eqd
-__eqd: .equ h'00303b84
+__eqd: .equ h'00303c68
  .export __divlu
-__divlu: .equ h'00303c18
+__divlu: .equ h'00303cfc
  .export __modls
-__modls: .equ h'00303cc0
+__modls: .equ h'00303da4
  .export __modlu
-__modlu: .equ h'00303d88
+__modlu: .equ h'00303e6c
  .export __its
-__its: .equ h'00303e40
+__its: .equ h'00303f24
  .export __strchek
-__strchek: .equ h'00303f70
+__strchek: .equ h'00304054
  .export __xti
-__xti: .equ h'00303f98
+__xti: .equ h'0030407c
  .export __allzero
-__allzero: .equ h'00304228
+__allzero: .equ h'0030430c
  .export __calcnpw
-__calcnpw: .equ h'00304248
+__calcnpw: .equ h'0030432c
  .export __log10
-__log10: .equ h'00304348
+__log10: .equ h'0030442c
  .export __lsfts
-__lsfts: .equ h'00304610
+__lsfts: .equ h'003046f4
  .export __pow5
-__pow5: .equ h'0030465c
+__pow5: .equ h'00304740
  .export __rsfts
-__rsfts: .equ h'00304680
+__rsfts: .equ h'00304764
  .export __sub
-__sub: .equ h'003046d8
+__sub: .equ h'003047bc
  .export __umemcmp
-__umemcmp: .equ h'0030476c
+__umemcmp: .equ h'00304850
  .export __unpack
-__unpack: .equ h'003047a0
+__unpack: .equ h'00304884
  .export __addd
-__addd: .equ h'0030490c
+__addd: .equ h'003049f0
  .export __subdr
-__subdr: .equ h'00304854
+__subdr: .equ h'00304938
  .export __subd
-__subd: .equ h'0030483c
+__subd: .equ h'00304920
  .export __dtoi
-__dtoi: .equ h'00304bcc
+__dtoi: .equ h'00304cb0
  .export __dtou
-__dtou: .equ h'00304bcc
+__dtou: .equ h'00304cb0
  .export __itod
-__itod: .equ h'00304c58
+__itod: .equ h'00304d3c
  .export __ltd
-__ltd: .equ h'00304cac
+__ltd: .equ h'00304d90
  .export __muld
-__muld: .equ h'00304df8
+__muld: .equ h'00304edc
  .export __ned
-__ned: .equ h'00304f68
+__ned: .equ h'0030504c
  .export __divws
-__divws: .equ h'00304ffc
+__divws: .equ h'003050e0
  .export __div64
-__div64: .equ h'0030504c
+__div64: .equ h'00305130
  .export __duchek
-__duchek: .equ h'003051e0
+__duchek: .equ h'003052c4
  .export __lsft
-__lsft: .equ h'00305210
+__lsft: .equ h'003052f4
  .export __mult64
-__mult64: .equ h'00305258
+__mult64: .equ h'0030533c
  .export __power
-__power: .equ h'003052c8
+__power: .equ h'003053ac
  .export __rnd
-__rnd: .equ h'0030541c
+__rnd: .equ h'00305500
  .export __setsbit
-__setsbit: .equ h'00305508
+__setsbit: .equ h'003055ec
  .export __add
-__add: .equ h'0030558c
+__add: .equ h'00305670
  .export __mult
-__mult: .equ h'003055e8
+__mult: .equ h'003056cc
  .export __pow10
-__pow10: .equ h'003056c4
+__pow10: .equ h'003057a8
  .export __rsft
-__rsft: .equ h'0030575c
+__rsft: .equ h'00305840
  .export _memset
-_memset: .equ h'003057a8
+_memset: .equ h'0030588c
  .end

@@ -5,8 +5,8 @@
 # Directory defines
 TCDIR = F:\SDKcalc\OS\SH
 OSDIR = F:\SDKcalc\OS
-APPDIR = D:\用户目录\我的文档\CASIO\fx-9860G SDK\DL2Rev\Chinese-Reader~-
-OUTDIR = D:\用户目录\我的文档\CASIO\fx-9860G SDK\DL2Rev\Chinese-Reader~-\Debug
+APPDIR = C:\Users\Administrator\Desktop\DL-master\src
+OUTDIR = C:\Users\Administrator\Desktop\DL-master\src\Debug
 
 ################
 # Main Defines
