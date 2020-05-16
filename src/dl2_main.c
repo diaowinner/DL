@@ -313,7 +313,7 @@ void start_read ()
 				else if (font_modle == 12)
 				{
 	
-					usr_font = open_font("\\\\fls0\\FONT12.dlf");
+					usr_font = open_font("\\\\fls0\\FONT16.dlf");
 					show_dialog(" 字体 ", "已更换为大字体.", 0, DLG_BTN_OK);
 					font_modle = 16;
 				}
@@ -468,7 +468,7 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
 	while (1)
 	{
 		all_clr();
-		PrintXY(0,0,"   DLiterature 2.1.2",0);
+		PrintXY(0,0,"  DLiterature 2.1.3",0);
 		menu_index = show_menu (menu_index,4,MAIN_MENU_TEXT,24,16);
 		if (menu_index==-1) break;
 		else if (menu_index==0)
@@ -486,7 +486,7 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
 		else if (menu_index==2)
 		{
 			close_font(usr_font);
-			if (font_modle == 12)
+			if (font_modle == 16)
 			{
 				usr_font = open_font("\\\\fls0\\FONT8.dlf");
 				show_dialog(" 字体 ", "已更换为小字体.", 0, DLG_BTN_OK);
@@ -496,8 +496,15 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
 			{
 
 				usr_font = open_font("\\\\fls0\\FONT12.dlf");
-				show_dialog(" 字体 ", "已更换为大字体.", 0, DLG_BTN_OK);
+				show_dialog(" 字体 ", "已更换为中字体.", 0, DLG_BTN_OK);
 				font_modle = 12;
+			}
+			else if (font_modle == 12)
+			{
+
+				usr_font = open_font("\\\\fls0\\FONT16.dlf");
+				show_dialog(" 字体 ", "已更换为大字体.", 0, DLG_BTN_OK);
+				font_modle = 16;
 			}
 			
 		}

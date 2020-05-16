@@ -5,8 +5,8 @@
 # Directory defines
 TCDIR = F:\SDKcalc\OS\SH
 OSDIR = F:\SDKcalc\OS
-APPDIR = C:\Users\Administrator\Desktop\DL-master\src
-OUTDIR = C:\Users\Administrator\Desktop\DL-master\src\Debug
+APPDIR = E:\DLsrc
+OUTDIR = E:\DLsrc\Debug
 
 ################
 # Main Defines
