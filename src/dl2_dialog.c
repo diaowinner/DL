@@ -71,14 +71,14 @@ int show_dialog(const uchar * caption,const uchar * text,int icon,int btn)
 	if (btn==DLG_BTN_YESNO)
 	{
 		uint key;
-		print_chs_str(8,48,1,(uchar*)" 确认EXE  取消EXIT");
+		print_chs_str(8,48,1,(uchar*)"Yes:EXE No:EXIT");
 		while(GetKey(&key),key!=KEY_CTRL_EXE && key!=KEY_CTRL_EXIT);
 		return key;
 	}
 	else if (btn==DLG_BTN_OK)
 	{
 		uint key;
-		print_chs_str(32,48,1,(uchar*)" 确定EXE ");
+		print_chs_str(32,48,1,(uchar*)"Yes:EXE");
 		while(GetKey(&key),key!=KEY_CTRL_EXE);
 		return key;
 	}
@@ -134,11 +134,11 @@ int file_view (int root,const char * filter,char * cfname)
 	{
 		char temp[32];
 		all_clr();
-		sprintf(temp,"打开%s文件在:%s",filter,root ? "闪存 ":"SD卡");
+		sprintf(temp,"Open %s in %s",filter,root ? "Sto":"SD");
 		print_chs_str(0,0,0,(const uchar*)temp);
 		area_rev(0,0,127,7);
 
-		print_chs_str(0,56,0,(uchar*)"[选择EXE] [取消EXIT]");
+		print_chs_str(0,56,0,(uchar*)"Sel:EXE Can:EXIT");
 		area_rev(0,56,127,63);
 
 	}

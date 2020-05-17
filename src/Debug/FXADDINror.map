@@ -1,8 +1,8 @@
-Hitachi Optimizing Linkage Editor (Ver. 7.1.03.000)16-May-2020 12:41:06
+Hitachi Optimizing Linkage Editor (Ver. 7.1.03.000)17-May-2020 11:39:41
 
 *** Options ***
 
--subcommand=C:\Users\ADMINI~1\AppData\Local\Temp\hmkBD21.tmp
+-subcommand=C:\Users\ADMINI~1\AppData\Local\Temp\hmk9CA5.tmp
 noprelink
 sdebug
 rom D=R
@@ -31,9 +31,9 @@ P_TOP
 P
                                   0030020c  003058d7      56cc   4
 C
-                                  003058d8  003061c7       8f0   4
+                                  003058d8  003061bb       8e4   4
 D
-                                  003061c8  00306277        b0   4
+                                  003061bc  0030626b        b0   4
 B_BR_Size
                                   08100000  08100003         4   4
 B
@@ -911,7 +911,7 @@ FILE=memset
 
 SECTION=C
 FILE=E:\DLsrc\Debug\dl2_dialog.obj
-                                  003058d8  003059bd        e6
+                                  003058d8  003059a9        d2
   _ICON_QUST
                                   003058d8        20   data ,g         * 
   _ICON_WAIT
@@ -919,43 +919,43 @@ FILE=E:\DLsrc\Debug\dl2_dialog.obj
   _ICON_WARN
                                   00305918        20   data ,g         * 
 FILE=E:\DLsrc\Debug\dl2_pic.obj
-                                  00305c08  00305e87       280
+                                  00305bfc  00305e7b       280
   _PIC_BACK
-                                  00305c08       180   data ,g         * 
+                                  00305bfc       180   data ,g         * 
   _PIC_FLS
-                                  00305d88        80   data ,g         * 
+                                  00305d7c        80   data ,g         * 
   _PIC_CRD
-                                  00305e08        80   data ,g         * 
+                                  00305dfc        80   data ,g         * 
 FILE=addin_sct
-                                  00305e88  00305e9b        14
+                                  00305e7c  00305e8f        14
   _B_BGN
-                                  00305e88         0   none ,g         * 
+                                  00305e7c         0   none ,g         * 
   _B_END
-                                  00305e8c         0   none ,g         * 
+                                  00305e80         0   none ,g         * 
   _R_BGN
-                                  00305e90         0   none ,g         * 
+                                  00305e84         0   none ,g         * 
   _R_END
-                                  00305e94         0   none ,g         * 
+                                  00305e88         0   none ,g         * 
   _D_ROM
-                                  00305e98         0   none ,g         * 
+                                  00305e8c         0   none ,g         * 
 FILE=_ctype
-                                  00305ec0  00305fbf       100
+                                  00305eb4  00305fb3       100
   __ctype
-                                  00305ec0       100   data ,g         * 
+                                  00305eb4       100   data ,g         * 
 FILE=_its
-                                  00305fc0  00306047        88
+                                  00305fb4  0030603b        88
   _table$246
-                                  00305fc0        88   data ,l         * 
+                                  00305fb4        88   data ,l         * 
 FILE=_pow5
-                                  00306048  00306127        e0
+                                  0030603c  0030611b        e0
   _w$238
-                                  00306048        e0   data ,l         * 
+                                  0030603c        e0   data ,l         * 
 FILE=_power
-                                  00306128  003061c7        a0
+                                  0030611c  003061bb        a0
   _conmnts$251
-                                  00306128        80   data ,l         * 
+                                  0030611c        80   data ,l         * 
   _conexp$252
-                                  003061a8        20   data ,l         * 
+                                  0030619c        20   data ,l         * 
 
 SECTION=B_BR_Size
 FILE=E:\DLsrc\Debug\dl2_main.obj

@@ -13,7 +13,7 @@ OptionA=0
 
 [_2]
 Type=1
-Order=12
+Order=2
 Top=3570
 Left=-45
 Height=6855
@@ -36,7 +36,7 @@ OptionA=0
 
 [_4]
 Type=7
-Order=9
+Order=10
 Top=10425
 Left=-45
 Height=3840
@@ -47,7 +47,7 @@ OptionA=0
 
 [_5]
 Type=8
-Order=8
+Order=9
 Top=10440
 Left=5505
 Height=3825
@@ -58,7 +58,7 @@ OptionA=0
 
 [_6]
 Type=3
-Order=5
+Order=6
 Top=10395
 Left=14505
 Height=3870
@@ -80,7 +80,7 @@ OptionA=0
 
 [_8]
 Type=17
-Order=3
+Order=4
 Top=10380
 Left=23325
 Height=3870
@@ -91,7 +91,7 @@ OptionA=0
 
 [_9]
 Type=15
-Order=2
+Order=3
 Top=6855
 Left=18645
 Height=3540
@@ -113,7 +113,7 @@ OptionA=0
 
 [_11]
 Type=4
-Order=11
+Order=12
 Top=3570
 Left=13710
 Height=3315
@@ -124,7 +124,7 @@ OptionA=0
 
 [_12]
 Type=10
-Order=10
+Order=11
 Top=6870
 Left=13740
 Height=3540
@@ -135,7 +135,7 @@ OptionA=0
 
 [_13]
 Type=13
-Order=7
+Order=8
 Top=10440
 Left=11070
 Height=3840
@@ -146,7 +146,7 @@ OptionA=0
 
 [_14]
 Type=9
-Order=4
+Order=5
 Top=10395
 Left=17160
 Height=3870
@@ -158,7 +158,7 @@ OptionA=0
 
 [_15]
 Type=14
-Order=6
+Order=7
 Top=10365
 Left=26430
 Height=3960
@@ -174,9 +174,9 @@ Top=0
 Left=2205
 Height=4590
 Width=5595
-State=18
+State=16
 Flags=00000020
-Setting=1:1:dl2_main.c
+Setting=292:29:dl2_main.c
 OptionA=0
 
 [_33]
@@ -188,5 +188,5 @@ Height=9765
 Width=24240
 State=16
 Flags=00000020
-Setting=318:21:dl2_main.c
+Setting=1:1:dl2_all.h
 OptionA=0

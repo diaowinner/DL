@@ -25,8 +25,8 @@ int				fh_txt		=	0	;
 long			mark[MARK_SIZE]		;
 
 
-const char * MAIN_MENU_TEXT[] = {" 打开闪存文件 "," 打开SD卡文件 "," 更改阅读字体 "," 关于 "};
-const char * READ_MENU_TEXT[] = { " 更改字体 "," 跳页 "," 读取书签 "," 保存书签 "," 退出 "};
+const char * MAIN_MENU_TEXT[] = {"Open Storage","Open SDcard","Change Font"," About"};
+const char * READ_MENU_TEXT[] = { "Cnge Font","Jump To","Read Mark","Save Mark","Exit"};
 
 void save_page_mark ()
 {
@@ -289,7 +289,7 @@ void start_read ()
 			char	buf[128];
 			int		r;
 			select_font (sys_font);
-			sprintf(buf,"  当前页%04d/%04d",page_now+1,page_size);
+			sprintf(buf,"Page %04d of%04d",page_now+1,page_size);
 			all_clr();
 			print_chs_str(0,0,0,buf);
 			menu_index = show_menu (0,5,READ_MENU_TEXT,32,16);
@@ -300,21 +300,21 @@ void start_read ()
 				if (font_modle == 16)
 				{
 					usr_font = open_font("\\\\fls0\\FONT8.dlf");
-					show_dialog(" 字体 ", "已更换为小字体.", 0, DLG_BTN_OK);
+					show_dialog(" Font ", "Changed to 8.", 0, DLG_BTN_OK);
 					font_modle = 8;
 				}
 				else if (font_modle == 8)
 				{
 	
 					usr_font = open_font("\\\\fls0\\FONT12.dlf");
-					show_dialog(" 字体 ", "已更换为中字体.", 0, DLG_BTN_OK);
+					show_dialog(" Font ", "Changed to 12", 0, DLG_BTN_OK);
 					font_modle = 12;
 				}
 				else if (font_modle == 12)
 				{
 	
 					usr_font = open_font("\\\\fls0\\FONT16.dlf");
-					show_dialog(" 字体 ", "已更换为大字体.", 0, DLG_BTN_OK);
+					show_dialog(" Font ", "Changed to 16.", 0, DLG_BTN_OK);
 					font_modle = 16;
 				}
 
@@ -323,7 +323,7 @@ void start_read ()
 			}
 			else if (menu_index==1)
 			{
-				show_dialog (""," 输入页码 ",0,0);
+				show_dialog ("","Input Page",0,0);
 				sprintf(buf,"%d",page_now+1);
 				if (get_line_box(buf,128,16,14,32))
 				{
@@ -335,7 +335,7 @@ void start_read ()
 			}
 			else if (menu_index==2)
 			{
-				r = select_page_mark ("读取书签");
+				r = select_page_mark ("ReadMark");
 				if (r!=-1)
 				{
 					page_now = mark[r];
@@ -344,7 +344,7 @@ void start_read ()
 			}
 			else if (menu_index==3)
 			{
-				r = select_page_mark ("保存书签");
+				r = select_page_mark ("SaveMark");
 				if (r!=-1)
 				{
 					mark[r] = page_now;
@@ -367,15 +367,15 @@ void start_read_text (const char * t_file_name)
 
 	if (fh_txt<0)
 	{
-		show_dialog(" 错误 "," 找不到文件 ",DLG_ICON_WARN,DLG_BTN_OK);
+		show_dialog("ERROR","No such file",DLG_ICON_WARN,DLG_BTN_OK);
 		return;
 	}
 
-	show_dialog(" 分页中 "," 请稍等 ",DLG_ICON_WAIT,0);putdisp();
+	show_dialog("Processing","Please wait",DLG_ICON_WAIT,0);putdisp();
 	switch(split_page ())
 	{
-		case -1:show_dialog(" 错误 "," 页数过多 ",DLG_ICON_WARN,DLG_BTN_OK);return;
-		case -2:show_dialog(" 错误 "," 内存不足 ",DLG_ICON_WARN,DLG_BTN_OK);return;
+		case -1:show_dialog("ERROR","More Page",DLG_ICON_WARN,DLG_BTN_OK);return;
+		case -2:show_dialog("ERROR","MemoryOut",DLG_ICON_WARN,DLG_BTN_OK);return;
 		default:;
 	}
 	read_page_mark();
@@ -461,7 +461,7 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
 	page_offset = (word*)calloc(PAGE_MAX,sizeof(word));
 	if (page_offset==NULL)
 	{
-		show_dialog(" 错误 "," 内存不足 ",DLG_ICON_WARN,DLG_BTN_OK);
+		show_dialog("ERROR","MemoryOut",DLG_ICON_WARN,DLG_BTN_OK);
 		return 0;
 	}
 
@@ -475,13 +475,13 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
 		{
 			r = file_view(1,"txt",temp_file_name);
 			if (r==1)			start_read_text(temp_file_name);
-			else if (r==-1)		show_dialog(" 错误 "," 闪存中无此类文件 ",DLG_ICON_WARN,DLG_BTN_OK);
+			else if (r==-1)		show_dialog("ERROR","No this file on StorMem",DLG_ICON_WARN,DLG_BTN_OK);
 		}
 		else if (menu_index==1)
 		{
 			r = file_view(0,"txt",temp_file_name);
 			if (r==1)			start_read_text(temp_file_name);
-			else if (r==-1)		show_dialog(" 错误 "," SD卡中无此类文件 ",DLG_ICON_WARN,DLG_BTN_OK);
+			else if (r==-1)		show_dialog("ERROR","No this file on SDCard",DLG_ICON_WARN,DLG_BTN_OK);
 		}
 		else if (menu_index==2)
 		{
@@ -489,21 +489,21 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
 			if (font_modle == 16)
 			{
 				usr_font = open_font("\\\\fls0\\FONT8.dlf");
-				show_dialog(" 字体 ", "已更换为小字体.", 0, DLG_BTN_OK);
+				show_dialog(" Font ", "Changed to 8.", 0, DLG_BTN_OK);
 				font_modle = 8;
 			}
 			else if (font_modle == 8)
 			{
 
 				usr_font = open_font("\\\\fls0\\FONT12.dlf");
-				show_dialog(" 字体 ", "已更换为中字体.", 0, DLG_BTN_OK);
+				show_dialog(" Font ", "Changed to 12.", 0, DLG_BTN_OK);
 				font_modle = 12;
 			}
 			else if (font_modle == 12)
 			{
 
 				usr_font = open_font("\\\\fls0\\FONT16.dlf");
-				show_dialog(" 字体 ", "已更换为大字体.", 0, DLG_BTN_OK);
+				show_dialog(" Font ", "Changed to 16.", 0, DLG_BTN_OK);
 				font_modle = 16;
 			}
 			
@@ -512,7 +512,7 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
 		else if (menu_index==3)
 		{
 			// about
-			show_dialog(" 关于 ","DLv2.1,作者直径君和diaowinner,此程序以MPL开源,github.com/diaowinner/DL",0,DLG_BTN_OK);
+			show_dialog("About ","DLv2.1,more info please visit: github.com/diaowinner/DL",0,DLG_BTN_OK);
 		}
 
 	}

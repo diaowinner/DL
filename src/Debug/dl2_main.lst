@@ -1,4 +1,4 @@
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE    1
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE    1
 
 ************ OBJECT LISTING ************
 
@@ -33,8 +33,8 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c    25    long                    mark[MARK_SIZE]         ;
       dl2_main.c    26    
       dl2_main.c    27    
-      dl2_main.c    28    const char * MAIN_MENU_TEXT[] = {" 打开闪存文件 "," 打开SD卡文件 "," 更改阅读字体 "," 关于 "};
-      dl2_main.c    29    const char * READ_MENU_TEXT[] = { " 更改字体 "," 跳页 "," 读取书签 "," 保存书签 "," 退出 "};
+      dl2_main.c    28    const char * MAIN_MENU_TEXT[] = {"Open Storage","Open SDcard","Change Font"," About"};
+      dl2_main.c    29    const char * READ_MENU_TEXT[] = { "Cnge Font","Jump To","Read Mark","Save Mark","Exit"};
       dl2_main.c    30    
       dl2_main.c    31    void save_page_mark ()
 P   00000000              _save_page_mark:                 ; function: save_page_mark
@@ -48,54 +48,54 @@ P   00000000              _save_page_mark:                 ; function: save_page
       dl2_main.c    34            int             file;
       dl2_main.c    35            
       dl2_main.c    36            strcpy(mark_file_name,file_name);
-    00000004 D245                   MOV.L       L780+4,R2  ; _file_name
+    00000004 D245                   MOV.L       L784+4,R2  ; _file_name
     00000006 7FE0                   ADD         #-32,R15
-    00000008 D345                   MOV.L       L780+8,R3  ; __slow_strcpy
+    00000008 D345                   MOV.L       L784+8,R3  ; __slow_strcpy
     0000000A 6122                   MOV.L       @R2,R1
     0000000C 430B                   JSR         @R3
     0000000E 60F3                   MOV         R15,R0
       dl2_main.c    37            memcpy(strstr(mark_file_name,".txt"),".svt",4);
-    00000010 D544                   MOV.L       L780+12,R5 ; L406
-    00000012 D345                   MOV.L       L780+16,R3 ; _strstr
+    00000010 D544                   MOV.L       L784+12,R5 ; L406
+    00000012 D345                   MOV.L       L784+16,R3 ; _strstr
     00000014 430B                   JSR         @R3
     00000016 64F3                   MOV         R15,R4
-    00000018 D544                   MOV.L       L780+20,R5 ; L407
+    00000018 D544                   MOV.L       L784+20,R5 ; L407
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE    2
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE    2
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
     0000001A 6403                   MOV         R0,R4
-    0000001C D244                   MOV.L       L780+24,R2 ; _memcpy
+    0000001C D244                   MOV.L       L784+24,R2 ; _memcpy
     0000001E 420B                   JSR         @R2
     00000020 E604                   MOV         #4,R6
       dl2_main.c    38    
       dl2_main.c    39            file = open_file(mark_file_name,_OPENMODE_WRITE);
     00000022 E502                   MOV         #2,R5
-    00000024 D343                   MOV.L       L780+28,R3 ; _open_file
+    00000024 D343                   MOV.L       L784+28,R3 ; _open_file
     00000026 430B                   JSR         @R3
     00000028 64F3                   MOV         R15,R4
     0000002A 6E03                   MOV         R0,R14
       dl2_main.c    40            
       dl2_main.c    41            write_file(file,&page_now,sizeof(int));
-    0000002C D542                   MOV.L       L780+32,R5 ; _page_now
+    0000002C D542                   MOV.L       L784+32,R5 ; _page_now
     0000002E E604                   MOV         #4,R6
-    00000030 D242                   MOV.L       L780+36,R2 ; _Bfile_WriteFile
+    00000030 D242                   MOV.L       L784+36,R2 ; _Bfile_WriteFile
     00000032 420B                   JSR         @R2
     00000034 6403                   MOV         R0,R4
       dl2_main.c    42            write_file(file,mark,sizeof(int)*MARK_SIZE);
     00000036 E614                   MOV         #20,R6
-    00000038 D541                   MOV.L       L780+40,R5 ; _mark
-    0000003A D340                   MOV.L       L780+36,R3 ; _Bfile_WriteFile
+    00000038 D541                   MOV.L       L784+40,R5 ; _mark
+    0000003A D340                   MOV.L       L784+36,R3 ; _Bfile_WriteFile
     0000003C 430B                   JSR         @R3
     0000003E 64E3                   MOV         R14,R4
       dl2_main.c    43    
       dl2_main.c    44            close_file(file);
-    00000040 D240                   MOV.L       L780+44,R2 ; _Bfile_CloseFile
+    00000040 D240                   MOV.L       L784+44,R2 ; _Bfile_CloseFile
     00000042 420B                   JSR         @R2
     00000044 64E3                   MOV         R14,R4
       dl2_main.c    45    }
@@ -118,35 +118,35 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c    51            int             file;
       dl2_main.c    52            
       dl2_main.c    53            strcpy(mark_file_name,file_name);
-    00000054 D231                   MOV.L       L780+4,R2  ; _file_name
+    00000054 D231                   MOV.L       L784+4,R2  ; _file_name
     00000056 60F3                   MOV         R15,R0
-    00000058 D331                   MOV.L       L780+8,R3  ; __slow_strcpy
+    00000058 D331                   MOV.L       L784+8,R3  ; __slow_strcpy
     0000005A 6122                   MOV.L       @R2,R1
     0000005C 430B                   JSR         @R3
     0000005E 7040                   ADD         #64,R0
       dl2_main.c    54            memcpy(strstr(mark_file_name,".txt"),".svt",4);
-    00000060 D530                   MOV.L       L780+12,R5 ; L406
+    00000060 D530                   MOV.L       L784+12,R5 ; L406
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE    3
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE    3
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
     00000062 64F3                   MOV         R15,R4
-    00000064 D330                   MOV.L       L780+16,R3 ; _strstr
+    00000064 D330                   MOV.L       L784+16,R3 ; _strstr
     00000066 430B                   JSR         @R3
     00000068 7440                   ADD         #64,R4
     0000006A 6403                   MOV         R0,R4
-    0000006C D52F                   MOV.L       L780+20,R5 ; L407
-    0000006E D230                   MOV.L       L780+24,R2 ; _memcpy
+    0000006C D52F                   MOV.L       L784+20,R5 ; L407
+    0000006E D230                   MOV.L       L784+24,R2 ; _memcpy
     00000070 420B                   JSR         @R2
     00000072 E604                   MOV         #4,R6
       dl2_main.c    55    
       dl2_main.c    56            file = open_file(mark_file_name,_OPENMODE_READ);
-    00000074 D32F                   MOV.L       L780+28,R3 ; _open_file
+    00000074 D32F                   MOV.L       L784+28,R3 ; _open_file
     00000076 E501                   MOV         #1,R5
     00000078 64F3                   MOV         R15,R4
     0000007A 430B                   JSR         @R3
@@ -155,72 +155,72 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c    57            
       dl2_main.c    58            if (file<0)
     00000080 4E11                   CMP/PZ      R14
-    00000082 8915                   BT          L640
+    00000082 8915                   BT          L644
       dl2_main.c    59            {
       dl2_main.c    60                    int     i;
       dl2_main.c    61                    fontc   ffname[32];
       dl2_main.c    62                    page_now = 0;
-    00000084 D32C                   MOV.L       L780+32,R3 ; _page_now
+    00000084 D32C                   MOV.L       L784+32,R3 ; _page_now
     00000086 E500                   MOV         #0,R5
-    00000088 D62D                   MOV.L       L780+40,R6 ; _mark
+    00000088 D62D                   MOV.L       L784+40,R6 ; _mark
     0000008A 2352                   MOV.L       R5,@R3
     0000008C 6463                   MOV         R6,R4
     0000008E 6763                   MOV         R6,R7
     00000090 7714                   ADD         #20,R7
       dl2_main.c    63                    for(i=0;i<MARK_SIZE;++i)
-    00000092              L641:                             
+    00000092              L645:                             
       dl2_main.c    64                    {
       dl2_main.c    65                            mark[i] = 0;
     00000092 2452                   MOV.L       R5,@R4
     00000094 7404                   ADD         #4,R4
     00000096 3472                   CMP/HS      R7,R4
-    00000098 8BFB                   BF          L641
+    00000098 8BFB                   BF          L645
       dl2_main.c    66                    }
       dl2_main.c    67                    char_to_font(mark_file_name,ffname);
     0000009A 65F3                   MOV         R15,R5
-    0000009C D32A                   MOV.L       L780+48,R3 ; _char_to_font
+    0000009C D32A                   MOV.L       L784+48,R3 ; _char_to_font
     0000009E 64F3                   MOV         R15,R4
     000000A0 430B                   JSR         @R3
     000000A2 7440                   ADD         #64,R4
       dl2_main.c    68                    i = create_file(ffname,sizeof(int)*(MARK_SIZE+1));
-    000000A4 D229                   MOV.L       L780+52,R2 ; _Bfile_CreateFile
+    000000A4 D229                   MOV.L       L784+52,R2 ; _Bfile_CreateFile
     000000A6 E518                   MOV         #24,R5
     000000A8 420B                   JSR         @R2
     000000AA 64F3                   MOV         R15,R4
-    000000AC A00F                   BRA         L642
+    000000AC A00F                   BRA         L646
     000000AE 0009                   NOP
-    000000B0              L640:                             
+    000000B0              L644:                             
       dl2_main.c    69            }
       dl2_main.c    70            else
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE    4
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE    4
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
       dl2_main.c    71            {
       dl2_main.c    72                    read_file(file,&page_now,sizeof(int),0);
-    000000B0 D521                   MOV.L       L780+32,R5 ; _page_now
+    000000B0 D521                   MOV.L       L784+32,R5 ; _page_now
     000000B2 E700                   MOV         #0,R7
-    000000B4 D226                   MOV.L       L780+56,R2 ; _Bfile_ReadFile
+    000000B4 D226                   MOV.L       L784+56,R2 ; _Bfile_ReadFile
     000000B6 E604                   MOV         #4,R6
     000000B8 420B                   JSR         @R2
     000000BA 64E3                   MOV         R14,R4
       dl2_main.c    73                    read_file(file,mark,sizeof(int)*MARK_SIZE,sizeof(int));
-    000000BC D520                   MOV.L       L780+40,R5 ; _mark
+    000000BC D520                   MOV.L       L784+40,R5 ; _mark
     000000BE E704                   MOV         #4,R7
-    000000C0 D323                   MOV.L       L780+56,R3 ; _Bfile_ReadFile
+    000000C0 D323                   MOV.L       L784+56,R3 ; _Bfile_ReadFile
     000000C2 E614                   MOV         #20,R6
     000000C4 430B                   JSR         @R3
     000000C6 64E3                   MOV         R14,R4
       dl2_main.c    74                    close_file(file);
-    000000C8 D21E                   MOV.L       L780+44,R2 ; _Bfile_CloseFile
+    000000C8 D21E                   MOV.L       L784+44,R2 ; _Bfile_CloseFile
     000000CA 420B                   JSR         @R2
     000000CC 64E3                   MOV         R14,R4
-    000000CE              L642:                             
+    000000CE              L646:                             
       dl2_main.c    75            }
       dl2_main.c    76    }
     000000CE 7F60                   ADD         #96,R15
@@ -243,7 +243,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c    85    
       dl2_main.c    86            page_size               = 0;
       dl2_main.c    87            file_pos                = 0;
-    000000DC D31F                   MOV.L       L780+68,R3 ; _file_pos
+    000000DC D31F                   MOV.L       L784+68,R3 ; _file_pos
     000000DE 2FC6                   MOV.L       R12,@-R15
     000000E0 2FB6                   MOV.L       R11,@-R15
     000000E2 2FA6                   MOV.L       R10,@-R15
@@ -251,41 +251,41 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     000000E6 2F86                   MOV.L       R8,@-R15
     000000E8 4F22                   STS.L       PR,@-R15
     000000EA E840                   MOV         #64,R8
-    000000EC DA19                   MOV.L       L780+60,R10; _page_size
+    000000EC DA19                   MOV.L       L784+60,R10; _page_size
     000000EE 7FFC                   ADD         #-4,R15
-    000000F0 DB19                   MOV.L       L780+64,R11; _usr_font
+    000000F0 DB19                   MOV.L       L784+64,R11; _usr_font
     000000F2 6D83                   MOV         R8,R13
       dl2_main.c    88            file_size               = get_file_size(fh_txt);
-    000000F4 D21A                   MOV.L       L780+72,R2 ; _fh_txt
+    000000F4 D21A                   MOV.L       L784+72,R2 ; _fh_txt
     000000F6 7D40                   ADD         #64,R13
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE    5
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE    5
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
     000000F8 2AE2                   MOV.L       R14,@R10
     000000FA 23E2                   MOV.L       R14,@R3
-    000000FC D119                   MOV.L       L780+76,R1 ; _Bfile_GetFileSize
+    000000FC D119                   MOV.L       L784+76,R1 ; _Bfile_GetFileSize
     000000FE 410B                   JSR         @R1
     00000100 6422                   MOV.L       @R2,R4
-    00000102 D319                   MOV.L       L780+80,R3 ; _file_size
+    00000102 D319                   MOV.L       L784+80,R3 ; _file_size
       dl2_main.c    89            buf                             = (uchar*)calloc(BUFFER_SIZE-1,1);
-    00000104 9408                   MOV.W       L780,R4    ; H'4FFF
+    00000104 9408                   MOV.W       L784,R4    ; H'4FFF
     00000106 2302                   MOV.L       R0,@R3
-    00000108 D218                   MOV.L       L780+84,R2 ; _calloc
+    00000108 D218                   MOV.L       L784+84,R2 ; _calloc
     0000010A 420B                   JSR         @R2
     0000010C E501                   MOV         #1,R5
     0000010E 6C03                   MOV         R0,R12
       dl2_main.c    90            if (buf==NULL) return -2;
     00000110 2CC8                   TST         R12,R12
-    00000112 8B2D                   BF          L643
-    00000114 A09B                   BRA         L644
+    00000112 8B2D                   BF          L647
+    00000114 A09B                   BRA         L648
     00000116 E0FE                   MOV         #-2,R0
-    00000118              L780:                             
+    00000118              L784:                             
     00000118 4FFF                   .DATA.W     H'4FFF
     0000011A 0000                   .DATA.W     0
     0000011C <00000000>             .DATA.L     _file_name
@@ -309,55 +309,55 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000164 <00000000>             .DATA.L     _Bfile_GetFileSize
     00000168 <00000000>             .DATA.L     _file_size
     0000016C <00000000>             .DATA.L     _calloc
-    00000170              L643:                             
+    00000170              L647:                             
       dl2_main.c    91    
       dl2_main.c    92            select_font (usr_font);
-    00000170 D241                   MOV.L       L781+6,R2  ; _select_font
+    00000170 D241                   MOV.L       L785+6,R2  ; _select_font
     00000172 420B                   JSR         @R2
     00000174 64B2                   MOV.L       @R11,R4
       dl2_main.c    93            
       dl2_main.c    94            while(file_pos < file_size-1)
-    00000176 A05E                   BRA         L645
+    00000176 A05E                   BRA         L649
     00000178 0009                   NOP
-    0000017A              L646:                             
+    0000017A              L650:                             
       dl2_main.c    95            {
       dl2_main.c    96                    if (file_size - file_pos > BUFFER_SIZE)
     0000017A 62F2                   MOV.L       @R15,R2
-    0000017C 9379                   MOV.W       L781,R3    ; H'5000
+    0000017C 9379                   MOV.W       L785,R3    ; H'5000
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE    6
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE    6
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
     0000017E 3298                   SUB         R9,R2
     00000180 3236                   CMP/HI      R3,R2
-    00000182 8B08                   BF          L647
+    00000182 8B08                   BF          L651
       dl2_main.c    97                            bytes_read = read_file(fh_txt,buf,BUFFER_SIZE,file_pos);
-    00000184 D13D                   MOV.L       L781+10,R1 ; _fh_txt
+    00000184 D13D                   MOV.L       L785+10,R1 ; _fh_txt
     00000186 6793                   MOV         R9,R7
-    00000188 D23D                   MOV.L       L781+14,R2 ; _Bfile_ReadFile
+    00000188 D23D                   MOV.L       L785+14,R2 ; _Bfile_ReadFile
     0000018A 6633                   MOV         R3,R6
     0000018C 65C3                   MOV         R12,R5
     0000018E 420B                   JSR         @R2
     00000190 6412                   MOV.L       @R1,R4
-    00000192 A008                   BRA         L775
+    00000192 A008                   BRA         L779
     00000194 0009                   NOP
-    00000196              L647:                             
+    00000196              L651:                             
       dl2_main.c    98                    else
       dl2_main.c    99                            bytes_read = read_file(fh_txt,buf,file_size - file_pos,file_pos);
     00000196 6793                   MOV         R9,R7
     00000198 66F2                   MOV.L       @R15,R6
     0000019A 65C3                   MOV         R12,R5
-    0000019C D237                   MOV.L       L781+10,R2 ; _fh_txt
+    0000019C D237                   MOV.L       L785+10,R2 ; _fh_txt
     0000019E 3698                   SUB         R9,R6
-    000001A0 D137                   MOV.L       L781+14,R1 ; _Bfile_ReadFile
+    000001A0 D137                   MOV.L       L785+14,R1 ; _Bfile_ReadFile
     000001A2 410B                   JSR         @R1
     000001A4 6422                   MOV.L       @R2,R4
-    000001A6              L775:                             
+    000001A6              L779:                             
       dl2_main.c   100    
       dl2_main.c   101                    buf[bytes_read] = '\0';
       dl2_main.c   102                    
@@ -374,13 +374,13 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     000001B0 65E3                   MOV         R14,R5
       dl2_main.c   108    
       dl2_main.c   109                    while(1)
-    000001B2              L650:                             
+    000001B2              L654:                             
       dl2_main.c   110                    {
       dl2_main.c   111                            if ((*p) & 0x80)
     000001B2 6240                   MOV.B       @R4,R2
     000001B4 622C                   EXTU.B      R2,R2
     000001B6 22D8                   TST         R13,R2
-    000001B8 8905                   BT          L651
+    000001B8 8905                   BT          L655
       dl2_main.c   112                            {
       dl2_main.c   113    #ifdef SPLIT_TEST
       dl2_main.c   114                                    print_chs_char(x,y,0,*p,*(p+1));        
@@ -394,42 +394,42 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE    7
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE    7
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
     000001BE 7502                   ADD         #2,R5
     000001C0 5324                   MOV.L       @(16,R2),R3
-    000001C2 A00E                   BRA         L652
+    000001C2 A00E                   BRA         L656
     000001C4 363C                   ADD         R3,R6
-    000001C6              L651:                             
+    000001C6              L655:                             
       dl2_main.c   119                            }
       dl2_main.c   120                            else if ((*p)=='\n')
     000001C6 6040                   MOV.B       @R4,R0
     000001C8 600C                   EXTU.B      R0,R0
     000001CA 880A                   CMP/EQ      #10,R0
-    000001CC 8B01                   BF          L653
-    000001CE A006                   BRA         L573
+    000001CC 8B01                   BF          L657
+    000001CE A006                   BRA         L575
       dl2_main.c   121                            {
       dl2_main.c   122                                    x = SCR_WIDTH;
     000001D0 66D3                   MOV         R13,R6
-    000001D2              L653:                             
+    000001D2              L657:                             
       dl2_main.c   123                                    p++;
       dl2_main.c   124                                    page_bytes++;
       dl2_main.c   125                            }
       dl2_main.c   126                            else if (*p == 0)
     000001D2 6240                   MOV.B       @R4,R2
     000001D4 2228                   TST         R2,R2
-    000001D6 8B02                   BF          L573
+    000001D6 8B02                   BF          L575
       dl2_main.c   127                            {
       dl2_main.c   128                                    if (last_page)
       dl2_main.c   129                                    {
       dl2_main.c   130                                            x = SCR_WIDTH,y = SCR_HEIGHT;
     000001D8 66D3                   MOV         R13,R6
-    000001DA A002                   BRA         L652
+    000001DA A002                   BRA         L656
     000001DC 6783                   MOV         R8,R7
-    000001DE              L573:
+    000001DE              L575:
       dl2_main.c   131                                    }
       dl2_main.c   132                                    else
       dl2_main.c   133                                            break;
@@ -443,14 +443,14 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     000001DE 7401                   ADD         #1,R4
       dl2_main.c   141                                    page_bytes++;
     000001E0 7501                   ADD         #1,R5
-    000001E2              L652:                             
+    000001E2              L656:                             
       dl2_main.c   142                            }
       dl2_main.c   143                            if (x+usr_font->cwidth > SCR_WIDTH)
     000001E2 63B2                   MOV.L       @R11,R3
     000001E4 5234                   MOV.L       @(16,R3),R2
     000001E6 326C                   ADD         R6,R2
     000001E8 32D6                   CMP/HI      R13,R2
-    000001EA 8BE2                   BF          L650
+    000001EA 8BE2                   BF          L654
       dl2_main.c   144                            {
       dl2_main.c   145                                    x = 0;
       dl2_main.c   146                                    y += usr_font->height;
@@ -460,7 +460,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE    8
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE    8
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -470,7 +470,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c   147                                    if (y + usr_font->height > SCR_HEIGHT)
     000001F4 337C                   ADD         R7,R3
     000001F6 3386                   CMP/HI      R8,R3
-    000001F8 8FDB                   BF/S        L650
+    000001F8 8FDB                   BF/S        L654
     000001FA 66E3                   MOV         R14,R6
       dl2_main.c   148                                    {
       dl2_main.c   149                                            // page_end
@@ -478,28 +478,28 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c   151                                            bytes_read += page_bytes;
       dl2_main.c   152                                            // save page offset
       dl2_main.c   153                                            if (page_size>=PAGE_MAX)
-    000001FC 923A                   MOV.W       L781+2,R2  ; H'270F
+    000001FC 923A                   MOV.W       L785+2,R2  ; H'270F
     000001FE 67E3                   MOV         R14,R7
     00000200 63A2                   MOV.L       @R10,R3
     00000202 3322                   CMP/HS      R2,R3
-    00000204 8F05                   BF/S        L662
+    00000204 8F05                   BF/S        L666
     00000206 395C                   ADD         R5,R9
       dl2_main.c   154                                            {
       dl2_main.c   155                                                    free(buf);      
-    00000208 D31E                   MOV.L       L781+18,R3 ; _free
+    00000208 D31E                   MOV.L       L785+18,R3 ; _free
     0000020A 430B                   JSR         @R3
     0000020C 64C3                   MOV         R12,R4
       dl2_main.c   156                                                    return -1;
-    0000020E A01E                   BRA         L644
+    0000020E A01E                   BRA         L648
     00000210 E0FF                   MOV         #-1,R0
-    00000212              L662:                             
+    00000212              L666:                             
       dl2_main.c   157                                            }
       dl2_main.c   158    #ifdef SPLIT_TEST
       dl2_main.c   159                                            waitkey();all_clr();
       dl2_main.c   160    #endif
       dl2_main.c   161                                            page_offset[page_size++] = page_bytes;
     00000212 62A2                   MOV.L       @R10,R2
-    00000214 D31C                   MOV.L       L781+22,R3 ; _page_offset
+    00000214 D31C                   MOV.L       L785+22,R3 ; _page_offset
     00000216 7201                   ADD         #1,R2
     00000218 2A22                   MOV.L       R2,@R10
     0000021A 72FF                   ADD         #-1,R2
@@ -510,23 +510,23 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c   163                                            if (*p==0) break;
     00000222 6240                   MOV.B       @R4,R2
     00000224 2228                   TST         R2,R2
-    00000226 8FC4                   BF/S        L650
+    00000226 8FC4                   BF/S        L654
     00000228 65E3                   MOV         R14,R5
       dl2_main.c   164                                    }
       dl2_main.c   165                            }// if
       dl2_main.c   166                    }
       dl2_main.c   167                    if (bytes_read==0)
     0000022A 2998                   TST         R9,R9
-    0000022C 8903                   BT          L645
+    0000022C 8903                   BT          L649
       dl2_main.c   168                            last_page = TRUE;
       dl2_main.c   169                    else
       dl2_main.c   170                            file_pos += bytes_read;
-    0000022E D317                   MOV.L       L781+26,R3 ; _file_pos
+    0000022E D317                   MOV.L       L785+26,R3 ; _file_pos
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE    9
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE    9
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -534,24 +534,24 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000230 6132                   MOV.L       @R3,R1
     00000232 319C                   ADD         R9,R1
     00000234 2312                   MOV.L       R1,@R3
-    00000236              L645:                             
-    00000236 D315                   MOV.L       L781+26,R3 ; _file_pos
-    00000238 D115                   MOV.L       L781+30,R1 ; _file_size
+    00000236              L649:                             
+    00000236 D315                   MOV.L       L785+26,R3 ; _file_pos
+    00000238 D115                   MOV.L       L785+30,R1 ; _file_size
     0000023A 6932                   MOV.L       @R3,R9
     0000023C 6212                   MOV.L       @R1,R2
     0000023E 2F22                   MOV.L       R2,@R15
     00000240 72FF                   ADD         #-1,R2
     00000242 3922                   CMP/HS      R2,R9
-    00000244 8B99                   BF          L646
+    00000244 8B99                   BF          L650
       dl2_main.c   171            }
       dl2_main.c   172            free(buf);
-    00000246 D30F                   MOV.L       L781+18,R3 ; _free
+    00000246 D30F                   MOV.L       L785+18,R3 ; _free
     00000248 430B                   JSR         @R3
     0000024A 64C3                   MOV         R12,R4
       dl2_main.c   173            return 0;
     0000024C E000                   MOV         #0,R0
       dl2_main.c   174    }
-    0000024E              L644:                             
+    0000024E              L648:                             
     0000024E 7F04                   ADD         #4,R15
     00000250 4F26                   LDS.L       @R15+,PR
     00000252 68F6                   MOV.L       @R15+,R8
@@ -569,15 +569,15 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c   177    {
       dl2_main.c   178            int offset = 0,i;
     00000262 E700                   MOV         #0,R7
-    00000264 D108                   MOV.L       L781+22,R1 ; _page_offset
+    00000264 D108                   MOV.L       L785+22,R1 ; _page_offset
     00000266 6673                   MOV         R7,R6
     00000268 2FD6                   MOV.L       R13,@-R15
       dl2_main.c   179            for (i=0;i<page_now;++i)
     0000026A 6573                   MOV         R7,R5
-    0000026C DD09                   MOV.L       L781+34,R13; _page_now
-    0000026E A019                   BRA         L666
+    0000026C DD09                   MOV.L       L785+34,R13; _page_now
+    0000026E A019                   BRA         L670
     00000270 6473                   MOV         R7,R4
-    00000272              L781:                             
+    00000272              L785:                             
     00000272 5000                   .DATA.W     H'5000
     00000274 270F                   .DATA.W     H'270F
     00000276 0000                   .DATA.W     0
@@ -592,13 +592,13 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   10
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   10
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
     00000294 <00000000>             .DATA.L     _page_now
-    00000298              L667:                             
+    00000298              L671:                             
       dl2_main.c   180            {
       dl2_main.c   181                    offset+=page_offset[i]; 
     00000298 6012                   MOV.L       @R1,R0
@@ -607,10 +607,10 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     0000029E 7402                   ADD         #2,R4
     000002A0 622D                   EXTU.W      R2,R2
     000002A2 362C                   ADD         R2,R6
-    000002A4              L666:                             
+    000002A4              L670:                             
     000002A4 63D2                   MOV.L       @R13,R3
     000002A6 3532                   CMP/HS      R3,R5
-    000002A8 8BF6                   BF          L667
+    000002A8 8BF6                   BF          L671
       dl2_main.c   182            }
       dl2_main.c   183            return offset;
     000002AA 6063                   MOV         R6,R0
@@ -627,15 +627,15 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     000002B6 EC01                   MOV         #1,R12
       dl2_main.c   187    {
       dl2_main.c   188            int                             left = 64-get_str_width(title)/2,index = 0;
-    000002B8 D33D                   MOV.L       L782+16,R3 ; _get_str_width
+    000002B8 D33D                   MOV.L       L786+16,R3 ; _get_str_width
     000002BA 2FB6                   MOV.L       R11,@-R15
     000002BC 2FA6                   MOV.L       R10,@-R15
     000002BE 2F96                   MOV.L       R9,@-R15
     000002C0 2F86                   MOV.L       R8,@-R15
     000002C2 E800                   MOV         #0,R8
-    000002C4 DB39                   MOV.L       L782+12,R11; _sys_font
+    000002C4 DB39                   MOV.L       L786+12,R11; _sys_font
     000002C6 4F22                   STS.L       PR,@-R15
-    000002C8 906A                   MOV.W       L782,R0    ; H'FF74
+    000002C8 906A                   MOV.W       L786,R0    ; H'FF74
     000002CA 3F0C                   ADD         R0,R15
     000002CC 430B                   JSR         @R3
     000002CE 1F41                   MOV.L       R4,@(4,R15)
@@ -652,13 +652,13 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c   191            unsigned int    key;
       dl2_main.c   192    
       dl2_main.c   193            select_font(sys_font);
-    000002E0 D334                   MOV.L       L782+20,R3 ; _select_font
+    000002E0 D334                   MOV.L       L786+20,R3 ; _select_font
     000002E2 6EC3                   MOV         R12,R14
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   11
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   11
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -666,44 +666,44 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     000002E4 430B                   JSR         @R3
     000002E6 64B2                   MOV.L       @R11,R4
       dl2_main.c   194            all_clr();
-    000002E8 D233                   MOV.L       L782+24,R2 ; _Bdisp_AllClr_VRAM
+    000002E8 D233                   MOV.L       L786+24,R2 ; _Bdisp_AllClr_VRAM
     000002EA 420B                   JSR         @R2
     000002EC 0009                   NOP
       dl2_main.c   195            print_chs_str(left,0,0,title);
     000002EE 6683                   MOV         R8,R6
-    000002F0 D332                   MOV.L       L782+28,R3 ; _print_chs_str
+    000002F0 D332                   MOV.L       L786+28,R3 ; _print_chs_str
     000002F2 6583                   MOV         R8,R5
     000002F4 57F1                   MOV.L       @(4,R15),R7
     000002F6 430B                   JSR         @R3
     000002F8 54F2                   MOV.L       @(8,R15),R4
       dl2_main.c   196            while(1)
-    000002FA              L670:                             
+    000002FA              L674:                             
       dl2_main.c   197            {
       dl2_main.c   198                    if (redraw)
     000002FA 2EE8                   TST         R14,R14
-    000002FC 8925                   BT          L671
+    000002FC 8925                   BT          L675
       dl2_main.c   199                    {
       dl2_main.c   200                            int i,y=sys_font->height+4,x=0;
     000002FE 6AB2                   MOV.L       @R11,R10
     00000300 5AA6                   MOV.L       @(24,R10),R10
     00000302 7A04                   ADD         #4,R10
       dl2_main.c   201                            for (i=0;i<MARK_SIZE;++i,y+=sys_font->height)
-    00000304 A01D                   BRA         L672
+    00000304 A01D                   BRA         L676
     00000306 6E83                   MOV         R8,R14
-    00000308              L673:                             
+    00000308              L677:                             
       dl2_main.c   202                            {
       dl2_main.c   203                                    sprintf(buf," -%d- %04d/%04d  ",i,mark[i]+1,page_size);
-    00000308 D32D                   MOV.L       L782+32,R3 ; _page_size
+    00000308 D32D                   MOV.L       L786+32,R3 ; _page_size
     0000030A 61E3                   MOV         R14,R1
-    0000030C D02D                   MOV.L       L782+36,R0 ; _mark
+    0000030C D02D                   MOV.L       L786+36,R0 ; _mark
     0000030E 69F3                   MOV         R15,R9
     00000310 6232                   MOV.L       @R3,R2
     00000312 4108                   SHLL2       R1
     00000314 2F26                   MOV.L       R2,@-R15
     00000316 790C                   ADD         #12,R9
-    00000318 D32C                   MOV.L       L782+44,R3 ; _sprintf
+    00000318 D32C                   MOV.L       L786+44,R3 ; _sprintf
     0000031A 021E                   MOV.L       @(R0,R1),R2
-    0000031C D12A                   MOV.L       L782+40,R1 ; L457
+    0000031C D12A                   MOV.L       L786+40,R1 ; L457
     0000031E 7201                   ADD         #1,R2
     00000320 2F26                   MOV.L       R2,@-R15
     00000322 2FE6                   MOV.L       R14,@-R15
@@ -712,7 +712,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000328 6493                   MOV         R9,R4
     0000032A 7F10                   ADD         #16,R15
       dl2_main.c   204                                    print_chs_str(x,y,index==i,buf);
-    0000032C D223                   MOV.L       L782+28,R2 ; _print_chs_str
+    0000032C D223                   MOV.L       L786+28,R2 ; _print_chs_str
     0000032E 6793                   MOV         R9,R7
     00000330 3DE0                   CMP/EQ      R14,R13
     00000332 0629                   MOVT        R6
@@ -724,7 +724,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   12
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   12
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -732,82 +732,82 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     0000033C 63B2                   MOV.L       @R11,R3
     0000033E 5236                   MOV.L       @(24,R3),R2
     00000340 3A2C                   ADD         R2,R10
-    00000342              L672:                             
+    00000342              L676:                             
     00000342 E405                   MOV         #5,R4
     00000344 3E43                   CMP/GE      R4,R14
-    00000346 8BDF                   BF          L673
+    00000346 8BDF                   BF          L677
       dl2_main.c   205                            }
       dl2_main.c   206                            redraw = TRUE;
     00000348 6EC3                   MOV         R12,R14
-    0000034A              L671:                             
+    0000034A              L675:                             
       dl2_main.c   207                    }
       dl2_main.c   208                    GetKey(&key);
-    0000034A DA21                   MOV.L       L782+48,R10; _GetKey
+    0000034A DA21                   MOV.L       L786+48,R10; _GetKey
     0000034C 4A0B                   JSR         @R10
     0000034E 64F3                   MOV         R15,R4
       dl2_main.c   209                    if (key==KEY_CTRL_UP)
-    00000350 9427                   MOV.W       L782+2,R4  ; H'7542
+    00000350 9427                   MOV.W       L786+2,R4  ; H'7542
     00000352 62F2                   MOV.L       @R15,R2
     00000354 3240                   CMP/EQ      R4,R2
-    00000356 8B03                   BF          L674
+    00000356 8B03                   BF          L678
       dl2_main.c   210                    {
       dl2_main.c   211                            if (index<=0) continue;
     00000358 4D15                   CMP/PL      R13
-    0000035A 8BCE                   BF          L670
-    0000035C A008                   BRA         L574
+    0000035A 8BCE                   BF          L674
+    0000035C A008                   BRA         L576
       dl2_main.c   212                            --index;
     0000035E 7DFF                   ADD         #-1,R13
-    00000360              L674:                             
+    00000360              L678:                             
       dl2_main.c   213                            redraw = TRUE;
       dl2_main.c   214                    }
       dl2_main.c   215                    else if (key==KEY_CTRL_DOWN)
-    00000360 9420                   MOV.W       L782+4,R4  ; H'7547
+    00000360 9420                   MOV.W       L786+4,R4  ; H'7547
     00000362 62F2                   MOV.L       @R15,R2
     00000364 3240                   CMP/EQ      R4,R2
-    00000366 8B05                   BF          L677
+    00000366 8B05                   BF          L681
       dl2_main.c   216                    {
       dl2_main.c   217                            if (index>=MARK_SIZE-1) continue;
     00000368 E404                   MOV         #4,R4
     0000036A 3D43                   CMP/GE      R4,R13
-    0000036C 89C5                   BT          L670
+    0000036C 89C5                   BT          L674
       dl2_main.c   218                            ++index;
     0000036E 7D01                   ADD         #1,R13
-    00000370              L574:
+    00000370              L576:
       dl2_main.c   219                            redraw = TRUE;
-    00000370 AFC3                   BRA         L670
+    00000370 AFC3                   BRA         L674
     00000372 6EC3                   MOV         R12,R14
-    00000374              L677:                             
+    00000374              L681:                             
       dl2_main.c   220                    }
       dl2_main.c   221                    else if (key==KEY_CTRL_EXE)
-    00000374 9417                   MOV.W       L782+6,R4  ; H'7534
+    00000374 9417                   MOV.W       L786+6,R4  ; H'7534
     00000376 63F2                   MOV.L       @R15,R3
     00000378 3340                   CMP/EQ      R4,R3
-    0000037A 8B01                   BF          L680
+    0000037A 8B01                   BF          L684
       dl2_main.c   222                    {
       dl2_main.c   223                            return index;
-    0000037C A005                   BRA         L681
+    0000037C A005                   BRA         L685
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   13
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   13
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
     0000037E 60D3                   MOV         R13,R0
-    00000380              L680:                             
+    00000380              L684:                             
       dl2_main.c   224                    }
       dl2_main.c   225                    else if (key==KEY_CTRL_EXIT) return -1;
-    00000380 9412                   MOV.W       L782+8,R4  ; H'7532
+    00000380 9412                   MOV.W       L786+8,R4  ; H'7532
     00000382 62F2                   MOV.L       @R15,R2
     00000384 3240                   CMP/EQ      R4,R2
-    00000386 8BB8                   BF          L670
+    00000386 8BB8                   BF          L674
     00000388 E0FF                   MOV         #-1,R0
-    0000038A              L681:                             
+    0000038A              L685:                             
       dl2_main.c   226            }
       dl2_main.c   227    }
-    0000038A 910E                   MOV.W       L782+10,R1 ; H'008C
+    0000038A 910E                   MOV.W       L786+10,R1 ; H'008C
     0000038C 3F1C                   ADD         R1,R15
     0000038E 4F26                   LDS.L       @R15+,PR
     00000390 68F6                   MOV.L       @R15+,R8
@@ -818,7 +818,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     0000039A 6DF6                   MOV.L       @R15+,R13
     0000039C 000B                   RTS
     0000039E 6EF6                   MOV.L       @R15+,R14
-    000003A0              L782:                             
+    000003A0              L786:                             
     000003A0 FF74                   .DATA.W     H'FF74
     000003A2 7542                   .DATA.W     H'7542
     000003A4 7547                   .DATA.W     H'7547
@@ -844,7 +844,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c   231            uint    key;
       dl2_main.c   232            int             redraw = 1;
     000003D6 E301                   MOV         #1,R3
-    000003D8 9049                   MOV.W       L783,R0    ; H'FF6C
+    000003D8 9049                   MOV.W       L787,R0    ; H'FF6C
     000003DA 2FD6                   MOV.L       R13,@-R15
     000003DC 2FC6                   MOV.L       R12,@-R15
     000003DE 2FB6                   MOV.L       R11,@-R15
@@ -856,12 +856,12 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   14
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   14
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
-    000003E8 DC22                   MOV.L       L783+6,R12 ; _file_pos
+    000003E8 DC22                   MOV.L       L787+6,R12 ; _file_pos
     000003EA 3F0C                   ADD         R0,R15
       dl2_main.c   233            int             menu_index = 0;
       dl2_main.c   234    
@@ -871,14 +871,14 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     000003F0 2C02                   MOV.L       R0,@R12
       dl2_main.c   236            
       dl2_main.c   237            while(1)
-    000003F2              L685:                             
+    000003F2              L689:                             
       dl2_main.c   238            {
       dl2_main.c   239                    if (redraw)
-    000003F2 9A3D                   MOV.W       L783+2,R10 ; H'0080
-    000003F4 DD20                   MOV.L       L783+10,R13; _usr_font
+    000003F2 9A3D                   MOV.W       L787+2,R10 ; H'0080
+    000003F4 DD20                   MOV.L       L787+10,R13; _usr_font
     000003F6 52F4                   MOV.L       @(16,R15),R2
     000003F8 2228                   TST         R2,R2
-    000003FA 8D67                   BT/S        L686
+    000003FA 8D67                   BT/S        L690
     000003FC EB00                   MOV         #0,R11
       dl2_main.c   240                    {
       dl2_main.c   241                            uchar c1,c2;
@@ -886,27 +886,27 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     000003FE 6EB3                   MOV         R11,R14
       dl2_main.c   243                            redraw = 0;
       dl2_main.c   244                            all_clr();
-    00000400 D31E                   MOV.L       L783+14,R3 ; _Bdisp_AllClr_VRAM
+    00000400 D31E                   MOV.L       L787+14,R3 ; _Bdisp_AllClr_VRAM
     00000402 69B3                   MOV         R11,R9
     00000404 68B3                   MOV         R11,R8
     00000406 430B                   JSR         @R3
     00000408 1FB4                   MOV.L       R11,@(16,R15)
       dl2_main.c   245                            select_font(usr_font);
-    0000040A D21D                   MOV.L       L783+18,R2 ; _select_font
+    0000040A D21D                   MOV.L       L787+18,R2 ; _select_font
     0000040C 420B                   JSR         @R2
     0000040E 64D2                   MOV.L       @R13,R4
       dl2_main.c   246    
       dl2_main.c   247                            while(file_pos+i<file_size)
-    00000410 A055                   BRA         L687
+    00000410 A055                   BRA         L691
     00000412 0009                   NOP
-    00000414              L688:                             
+    00000414              L692:                             
       dl2_main.c   248                            {
       dl2_main.c   249                                    read_file(fh_txt,&c1,1,file_pos+i);i++;
     00000414 57F3                   MOV.L       @(12,R15),R7
     00000416 E601                   MOV         #1,R6
-    00000418 D31A                   MOV.L       L783+22,R3 ; _fh_txt
+    00000418 D31A                   MOV.L       L787+22,R3 ; _fh_txt
     0000041A 65F3                   MOV         R15,R5
-    0000041C D21A                   MOV.L       L783+26,R2 ; _Bfile_ReadFile
+    0000041C D21A                   MOV.L       L787+26,R2 ; _Bfile_ReadFile
     0000041E 7504                   ADD         #4,R5
     00000420 420B                   JSR         @R2
     00000422 6432                   MOV.L       @R3,R4
@@ -915,14 +915,14 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000428 644C                   EXTU.B      R4,R4
     0000042A 6343                   MOV         R4,R3
     0000042C 23A8                   TST         R10,R3
-    0000042E 8D19                   BT/S        L689
+    0000042E 8D19                   BT/S        L693
     00000430 7801                   ADD         #1,R8
       dl2_main.c   250                                    if (c1 & 0x80)
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   15
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   15
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -930,9 +930,9 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c   251                                    {
       dl2_main.c   252                                            read_file(fh_txt,&c2,1,file_pos+i);i++;
     00000432 E601                   MOV         #1,R6
-    00000434 D313                   MOV.L       L783+22,R3 ; _fh_txt
+    00000434 D313                   MOV.L       L787+22,R3 ; _fh_txt
     00000436 65F3                   MOV         R15,R5
-    00000438 D213                   MOV.L       L783+26,R2 ; _Bfile_ReadFile
+    00000438 D213                   MOV.L       L787+26,R2 ; _Bfile_ReadFile
     0000043A 7508                   ADD         #8,R5
     0000043C 67C2                   MOV.L       @R12,R7
     0000043E 378C                   ADD         R8,R7
@@ -947,26 +947,26 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     0000044E 6593                   MOV         R9,R5
     00000450 84F8                   MOV.B       @(8,R15),R0
     00000452 6703                   MOV         R0,R7
-    00000454 D30D                   MOV.L       L783+30,R3 ; _print_chs_char
+    00000454 D30D                   MOV.L       L787+30,R3 ; _print_chs_char
     00000456 430B                   JSR         @R3
     00000458 64E3                   MOV         R14,R4
     0000045A 7F04                   ADD         #4,R15
       dl2_main.c   254                                            x += usr_font->cwidth;
     0000045C 62D2                   MOV.L       @R13,R2
     0000045E 5324                   MOV.L       @(16,R2),R3
-    00000460 A020                   BRA         L690
+    00000460 A020                   BRA         L694
     00000462 3E3C                   ADD         R3,R14
-    00000464              L689:                             
+    00000464              L693:                             
       dl2_main.c   255                                    }
       dl2_main.c   256                                    else if (c1 == '\n')
     00000464 6043                   MOV         R4,R0
     00000466 880A                   CMP/EQ      #10,R0
-    00000468 8B12                   BF          L691
+    00000468 8B12                   BF          L695
       dl2_main.c   257                                    {
       dl2_main.c   258                                            x = SCR_WIDTH;
-    0000046A A01B                   BRA         L690
+    0000046A A01B                   BRA         L694
     0000046C 6EA3                   MOV         R10,R14
-    0000046E              L783:                             
+    0000046E              L787:                             
     0000046E FF6C                   .DATA.W     H'FF6C
     00000470 0080                   .DATA.W     H'0080
     00000472 0000                   .DATA.W     0
@@ -977,7 +977,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000484 <00000000>             .DATA.L     _fh_txt
     00000488 <00000000>             .DATA.L     _Bfile_ReadFile
     0000048C <00000000>             .DATA.L     _print_chs_char
-    00000490              L691:                             
+    00000490              L695:                             
       dl2_main.c   259                                    }
       dl2_main.c   260                                    else
       dl2_main.c   261                                    {
@@ -988,12 +988,12 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   16
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   16
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
-    00000494 D327                   MOV.L       L784+6,R3  ; _print_asc_char
+    00000494 D327                   MOV.L       L788+6,R3  ; _print_asc_char
     00000496 6593                   MOV         R9,R5
     00000498 6703                   MOV         R0,R7
     0000049A 430B                   JSR         @R3
@@ -1002,14 +1002,14 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     0000049E 62D2                   MOV.L       @R13,R2
     000004A0 5325                   MOV.L       @(20,R2),R3
     000004A2 3E3C                   ADD         R3,R14
-    000004A4              L690:                             
+    000004A4              L694:                             
       dl2_main.c   264                                    }
       dl2_main.c   265                                    if (x+usr_font->cwidth > SCR_WIDTH)
     000004A4 62D2                   MOV.L       @R13,R2
     000004A6 5324                   MOV.L       @(16,R2),R3
     000004A8 33EC                   ADD         R14,R3
     000004AA 33A6                   CMP/HI      R10,R3
-    000004AC 8B07                   BF          L687
+    000004AC 8B07                   BF          L691
       dl2_main.c   266                                    {
       dl2_main.c   267                                            x = 0;
       dl2_main.c   268                                            y += usr_font->height;
@@ -1020,32 +1020,32 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     000004B4 394C                   ADD         R4,R9
     000004B6 349C                   ADD         R9,R4
     000004B8 3456                   CMP/HI      R5,R4
-    000004BA 8D07                   BT/S        L686
+    000004BA 8D07                   BT/S        L690
     000004BC 6EB3                   MOV         R11,R14
-    000004BE              L687:                             
-    000004BE D41E                   MOV.L       L784+10,R4 ; _file_size
+    000004BE              L691:                             
+    000004BE D41E                   MOV.L       L788+10,R4 ; _file_size
     000004C0 63C2                   MOV.L       @R12,R3
     000004C2 338C                   ADD         R8,R3
     000004C4 1F33                   MOV.L       R3,@(12,R15)
     000004C6 6242                   MOV.L       @R4,R2
     000004C8 3322                   CMP/HS      R2,R3
-    000004CA 8BA3                   BF          L688
-    000004CC              L686:                             
+    000004CA 8BA3                   BF          L692
+    000004CC              L690:                             
       dl2_main.c   270                                                    break;
       dl2_main.c   271                                    }
       dl2_main.c   272                            }
       dl2_main.c   273                    }
       dl2_main.c   274                    GetKey(&key);
-    000004CC DE1B                   MOV.L       L784+14,R14; _GetKey
+    000004CC DE1B                   MOV.L       L788+14,R14; _GetKey
     000004CE 4E0B                   JSR         @R14
     000004D0 64F3                   MOV         R15,R4
       dl2_main.c   275                    if (key==KEY_CTRL_UP)
-    000004D2 952C                   MOV.W       L784,R5    ; H'7542
-    000004D4 D41A                   MOV.L       L784+18,R4 ; _page_offset
-    000004D6 DE1B                   MOV.L       L784+22,R14; _page_now
+    000004D2 952C                   MOV.W       L788,R5    ; H'7542
+    000004D4 D41A                   MOV.L       L788+18,R4 ; _page_offset
+    000004D6 DE1B                   MOV.L       L788+22,R14; _page_now
     000004D8 63F2                   MOV.L       @R15,R3
     000004DA 3350                   CMP/EQ      R5,R3
-    000004DC 8B0F                   BF          L696
+    000004DC 8B0F                   BF          L700
       dl2_main.c   276                    {
       dl2_main.c   277                            if (page_now<=0) continue;
     000004DE E100                   MOV         #0,R1
@@ -1054,13 +1054,13 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   17
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   17
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
     000004E2 3216                   CMP/HI      R1,R2
-    000004E4 8B85                   BF          L685
+    000004E4 8B85                   BF          L689
       dl2_main.c   278                            file_pos -= page_offset[--page_now];
     000004E6 63E2                   MOV.L       @R14,R3
     000004E8 73FF                   ADD         #-1,R3
@@ -1075,24 +1075,24 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c   279                            redraw = 1;
     000004FA E201                   MOV         #1,R2
     000004FC 1F24                   MOV.L       R2,@(16,R15)
-    000004FE              L696:                             
+    000004FE              L700:                             
       dl2_main.c   280                    }
       dl2_main.c   281                    if (key==KEY_CTRL_DOWN)
-    000004FE 9517                   MOV.W       L784+2,R5  ; H'7547
+    000004FE 9517                   MOV.W       L788+2,R5  ; H'7547
     00000500 63F2                   MOV.L       @R15,R3
     00000502 3350                   CMP/EQ      R5,R3
-    00000504 8B22                   BF          L698
+    00000504 8B22                   BF          L702
       dl2_main.c   282                    {
       dl2_main.c   283                            if (page_now+1>=page_size) continue;
     00000506 61E2                   MOV.L       @R14,R1
-    00000508 D20F                   MOV.L       L784+26,R2 ; _page_size
+    00000508 D20F                   MOV.L       L788+26,R2 ; _page_size
     0000050A 7101                   ADD         #1,R1
     0000050C 6322                   MOV.L       @R2,R3
     0000050E 3132                   CMP/HS      R3,R1
-    00000510 8B01                   BF          L785
-    00000512 AF6E                   BRA         L685
+    00000510 8B01                   BF          L789
+    00000512 AF6E                   BRA         L689
     00000514 0009                   NOP
-    00000516              L785:                             
+    00000516              L789:                             
       dl2_main.c   284                            file_pos += page_offset[page_now++];
     00000516 61E2                   MOV.L       @R14,R1
     00000518 7101                   ADD         #1,R1
@@ -1104,9 +1104,9 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000524 031D                   MOV.W       @(R0,R1),R3
     00000526 633D                   EXTU.W      R3,R3
     00000528 323C                   ADD         R3,R2
-    0000052A A0E9                   BRA         L576
+    0000052A A0E9                   BRA         L578
     0000052C 2C22                   MOV.L       R2,@R12
-    0000052E              L784:                             
+    0000052E              L788:                             
     0000052E 7542                   .DATA.W     H'7542
     00000530 7547                   .DATA.W     H'7547
     00000532 0000                   .DATA.W     0
@@ -1120,34 +1120,34 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   18
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   18
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
-    0000054C              L698:                             
+    0000054C              L702:                             
       dl2_main.c   285                            redraw = 1;
       dl2_main.c   286                    }
       dl2_main.c   287                    else if (key==KEY_CTRL_EXIT)
-    0000054C 9466                   MOV.W       L786,R4    ; H'7532
+    0000054C 9466                   MOV.W       L790,R4    ; H'7532
     0000054E 63F2                   MOV.L       @R15,R3
     00000550 3340                   CMP/EQ      R4,R3
-    00000552 8901                   BT          L787
-    00000554 AF4D                   BRA         L685
+    00000552 8901                   BT          L791
+    00000554 AF4D                   BRA         L689
     00000556 0009                   NOP
-    00000558              L787:                             
+    00000558              L791:                             
       dl2_main.c   288                    {
       dl2_main.c   289                            char    buf[128];
       dl2_main.c   290                            int             r;
       dl2_main.c   291                            select_font (sys_font);
-    00000558 D931                   MOV.L       L786+4,R9  ; _sys_font
-    0000055A D332                   MOV.L       L786+8,R3  ; _select_font
+    00000558 D931                   MOV.L       L790+4,R9  ; _sys_font
+    0000055A D332                   MOV.L       L790+8,R3  ; _select_font
     0000055C 430B                   JSR         @R3
     0000055E 6492                   MOV.L       @R9,R4
-      dl2_main.c   292                            sprintf(buf,"  当前页%04d/%04d",page_now+1,page_size);
-    00000560 D831                   MOV.L       L786+12,R8 ; L483
+      dl2_main.c   292                            sprintf(buf,"Page %04d of%04d",page_now+1,page_size);
+    00000560 D831                   MOV.L       L790+12,R8 ; L483
     00000562 69F3                   MOV         R15,R9
-    00000564 D331                   MOV.L       L786+16,R3 ; _page_size
+    00000564 D331                   MOV.L       L790+16,R3 ; _page_size
     00000566 7914                   ADD         #20,R9
     00000568 6232                   MOV.L       @R3,R2
     0000056A 2F26                   MOV.L       R2,@-R15
@@ -1155,22 +1155,22 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     0000056E 7101                   ADD         #1,R1
     00000570 2F16                   MOV.L       R1,@-R15
     00000572 2F86                   MOV.L       R8,@-R15
-    00000574 D22E                   MOV.L       L786+20,R2 ; _sprintf
+    00000574 D22E                   MOV.L       L790+20,R2 ; _sprintf
     00000576 420B                   JSR         @R2
     00000578 6493                   MOV         R9,R4
       dl2_main.c   293                            all_clr();
-    0000057A D32E                   MOV.L       L786+24,R3 ; _Bdisp_AllClr_VRAM
+    0000057A D32E                   MOV.L       L790+24,R3 ; _Bdisp_AllClr_VRAM
     0000057C 430B                   JSR         @R3
     0000057E 0009                   NOP
       dl2_main.c   294                            print_chs_str(0,0,0,buf);
-    00000580 D82D                   MOV.L       L786+28,R8 ; _print_chs_str
+    00000580 D82D                   MOV.L       L790+28,R8 ; _print_chs_str
     00000582 6793                   MOV         R9,R7
     00000584 E600                   MOV         #0,R6
     00000586 6563                   MOV         R6,R5
     00000588 480B                   JSR         @R8
     0000058A 6463                   MOV         R6,R4
       dl2_main.c   295                            menu_index = show_menu (0,5,READ_MENU_TEXT,32,16);
-    0000058C D82B                   MOV.L       L786+32,R8 ; _READ_MENU_TEXT
+    0000058C D82B                   MOV.L       L790+32,R8 ; _READ_MENU_TEXT
     0000058E E210                   MOV         #16,R2
     00000590 2F26                   MOV.L       R2,@-R15
     00000592 E720                   MOV         #32,R7
@@ -1181,70 +1181,70 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     0000059C 7F10                   ADD         #16,R15
       dl2_main.c   296                            if (menu_index==-1) continue;
     0000059E 88FF                   CMP/EQ      #-1,R0
-    000005A0 8F02                   BF/S        L788
+    000005A0 8F02                   BF/S        L792
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   19
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   19
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
     000005A2 6403                   MOV         R0,R4
-    000005A4 AF25                   BRA         L685
+    000005A4 AF25                   BRA         L689
     000005A6 0009                   NOP
-    000005A8              L788:                             
+    000005A8              L792:                             
       dl2_main.c   297                            else if (menu_index == 0)
-    000005A8 D825                   MOV.L       L786+36,R8 ; _show_dialog
+    000005A8 D825                   MOV.L       L790+36,R8 ; _show_dialog
     000005AA 2448                   TST         R4,R4
-    000005AC 8B5E                   BF          L704
+    000005AC 8B5E                   BF          L708
       dl2_main.c   298                            {
       dl2_main.c   299                                    close_font(usr_font);
-    000005AE DE25                   MOV.L       L786+40,R14; _close_font
+    000005AE DE25                   MOV.L       L790+40,R14; _close_font
     000005B0 4E0B                   JSR         @R14
     000005B2 64D2                   MOV.L       @R13,R4
-    000005B4 DA24                   MOV.L       L786+44,R10; _open_font
-    000005B6 DB25                   MOV.L       L786+48,R11; L488
-    000005B8 DE25                   MOV.L       L786+52,R14; _font_modle
+    000005B4 DA24                   MOV.L       L790+44,R10; _open_font
+    000005B6 DB25                   MOV.L       L790+48,R11; L488
+    000005B8 DE25                   MOV.L       L790+52,R14; _font_modle
     000005BA 60E2                   MOV.L       @R14,R0
     000005BC 8810                   CMP/EQ      #16,R0
-    000005BE 8F0C                   BF/S        L705
+    000005BE 8F0C                   BF/S        L709
     000005C0 6403                   MOV         R0,R4
       dl2_main.c   300                                    if (font_modle == 16)
       dl2_main.c   301                                    {
       dl2_main.c   302                                            usr_font = open_font("\\\\fls0\\FONT8.dlf");
-    000005C2 D924                   MOV.L       L786+56,R9 ; L487
+    000005C2 D924                   MOV.L       L790+56,R9 ; L487
     000005C4 4A0B                   JSR         @R10
     000005C6 6493                   MOV         R9,R4
     000005C8 2D02                   MOV.L       R0,@R13
-      dl2_main.c   303                                            show_dialog(" 字体 ", "已更换为小字体.", 0, DLG_BTN_OK);
+      dl2_main.c   303                                            show_dialog(" Font ", "Changed to 8.", 0, DLG_BTN_OK);
     000005CA E702                   MOV         #2,R7
-    000005CC DD22                   MOV.L       L786+60,R13; L489
+    000005CC DD22                   MOV.L       L790+60,R13; L489
     000005CE E600                   MOV         #0,R6
     000005D0 65D3                   MOV         R13,R5
     000005D2 480B                   JSR         @R8
     000005D4 64B3                   MOV         R11,R4
       dl2_main.c   304                                            font_modle = 8;
-    000005D6 A00E                   BRA         L776
+    000005D6 A00E                   BRA         L780
     000005D8 E408                   MOV         #8,R4
-    000005DA              L705:                             
+    000005DA              L709:                             
       dl2_main.c   305                                    }
       dl2_main.c   306                                    else if (font_modle == 8)
     000005DA 6043                   MOV         R4,R0
     000005DC 8808                   CMP/EQ      #8,R0
-    000005DE 8B0C                   BF          L707
+    000005DE 8B0C                   BF          L711
       dl2_main.c   307                                    {
       dl2_main.c   308            
       dl2_main.c   309                                            usr_font = open_font("\\\\fls0\\FONT12.dlf");
-    000005E0 D91E                   MOV.L       L786+64,R9 ; L491
+    000005E0 D91E                   MOV.L       L790+64,R9 ; L491
     000005E2 4A0B                   JSR         @R10
     000005E4 6493                   MOV         R9,R4
-      dl2_main.c   310                                            show_dialog(" 字体 ", "已更换为中字体.", 0, DLG_BTN_OK);
+      dl2_main.c   310                                            show_dialog(" Font ", "Changed to 12", 0, DLG_BTN_OK);
     000005E6 E702                   MOV         #2,R7
     000005E8 2D02                   MOV.L       R0,@R13
     000005EA E600                   MOV         #0,R6
-    000005EC DD1C                   MOV.L       L786+68,R13; L492
+    000005EC DD1C                   MOV.L       L790+68,R13; L492
     000005EE 65D3                   MOV         R13,R5
     000005F0 480B                   JSR         @R8
     000005F2 64B3                   MOV         R11,R4
@@ -1252,43 +1252,43 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   20
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   20
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
       dl2_main.c   311                                            font_modle = 12;
     000005F4 E40C                   MOV         #12,R4
-    000005F6              L776:                             
-    000005F6 A083                   BRA         L576
+    000005F6              L780:                             
+    000005F6 A083                   BRA         L578
     000005F8 2E42                   MOV.L       R4,@R14
-    000005FA              L707:                             
+    000005FA              L711:                             
       dl2_main.c   312                                    }
       dl2_main.c   313                                    else if (font_modle == 12)
     000005FA 880C                   CMP/EQ      #12,R0
-    000005FC 8901                   BT          L789
-    000005FE A07F                   BRA         L576
+    000005FC 8901                   BT          L793
+    000005FE A07F                   BRA         L578
     00000600 0009                   NOP
-    00000602              L789:                             
+    00000602              L793:                             
       dl2_main.c   314                                    {
       dl2_main.c   315            
       dl2_main.c   316                                            usr_font = open_font("\\\\fls0\\FONT16.dlf");
-    00000602 D918                   MOV.L       L786+72,R9 ; L494
+    00000602 D918                   MOV.L       L790+72,R9 ; L494
     00000604 4A0B                   JSR         @R10
     00000606 6493                   MOV         R9,R4
     00000608 2D02                   MOV.L       R0,@R13
-      dl2_main.c   317                                            show_dialog(" 字体 ", "已更换为大字体.", 0, DLG_BTN_OK);
+      dl2_main.c   317                                            show_dialog(" Font ", "Changed to 16.", 0, DLG_BTN_OK);
     0000060A E702                   MOV         #2,R7
-    0000060C DD16                   MOV.L       L786+76,R13; L495
+    0000060C DD16                   MOV.L       L790+76,R13; L495
     0000060E E600                   MOV         #0,R6
     00000610 65D3                   MOV         R13,R5
     00000612 480B                   JSR         @R8
     00000614 64B3                   MOV         R11,R4
       dl2_main.c   318                                            font_modle = 16;
     00000616 E410                   MOV         #16,R4
-    00000618 A072                   BRA         L576
+    00000618 A072                   BRA         L578
     0000061A 2E42                   MOV.L       R4,@R14
-    0000061C              L786:                             
+    0000061C              L790:                             
     0000061C 7532                   .DATA.W     H'7532
     0000061E 0000                   .DATA.W     0
     00000620 <00000000>             .DATA.L     _sys_font
@@ -1310,7 +1310,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000660 <00000000>             .DATA.L     L492
     00000664 <00000000>             .DATA.L     L494
     00000668 <00000000>             .DATA.L     L495
-    0000066C              L704:                             
+    0000066C              L708:                             
       dl2_main.c   319                                    }
       dl2_main.c   320    
       dl2_main.c   321    
@@ -1318,7 +1318,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   21
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   21
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -1328,25 +1328,25 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c   324                            else if (menu_index==1)
     0000066C 6043                   MOV         R4,R0
     0000066E 8801                   CMP/EQ      #1,R0
-    00000670 8B24                   BF          L711
+    00000670 8B24                   BF          L715
       dl2_main.c   325                            {
-      dl2_main.c   326                                    show_dialog (""," 输入页码 ",0,0);
+      dl2_main.c   326                                    show_dialog ("","Input Page",0,0);
     00000672 E700                   MOV         #0,R7
-    00000674 D435                   MOV.L       L790+8,R4  ; L497
-    00000676 D534                   MOV.L       L790+4,R5  ; L498
+    00000674 D435                   MOV.L       L794+8,R4  ; L497
+    00000676 D534                   MOV.L       L794+4,R5  ; L498
     00000678 480B                   JSR         @R8
     0000067A 6673                   MOV         R7,R6
       dl2_main.c   327                                    sprintf(buf,"%d",page_now+1);
-    0000067C DD34                   MOV.L       L790+12,R13; L499
+    0000067C DD34                   MOV.L       L794+12,R13; L499
     0000067E 63E2                   MOV.L       @R14,R3
-    00000680 D234                   MOV.L       L790+16,R2 ; _sprintf
+    00000680 D234                   MOV.L       L794+16,R2 ; _sprintf
     00000682 7301                   ADD         #1,R3
     00000684 2F36                   MOV.L       R3,@-R15
     00000686 2FD6                   MOV.L       R13,@-R15
     00000688 420B                   JSR         @R2
     0000068A 6493                   MOV         R9,R4
       dl2_main.c   328                                    if (get_line_box(buf,128,16,14,32))
-    0000068C DD32                   MOV.L       L790+20,R13; _get_line_box
+    0000068C DD32                   MOV.L       L794+20,R13; _get_line_box
     0000068E E320                   MOV         #32,R3
     00000690 2F36                   MOV.L       R3,@-R15
     00000692 E70E                   MOV         #14,R7
@@ -1355,51 +1355,51 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000698 4D0B                   JSR         @R13
     0000069A 6493                   MOV         R9,R4
     0000069C 2008                   TST         R0,R0
-    0000069E 8D2F                   BT/S        L576
+    0000069E 8D2F                   BT/S        L578
     000006A0 7F0C                   ADD         #12,R15
       dl2_main.c   329                                    {
       dl2_main.c   330                                            page_now = atol(buf)-1;
-    000006A2 DD2E                   MOV.L       L790+24,R13; _atol
+    000006A2 DD2E                   MOV.L       L794+24,R13; _atol
     000006A4 4D0B                   JSR         @R13
     000006A6 6493                   MOV         R9,R4
-    000006A8 D22D                   MOV.L       L790+28,R2 ; _page_size
+    000006A8 D22D                   MOV.L       L794+28,R2 ; _page_size
     000006AA 70FF                   ADD         #-1,R0
     000006AC 2E02                   MOV.L       R0,@R14
     000006AE 6303                   MOV         R0,R3
     000006B0 6422                   MOV.L       @R2,R4
     000006B2 3342                   CMP/HS      R4,R3
-    000006B4 8B10                   BF          L575
+    000006B4 8B10                   BF          L577
       dl2_main.c   331                                            if (page_now<0) page_now=0;
       dl2_main.c   332                                            else if (page_now>=page_size)page_now = page_size-1;
     000006B6 74FF                   ADD         #-1,R4
-    000006B8 A00E                   BRA         L575
+    000006B8 A00E                   BRA         L577
     000006BA 2E42                   MOV.L       R4,@R14
-    000006BC              L711:                             
+    000006BC              L715:                             
       dl2_main.c   333                                            file_pos = get_page_offset();
       dl2_main.c   334                                    }
       dl2_main.c   335                            }
       dl2_main.c   336                            else if (menu_index==2)
-    000006BC DD29                   MOV.L       L790+32,R13; _mark
+    000006BC DD29                   MOV.L       L794+32,R13; _mark
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   22
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   22
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
     000006BE 6043                   MOV         R4,R0
     000006C0 8802                   CMP/EQ      #2,R0
-    000006C2 8B0D                   BF          L717
+    000006C2 8B0D                   BF          L721
       dl2_main.c   337                            {
-      dl2_main.c   338                                    r = select_page_mark ("读取书签");
-    000006C4 DB28                   MOV.L       L790+36,R11; L503
+      dl2_main.c   338                                    r = select_page_mark ("ReadMark");
+    000006C4 DB28                   MOV.L       L794+36,R11; L503
     000006C6 BDF3                   BSR         _select_page_mark
     000006C8 64B3                   MOV         R11,R4
       dl2_main.c   339                                    if (r!=-1)
     000006CA 88FF                   CMP/EQ      #-1,R0
-    000006CC 8D18                   BT/S        L576
+    000006CC 8D18                   BT/S        L578
     000006CE 6403                   MOV         R0,R4
       dl2_main.c   340                                    {
       dl2_main.c   341                                            page_now = mark[r];
@@ -1407,42 +1407,42 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     000006D2 4008                   SHLL2       R0
     000006D4 03DE                   MOV.L       @(R0,R13),R3
     000006D6 2E32                   MOV.L       R3,@R14
-    000006D8              L575:
+    000006D8              L577:
       dl2_main.c   342                                            file_pos = get_page_offset();
     000006D8 BDC3                   BSR         _get_page_offset
     000006DA 0009                   NOP
-    000006DC A010                   BRA         L576
+    000006DC A010                   BRA         L578
     000006DE 2C02                   MOV.L       R0,@R12
-    000006E0              L717:                             
+    000006E0              L721:                             
       dl2_main.c   343                                    }
       dl2_main.c   344                            }
       dl2_main.c   345                            else if (menu_index==3)
     000006E0 8803                   CMP/EQ      #3,R0
-    000006E2 8B0A                   BF          L720
+    000006E2 8B0A                   BF          L724
       dl2_main.c   346                            {
-      dl2_main.c   347                                    r = select_page_mark ("保存书签");
-    000006E4 DB21                   MOV.L       L790+40,R11; L506
+      dl2_main.c   347                                    r = select_page_mark ("SaveMark");
+    000006E4 DB21                   MOV.L       L794+40,R11; L506
     000006E6 BDE3                   BSR         _select_page_mark
     000006E8 64B3                   MOV         R11,R4
       dl2_main.c   348                                    if (r!=-1)
     000006EA 88FF                   CMP/EQ      #-1,R0
-    000006EC 8D08                   BT/S        L576
+    000006EC 8D08                   BT/S        L578
     000006EE 6403                   MOV         R0,R4
       dl2_main.c   349                                    {
       dl2_main.c   350                                            mark[r] = page_now;
     000006F0 63E2                   MOV.L       @R14,R3
     000006F2 6043                   MOV         R4,R0
     000006F4 4008                   SHLL2       R0
-    000006F6 A003                   BRA         L576
+    000006F6 A003                   BRA         L578
     000006F8 0D36                   MOV.L       R3,@(R0,R13)
-    000006FA              L720:                             
+    000006FA              L724:                             
       dl2_main.c   351                                    }
       dl2_main.c   352                            }
       dl2_main.c   353                            else if (menu_index==4)
     000006FA 6043                   MOV         R4,R0
     000006FC 8804                   CMP/EQ      #4,R0
-    000006FE 8902                   BT          L724
-    00000700              L576:
+    000006FE 8902                   BT          L728
+    00000700              L578:
       dl2_main.c   354                            {
       dl2_main.c   355                                    break;
       dl2_main.c   356                            }
@@ -1450,20 +1450,20 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   23
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   23
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
       dl2_main.c   357                            redraw = TRUE;
     00000700 E301                   MOV         #1,R3
-    00000702 AE76                   BRA         L685
+    00000702 AE76                   BRA         L689
     00000704 1F34                   MOV.L       R3,@(16,R15)
-    00000706              L724:                             
+    00000706              L728:                             
       dl2_main.c   358                    }//
       dl2_main.c   359            }
       dl2_main.c   360    }
-    00000706 911D                   MOV.W       L790,R1    ; H'0094
+    00000706 911D                   MOV.W       L794,R1    ; H'0094
     00000708 3F1C                   ADD         R1,R15
     0000070A 4F26                   LDS.L       @R15+,PR
     0000070C 68F6                   MOV.L       @R15+,R8
@@ -1484,30 +1484,30 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000722 4F22                   STS.L       PR,@-R15
       dl2_main.c   363    {
       dl2_main.c   364            file_name = t_file_name;
-    00000724 D212                   MOV.L       L790+44,R2 ; _file_name
+    00000724 D212                   MOV.L       L794+44,R2 ; _file_name
       dl2_main.c   365    
       dl2_main.c   366            fh_txt = open_file(file_name,_OPENMODE_READ_SHARE);
-    00000726 DC13                   MOV.L       L790+48,R12; _fh_txt
-    00000728 950D                   MOV.W       L790+2,R5  ; H'0080
-    0000072A D313                   MOV.L       L790+52,R3 ; _open_file
+    00000726 DC13                   MOV.L       L794+48,R12; _fh_txt
+    00000728 950D                   MOV.W       L794+2,R5  ; H'0080
+    0000072A D313                   MOV.L       L794+52,R3 ; _open_file
     0000072C 430B                   JSR         @R3
     0000072E 2242                   MOV.L       R4,@R2
       dl2_main.c   367    
       dl2_main.c   368            if (fh_txt<0)
-    00000730 DD12                   MOV.L       L790+56,R13; L513
+    00000730 DD12                   MOV.L       L794+56,R13; L513
     00000732 6203                   MOV         R0,R2
-    00000734 DE12                   MOV.L       L790+60,R14; _show_dialog
+    00000734 DE12                   MOV.L       L794+60,R14; _show_dialog
     00000736 4211                   CMP/PZ      R2
-    00000738 8D26                   BT/S        L725
+    00000738 8D26                   BT/S        L729
     0000073A 2C02                   MOV.L       R0,@R12
       dl2_main.c   369            {
-      dl2_main.c   370                    show_dialog(" 错误 "," 找不到文件 ",DLG_ICON_WARN,DLG_BTN_OK);
-    0000073C D511                   MOV.L       L790+64,R5 ; L514
+      dl2_main.c   370                    show_dialog("ERROR","No such file",DLG_ICON_WARN,DLG_BTN_OK);
+    0000073C D511                   MOV.L       L794+64,R5 ; L514
     0000073E E702                   MOV         #2,R7
       dl2_main.c   371                    return;
-    00000740 A039                   BRA         L778
+    00000740 A039                   BRA         L782
     00000742 E603                   MOV         #3,R6
-    00000744              L790:                             
+    00000744              L794:                             
     00000744 0094                   .DATA.W     H'0094
     00000746 0080                   .DATA.W     H'0080
     00000748 <00000000>             .DATA.L     L498
@@ -1516,7 +1516,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   24
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   24
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -1535,45 +1535,45 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     0000077C <00000000>             .DATA.L     L513
     00000780 <00000000>             .DATA.L     _show_dialog
     00000784 <00000000>             .DATA.L     L514
-    00000788              L725:                             
+    00000788              L729:                             
       dl2_main.c   372            }
       dl2_main.c   373    
-      dl2_main.c   374            show_dialog(" 分页中 "," 请稍等 ",DLG_ICON_WAIT,0);putdisp();
-    00000788 D516                   MOV.L       L791+2,R5  ; L516
+      dl2_main.c   374            show_dialog("Processing","Please wait",DLG_ICON_WAIT,0);putdisp();
+    00000788 D516                   MOV.L       L795+2,R5  ; L516
     0000078A E700                   MOV         #0,R7
-    0000078C D416                   MOV.L       L791+6,R4  ; L515
+    0000078C D416                   MOV.L       L795+6,R4  ; L515
     0000078E 4E0B                   JSR         @R14
     00000790 E602                   MOV         #2,R6
-    00000792 D216                   MOV.L       L791+10,R2 ; _Bdisp_PutDisp_DD
+    00000792 D216                   MOV.L       L795+10,R2 ; _Bdisp_PutDisp_DD
     00000794 420B                   JSR         @R2
     00000796 0009                   NOP
       dl2_main.c   375            switch(split_page ())
     00000798 BC9D                   BSR         _split_page
     0000079A 0009                   NOP
     0000079C 88FF                   CMP/EQ      #-1,R0
-    0000079E 8903                   BT          L615
+    0000079E 8903                   BT          L617
     000007A0 88FE                   CMP/EQ      #-2,R0
-    000007A2 8905                   BT          L617
-    000007A4 A00B                   BRA         L619
+    000007A2 8905                   BT          L619
+    000007A4 A00B                   BRA         L621
     000007A6 0009                   NOP
-    000007A8              L615:                            ; case label 
+    000007A8              L617:                            ; case label 
       dl2_main.c   376            {
-      dl2_main.c   377                    case -1:show_dialog(" 错误 "," 页数过多 ",DLG_ICON_WARN,DLG_BTN_OK);return;
-    000007A8 D511                   MOV.L       L791+14,R5 ; L518
+      dl2_main.c   377                    case -1:show_dialog("ERROR","More Page",DLG_ICON_WARN,DLG_BTN_OK);return;
+    000007A8 D511                   MOV.L       L795+14,R5 ; L518
     000007AA E702                   MOV         #2,R7
-    000007AC A003                   BRA         L778
+    000007AC A003                   BRA         L782
     000007AE E603                   MOV         #3,R6
-    000007B0              L617:                            ; case label 
-      dl2_main.c   378                    case -2:show_dialog(" 错误 "," 内存不足 ",DLG_ICON_WARN,DLG_BTN_OK);return;
-    000007B0 D510                   MOV.L       L791+18,R5 ; L519
+    000007B0              L619:                            ; case label 
+      dl2_main.c   378                    case -2:show_dialog("ERROR","MemoryOut",DLG_ICON_WARN,DLG_BTN_OK);return;
+    000007B0 D510                   MOV.L       L795+18,R5 ; L519
     000007B2 E702                   MOV         #2,R7
     000007B4 E603                   MOV         #3,R6
-    000007B6              L778:                             
+    000007B6              L782:                             
     000007B6 4E0B                   JSR         @R14
     000007B8 64D3                   MOV         R13,R4
-    000007BA A00D                   BRA         L726
+    000007BA A00D                   BRA         L730
     000007BC 0009                   NOP
-    000007BE              L619:                            ; default label 
+    000007BE              L621:                            ; default label 
       dl2_main.c   379                    default:;
       dl2_main.c   380            }
       dl2_main.c   381            read_page_mark();
@@ -1582,7 +1582,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   25
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   25
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -1598,18 +1598,18 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     000007CA 64C2                   MOV.L       @R12,R4
     000007CC 4F26                   LDS.L       @R15+,PR
     000007CE 6CF6                   MOV.L       @R15+,R12
-    000007D0 D309                   MOV.L       L791+22,R3 ; _Bfile_CloseFile
+    000007D0 D309                   MOV.L       L795+22,R3 ; _Bfile_CloseFile
     000007D2 6DF6                   MOV.L       @R15+,R13
     000007D4 432B                   JMP         @R3
     000007D6 6EF6                   MOV.L       @R15+,R14
-    000007D8              L726:                             
+    000007D8              L730:                             
       dl2_main.c   385    }
     000007D8 4F26                   LDS.L       @R15+,PR
     000007DA 6CF6                   MOV.L       @R15+,R12
     000007DC 6DF6                   MOV.L       @R15+,R13
     000007DE 000B                   RTS
     000007E0 6EF6                   MOV.L       @R15+,R14
-    000007E2              L791:                             
+    000007E2              L795:                             
     000007E2 0000                   .DATA.W     0
     000007E4 <00000000>             .DATA.L     L516
     000007E8 <00000000>             .DATA.L     L515
@@ -1629,11 +1629,11 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c   391            unsigned int key;
       dl2_main.c   392            
       dl2_main.c   393            select_font(sys_font);
-    00000800 D346                   MOV.L       L792+6,R3  ; _sys_font
+    00000800 D346                   MOV.L       L796+6,R3  ; _sys_font
     00000802 2FD6                   MOV.L       R13,@-R15
     00000804 2FC6                   MOV.L       R12,@-R15
     00000806 ED00                   MOV         #0,R13
-    00000808 D245                   MOV.L       L792+10,R2 ; _select_font
+    00000808 D245                   MOV.L       L796+10,R2 ; _select_font
     0000080A EC01                   MOV         #1,R12
     0000080C 2FB6                   MOV.L       R11,@-R15
     0000080E 2FA6                   MOV.L       R10,@-R15
@@ -1648,7 +1648,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   26
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   26
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -1661,34 +1661,34 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c   395            for (i=0;i<count;++i)
     00000826 6983                   MOV         R8,R9
     00000828 4A15                   CMP/PL      R10
-    0000082A 8F0B                   BF/S        L728
+    0000082A 8F0B                   BF/S        L732
     0000082C 5BF4                   MOV.L       @(16,R15),R11
-    0000082E              L729:                             
+    0000082E              L733:                             
       dl2_main.c   396            {
       dl2_main.c   397                    t = get_str_width(item[i]);
-    0000082E D23D                   MOV.L       L792+14,R2 ; _get_str_width
+    0000082E D23D                   MOV.L       L796+14,R2 ; _get_str_width
     00000830 420B                   JSR         @R2
     00000832 64B2                   MOV.L       @R11,R4
     00000834 6403                   MOV         R0,R4
       dl2_main.c   398                    if (t>width) width = t;
     00000836 3487                   CMP/GT      R8,R4
-    00000838 8F01                   BF/S        L730
+    00000838 8F01                   BF/S        L734
     0000083A 7901                   ADD         #1,R9
     0000083C 6843                   MOV         R4,R8
-    0000083E              L730:                             
+    0000083E              L734:                             
     0000083E 39A3                   CMP/GE      R10,R9
-    00000840 8FF5                   BF/S        L729
+    00000840 8FF5                   BF/S        L733
     00000842 7B04                   ADD         #4,R11
-    00000844              L728:                             
+    00000844              L732:                             
       dl2_main.c   399            }
       dl2_main.c   400            width;
       dl2_main.c   401            height = count * sys_font->height ;
-    00000844 D235                   MOV.L       L792+6,R2  ; _sys_font
+    00000844 D235                   MOV.L       L796+6,R2  ; _sys_font
       dl2_main.c   402            area_clear(x,y,x+width+1,y+height+1,2);
     00000846 E044                   MOV         #68,R0
     00000848 6322                   MOV.L       @R2,R3
     0000084A 5136                   MOV.L       @(24,R3),R1
-    0000084C D236                   MOV.L       L792+18,R2 ; _area_clear
+    0000084C D236                   MOV.L       L796+18,R2 ; _area_clear
     0000084E E302                   MOV         #2,R3
     00000850 0A17                   MUL.L       R1,R10
     00000852 011A                   STS         MACL,R1
@@ -1714,7 +1714,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   27
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   27
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -1726,17 +1726,17 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000880 1F35                   MOV.L       R3,@(20,R15)
     00000882 1F26                   MOV.L       R2,@(24,R15)
       dl2_main.c   403            while(1)
-    00000884              L732:                             
+    00000884              L736:                             
       dl2_main.c   404            {
       dl2_main.c   405                    if (redraw)
     00000884 2CC8                   TST         R12,R12
-    00000886 8930                   BT          L733
+    00000886 8930                   BT          L737
       dl2_main.c   406                    {
       dl2_main.c   407                            int cx = x+1,cy = y+1;
     00000888 5BF5                   MOV.L       @(20,R15),R11
       dl2_main.c   408                            area_clear(x,y,x+width+1,y+height+1,2);
     0000088A E302                   MOV         #2,R3
-    0000088C D226                   MOV.L       L792+18,R2 ; _area_clear
+    0000088C D226                   MOV.L       L796+18,R2 ; _area_clear
     0000088E E044                   MOV         #68,R0
     00000890 2F36                   MOV.L       R3,@-R15
     00000892 57F4                   MOV.L       @(16,R15),R7
@@ -1753,14 +1753,14 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     000008A6 339C                   ADD         R9,R3
     000008A8 73FF                   ADD         #-1,R3
     000008AA 4A15                   CMP/PL      R10
-    000008AC 8F1C                   BF/S        L734
+    000008AC 8F1C                   BF/S        L738
     000008AE 1F32                   MOV.L       R3,@(8,R15)
-    000008B0              L735:                             
+    000008B0              L739:                             
       dl2_main.c   410                            {
       dl2_main.c   411                                    print_chs_str(cx,cy,FALSE,item[i]);
     000008B0 50F4                   MOV.L       @(16,R15),R0
     000008B2 E600                   MOV         #0,R6
-    000008B4 D31D                   MOV.L       L792+22,R3 ; _print_chs_str
+    000008B4 D31D                   MOV.L       L796+22,R3 ; _print_chs_str
     000008B6 67C3                   MOV         R12,R7
     000008B8 4708                   SHLL2       R7
     000008BA 65B3                   MOV         R11,R5
@@ -1769,10 +1769,10 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     000008C0 6493                   MOV         R9,R4
       dl2_main.c   412                                    if (index==i) area_rev(cx,cy,cx+width-1,cy+sys_font->height-1);
     000008C2 3EC0                   CMP/EQ      R12,R14
-    000008C4 8B09                   BF          L736
+    000008C4 8B09                   BF          L740
     000008C6 65B3                   MOV         R11,R5
-    000008C8 D219                   MOV.L       L792+26,R2 ; _Bdisp_AreaReverseVRAM
-    000008CA D314                   MOV.L       L792+6,R3  ; _sys_font
+    000008C8 D219                   MOV.L       L796+26,R2 ; _Bdisp_AreaReverseVRAM
+    000008CA D314                   MOV.L       L796+6,R3  ; _sys_font
     000008CC 56F2                   MOV.L       @(8,R15),R6
     000008CE 6732                   MOV.L       @R3,R7
     000008D0 5776                   MOV.L       @(24,R7),R7
@@ -1780,7 +1780,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   28
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   28
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -1789,56 +1789,56 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     000008D4 77FF                   ADD         #-1,R7
     000008D6 420B                   JSR         @R2
     000008D8 6493                   MOV         R9,R4
-    000008DA              L736:                             
+    000008DA              L740:                             
     000008DA 7C01                   ADD         #1,R12
       dl2_main.c   413                                    cy += sys_font->height;
-    000008DC D20F                   MOV.L       L792+6,R2  ; _sys_font
+    000008DC D20F                   MOV.L       L796+6,R2  ; _sys_font
     000008DE 3CA3                   CMP/GE      R10,R12
     000008E0 6322                   MOV.L       @R2,R3
     000008E2 5136                   MOV.L       @(24,R3),R1
-    000008E4 8FE4                   BF/S        L735
+    000008E4 8FE4                   BF/S        L739
     000008E6 3B1C                   ADD         R1,R11
-    000008E8              L734:                             
+    000008E8              L738:                             
       dl2_main.c   414                            }
       dl2_main.c   415                            redraw = FALSE;
     000008E8 6CD3                   MOV         R13,R12
-    000008EA              L733:                             
+    000008EA              L737:                             
       dl2_main.c   416                    }
       dl2_main.c   417                    GetKey(&key);
-    000008EA DB12                   MOV.L       L792+30,R11; _GetKey
+    000008EA DB12                   MOV.L       L796+30,R11; _GetKey
     000008EC 4B0B                   JSR         @R11
     000008EE 64F3                   MOV         R15,R4
       dl2_main.c   418                    if (key==KEY_CTRL_UP)
-    000008F0 9411                   MOV.W       L792,R4    ; H'7542
+    000008F0 9411                   MOV.W       L796,R4    ; H'7542
     000008F2 62F2                   MOV.L       @R15,R2
     000008F4 3240                   CMP/EQ      R4,R2
-    000008F6 8B04                   BF          L737
+    000008F6 8B04                   BF          L741
       dl2_main.c   419                    {
       dl2_main.c   420                            index--;if (index<0)index = count-1;
     000008F8 7EFF                   ADD         #-1,R14
     000008FA 4E11                   CMP/PZ      R14
-    000008FC 8909                   BT          L578
-    000008FE A008                   BRA         L578
+    000008FC 8909                   BT          L580
+    000008FE A008                   BRA         L580
     00000900 5EF6                   MOV.L       @(24,R15),R14
-    00000902              L737:                             
+    00000902              L741:                             
       dl2_main.c   421                            redraw = TRUE;
       dl2_main.c   422                    }
       dl2_main.c   423                    else if (key==KEY_CTRL_DOWN)
-    00000902 9409                   MOV.W       L792+2,R4  ; H'7547
+    00000902 9409                   MOV.W       L796+2,R4  ; H'7547
     00000904 63F2                   MOV.L       @R15,R3
     00000906 3340                   CMP/EQ      R4,R3
-    00000908 8B16                   BF          L740
+    00000908 8B16                   BF          L744
       dl2_main.c   424                    {
       dl2_main.c   425                            index++;if (index>=count)index = 0;
     0000090A 7E01                   ADD         #1,R14
     0000090C 3EA3                   CMP/GE      R10,R14
-    0000090E 8B00                   BF          L578
+    0000090E 8B00                   BF          L580
     00000910 6ED3                   MOV         R13,R14
-    00000912              L578:
+    00000912              L580:
       dl2_main.c   426                            redraw = TRUE;
-    00000912 AFB7                   BRA         L732
+    00000912 AFB7                   BRA         L736
     00000914 EC01                   MOV         #1,R12
-    00000916              L792:                             
+    00000916              L796:                             
     00000916 7542                   .DATA.W     H'7542
     00000918 7547                   .DATA.W     H'7547
     0000091A 0000                   .DATA.W     0
@@ -1846,7 +1846,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   29
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   29
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -1858,24 +1858,24 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     0000092C <00000000>             .DATA.L     _print_chs_str
     00000930 <00000000>             .DATA.L     _Bdisp_AreaReverseVRAM
     00000934 <00000000>             .DATA.L     _GetKey
-    00000938              L740:                             
+    00000938              L744:                             
       dl2_main.c   427                    }
       dl2_main.c   428                    else if (key==KEY_CTRL_EXE)
-    00000938 9452                   MOV.W       L793,R4    ; H'7534
+    00000938 9452                   MOV.W       L797,R4    ; H'7534
     0000093A 63F2                   MOV.L       @R15,R3
     0000093C 3340                   CMP/EQ      R4,R3
-    0000093E 8B01                   BF          L743
+    0000093E 8B01                   BF          L747
       dl2_main.c   429                    {
       dl2_main.c   430                            return index;
-    00000940 A005                   BRA         L744
+    00000940 A005                   BRA         L748
     00000942 60E3                   MOV         R14,R0
-    00000944              L743:                             
+    00000944              L747:                             
       dl2_main.c   431                    }
       dl2_main.c   432                    else if (key==KEY_CTRL_EXIT)
-    00000944 944D                   MOV.W       L793+2,R4  ; H'7532
+    00000944 944D                   MOV.W       L797+2,R4  ; H'7532
     00000946 62F2                   MOV.L       @R15,R2
     00000948 3240                   CMP/EQ      R4,R2
-    0000094A 8B9B                   BF          L732
+    0000094A 8B9B                   BF          L736
       dl2_main.c   433                    {
       dl2_main.c   434                            return -1;
       dl2_main.c   435                    }
@@ -1883,7 +1883,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c   437            return -1;
     0000094C E0FF                   MOV         #-1,R0
       dl2_main.c   438    }
-    0000094E              L744:                             
+    0000094E              L748:                             
     0000094E 7F1C                   ADD         #28,R15
     00000950 4F16                   LDS.L       @R15+,MACL
     00000952 4F26                   LDS.L       @R15+,PR
@@ -1907,106 +1907,106 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     0000096E 2F96                   MOV.L       R9,@-R15
     00000970 2F86                   MOV.L       R8,@-R15
     00000972 4F22                   STS.L       PR,@-R15
-    00000974 9036                   MOV.W       L793+4,R0  ; H'FE00
+    00000974 9036                   MOV.W       L797+4,R0  ; H'FE00
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   30
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   30
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
     00000976 3F0C                   ADD         R0,R15
-    00000978 D91B                   MOV.L       L793+8,R9  ; L513
-    0000097A DB1C                   MOV.L       L793+12,R11; _open_font
-    0000097C DC1C                   MOV.L       L793+16,R12; _usr_font
-    0000097E DE1D                   MOV.L       L793+20,R14; _show_dialog
+    00000978 D91B                   MOV.L       L797+8,R9  ; L513
+    0000097A DB1C                   MOV.L       L797+12,R11; _open_font
+    0000097C DC1C                   MOV.L       L797+16,R12; _usr_font
+    0000097E DE1D                   MOV.L       L797+20,R14; _show_dialog
       dl2_main.c   441    {
       dl2_main.c   442            int menu_index = 0,r,temp_file_name[128];
       dl2_main.c   443            
       dl2_main.c   444            //all_clr();
       dl2_main.c   445    
       dl2_main.c   446            sys_font = open_font(DEF_FONT_FILE_NAME);
-    00000980 D41D                   MOV.L       L793+24,R4 ; L487
+    00000980 D41D                   MOV.L       L797+24,R4 ; L487
     00000982 4B0B                   JSR         @R11
     00000984 ED00                   MOV         #0,R13
       dl2_main.c   447            if (sys_font == NULL)
     00000986 2008                   TST         R0,R0
-    00000988 D31C                   MOV.L       L793+28,R3 ; _sys_font
-    0000098A 8F08                   BF/S        L747
+    00000988 D31C                   MOV.L       L797+28,R3 ; _sys_font
+    0000098A 8F08                   BF/S        L751
     0000098C 2302                   MOV.L       R0,@R3
       dl2_main.c   448            {
       dl2_main.c   449                    printmini(0,0,(uchar*)DEF_FONT_FILE_NAME " not found.",MINI_OVER);
     0000098E E710                   MOV         #16,R7
-    00000990 D61B                   MOV.L       L793+32,R6 ; L551
+    00000990 D61B                   MOV.L       L797+32,R6 ; L551
     00000992 E500                   MOV         #0,R5
-    00000994 D11B                   MOV.L       L793+36,R1 ; _PrintMini
+    00000994 D11B                   MOV.L       L797+36,R1 ; _PrintMini
     00000996 410B                   JSR         @R1
     00000998 6453                   MOV         R5,R4
-    0000099A A00D                   BRA         L580
+    0000099A A00D                   BRA         L582
     0000099C 0009                   NOP
-    0000099E              L747:                             
+    0000099E              L751:                             
       dl2_main.c   450                    waitkey();
       dl2_main.c   451                    return 0;
       dl2_main.c   452            }
       dl2_main.c   453            usr_font = open_font("\\\\fls0\\FONT12.dlf");
-    0000099E D41A                   MOV.L       L793+40,R4 ; L491
+    0000099E D41A                   MOV.L       L797+40,R4 ; L491
     000009A0 4B0B                   JSR         @R11
     000009A2 0009                   NOP
       dl2_main.c   454            if (usr_font == NULL)
     000009A4 6203                   MOV         R0,R2
     000009A6 2228                   TST         R2,R2
-    000009A8 8F0B                   BF/S        L749
+    000009A8 8F0B                   BF/S        L753
     000009AA 2C02                   MOV.L       R0,@R12
       dl2_main.c   455            {
       dl2_main.c   456                    printmini(0,0,(uchar*)"FONT12.dlf not found.",MINI_OVER);
-    000009AC D617                   MOV.L       L793+44,R6 ; L553
+    000009AC D617                   MOV.L       L797+44,R6 ; L553
     000009AE E500                   MOV         #0,R5
-    000009B0 D314                   MOV.L       L793+36,R3 ; _PrintMini
+    000009B0 D314                   MOV.L       L797+36,R3 ; _PrintMini
     000009B2 E710                   MOV         #16,R7
     000009B4 430B                   JSR         @R3
     000009B6 6453                   MOV         R5,R4
-    000009B8              L580:
+    000009B8              L582:
       dl2_main.c   457                    waitkey();
-    000009B8 D215                   MOV.L       L793+48,R2 ; _waitkey
+    000009B8 D215                   MOV.L       L797+48,R2 ; _waitkey
     000009BA 420B                   JSR         @R2
     000009BC 0009                   NOP
-    000009BE A0E6                   BRA         L585
+    000009BE A0E6                   BRA         L587
     000009C0 0009                   NOP
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   31
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   31
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
-    000009C2              L749:                             
+    000009C2              L753:                             
       dl2_main.c   458                    return 0;
       dl2_main.c   459            }
       dl2_main.c   460            
       dl2_main.c   461            page_offset = (word*)calloc(PAGE_MAX,sizeof(word));
-    000009C2 9410                   MOV.W       L793+6,R4  ; H'270F
-    000009C4 D313                   MOV.L       L793+52,R3 ; _calloc
+    000009C2 9410                   MOV.W       L797+6,R4  ; H'270F
+    000009C4 D313                   MOV.L       L797+52,R3 ; _calloc
     000009C6 430B                   JSR         @R3
     000009C8 E502                   MOV         #2,R5
       dl2_main.c   462            if (page_offset==NULL)
     000009CA 2008                   TST         R0,R0
-    000009CC D212                   MOV.L       L793+56,R2 ; _page_offset
-    000009CE 8F27                   BF/S        L752
+    000009CC D212                   MOV.L       L797+56,R2 ; _page_offset
+    000009CE 8F27                   BF/S        L756
     000009D0 2202                   MOV.L       R0,@R2
       dl2_main.c   463            {
-      dl2_main.c   464                    show_dialog(" 错误 "," 内存不足 ",DLG_ICON_WARN,DLG_BTN_OK);
+      dl2_main.c   464                    show_dialog("ERROR","MemoryOut",DLG_ICON_WARN,DLG_BTN_OK);
     000009D2 E702                   MOV         #2,R7
-    000009D4 D511                   MOV.L       L793+60,R5 ; L519
+    000009D4 D511                   MOV.L       L797+60,R5 ; L519
     000009D6 E603                   MOV         #3,R6
     000009D8 4E0B                   JSR         @R14
     000009DA 6493                   MOV         R9,R4
-    000009DC A0D7                   BRA         L585
+    000009DC A0D7                   BRA         L587
     000009DE 0009                   NOP
-    000009E0              L793:                             
+    000009E0              L797:                             
     000009E0 7534                   .DATA.W     H'7534
     000009E2 7532                   .DATA.W     H'7532
     000009E4 FE00                   .DATA.W     H'FE00
@@ -2025,26 +2025,26 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000A14 <00000000>             .DATA.L     _calloc
     00000A18 <00000000>             .DATA.L     _page_offset
     00000A1C <00000000>             .DATA.L     L519
-    00000A20              L752:                             
+    00000A20              L756:                             
       dl2_main.c   465                    return 0;
       dl2_main.c   466            }
       dl2_main.c   467    
       dl2_main.c   468            while (1)
       dl2_main.c   469            {
       dl2_main.c   470                    all_clr();
-    00000A20 DA42                   MOV.L       L794,R10   ; _Bdisp_AllClr_VRAM
+    00000A20 DA42                   MOV.L       L798,R10   ; _Bdisp_AllClr_VRAM
     00000A22 4A0B                   JSR         @R10
     00000A24 0009                   NOP
       dl2_main.c   471                    PrintXY(0,0,"  DLiterature 2.1.3",0);
     00000A26 E700                   MOV         #0,R7
-    00000A28 D841                   MOV.L       L794+4,R8  ; L556
+    00000A28 D841                   MOV.L       L798+4,R8  ; L556
     00000A2A 6573                   MOV         R7,R5
-    00000A2C DA41                   MOV.L       L794+8,R10 ; _PrintXY
+    00000A2C DA41                   MOV.L       L798+8,R10 ; _PrintXY
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   32
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   32
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -2053,7 +2053,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000A30 4A0B                   JSR         @R10
     00000A32 6473                   MOV         R7,R4
       dl2_main.c   472                    menu_index = show_menu (menu_index,4,MAIN_MENU_TEXT,24,16);
-    00000A34 DA40                   MOV.L       L794+12,R10; _MAIN_MENU_TEXT
+    00000A34 DA40                   MOV.L       L798+12,R10; _MAIN_MENU_TEXT
     00000A36 E210                   MOV         #16,R2
     00000A38 2F26                   MOV.L       R2,@-R15
     00000A3A E718                   MOV         #24,R7
@@ -2064,45 +2064,45 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000A44 7F04                   ADD         #4,R15
       dl2_main.c   473                    if (menu_index==-1) break;
     00000A46 88FF                   CMP/EQ      #-1,R0
-    00000A48 8F02                   BF/S        L795
+    00000A48 8F02                   BF/S        L799
     00000A4A 6D03                   MOV         R0,R13
-    00000A4C A094                   BRA         L754
+    00000A4C A094                   BRA         L758
     00000A4E 0009                   NOP
-    00000A50              L795:                             
+    00000A50              L799:                             
       dl2_main.c   474                    else if (menu_index==0)
-    00000A50 D83A                   MOV.L       L794+16,R8 ; _file_view
+    00000A50 D83A                   MOV.L       L798+16,R8 ; _file_view
     00000A52 2DD8                   TST         R13,R13
-    00000A54 8F12                   BF/S        L756
+    00000A54 8F12                   BF/S        L760
     00000A56 6AF3                   MOV         R15,R10
       dl2_main.c   475                    {
       dl2_main.c   476                            r = file_view(1,"txt",temp_file_name);
-    00000A58 D539                   MOV.L       L794+20,R5 ; L558
+    00000A58 D539                   MOV.L       L798+20,R5 ; L558
     00000A5A 66A3                   MOV         R10,R6
     00000A5C 480B                   JSR         @R8
     00000A5E E401                   MOV         #1,R4
       dl2_main.c   477                            if (r==1)                       start_read_text(temp_file_name);
     00000A60 8801                   CMP/EQ      #1,R0
-    00000A62 8D15                   BT/S        L579
+    00000A62 8D15                   BT/S        L581
     00000A64 6403                   MOV         R0,R4
-      dl2_main.c   478                            else if (r==-1)         show_dialog(" 错误 "," 闪存中无此类文件 ",DLG_ICON_WARN,DL
-                         +G_BTN_OK);
+      dl2_main.c   478                            else if (r==-1)         show_dialog("ERROR","No this file on StorMem",DLG_ICON_WAR
+                         +N,DLG_BTN_OK);
     00000A66 6043                   MOV         R4,R0
     00000A68 88FF                   CMP/EQ      #-1,R0
-    00000A6A 8BD9                   BF          L752
-    00000A6C DA35                   MOV.L       L794+24,R10; L559
+    00000A6A 8BD9                   BF          L756
+    00000A6C DA35                   MOV.L       L798+24,R10; L559
     00000A6E E702                   MOV         #2,R7
     00000A70 E603                   MOV         #3,R6
     00000A72 65A3                   MOV         R10,R5
     00000A74 4E0B                   JSR         @R14
     00000A76 6493                   MOV         R9,R4
-    00000A78 AFD2                   BRA         L752
+    00000A78 AFD2                   BRA         L756
     00000A7A 0009                   NOP
-    00000A7C              L756:                             
+    00000A7C              L760:                             
       dl2_main.c   479                    }
       dl2_main.c   480                    else if (menu_index==1)
     00000A7C 60D3                   MOV         R13,R0
     00000A7E 8801                   CMP/EQ      #1,R0
-    00000A80 8B15                   BF          L761
+    00000A80 8B15                   BF          L765
       dl2_main.c   481                    {
       dl2_main.c   482                            r = file_view(0,"txt",temp_file_name);
     00000A82 66A3                   MOV         R10,R6
@@ -2110,125 +2110,125 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   33
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   33
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
-    00000A84 D52E                   MOV.L       L794+20,R5 ; L558
+    00000A84 D52E                   MOV.L       L798+20,R5 ; L558
     00000A86 480B                   JSR         @R8
     00000A88 E400                   MOV         #0,R4
       dl2_main.c   483                            if (r==1)                       start_read_text(temp_file_name);
     00000A8A 8801                   CMP/EQ      #1,R0
-    00000A8C 8F04                   BF/S        L762
+    00000A8C 8F04                   BF/S        L766
     00000A8E 6403                   MOV         R0,R4
-    00000A90              L579:
+    00000A90              L581:
     00000A90 BE44                   BSR         _start_read_text
     00000A92 64A3                   MOV         R10,R4
-    00000A94 AFC4                   BRA         L752
+    00000A94 AFC4                   BRA         L756
     00000A96 0009                   NOP
-    00000A98              L762:                             
-      dl2_main.c   484                            else if (r==-1)         show_dialog(" 错误 "," SD卡中无此类文件 ",DLG_ICON_WARN,DL
-                         +G_BTN_OK);
+    00000A98              L766:                             
+      dl2_main.c   484                            else if (r==-1)         show_dialog("ERROR","No this file on SDCard",DLG_ICON_WARN
+                         +,DLG_BTN_OK);
     00000A98 6043                   MOV         R4,R0
     00000A9A 88FF                   CMP/EQ      #-1,R0
-    00000A9C 8BC0                   BF          L752
+    00000A9C 8BC0                   BF          L756
     00000A9E E702                   MOV         #2,R7
-    00000AA0 DA29                   MOV.L       L794+28,R10; L561
+    00000AA0 DA29                   MOV.L       L798+28,R10; L561
     00000AA2 E603                   MOV         #3,R6
     00000AA4 65A3                   MOV         R10,R5
     00000AA6 4E0B                   JSR         @R14
     00000AA8 6493                   MOV         R9,R4
-    00000AAA AFB9                   BRA         L752
+    00000AAA AFB9                   BRA         L756
     00000AAC 0009                   NOP
-    00000AAE              L761:                             
+    00000AAE              L765:                             
       dl2_main.c   485                    }
       dl2_main.c   486                    else if (menu_index==2)
     00000AAE 8802                   CMP/EQ      #2,R0
-    00000AB0 8B30                   BF          L766
+    00000AB0 8B30                   BF          L770
       dl2_main.c   487                    {
       dl2_main.c   488                            close_font(usr_font);
-    00000AB2 D226                   MOV.L       L794+32,R2 ; _close_font
+    00000AB2 D226                   MOV.L       L798+32,R2 ; _close_font
     00000AB4 420B                   JSR         @R2
     00000AB6 64C2                   MOV.L       @R12,R4
-    00000AB8 D825                   MOV.L       L794+36,R8 ; L488
-    00000ABA DA26                   MOV.L       L794+40,R10; _font_modle
+    00000AB8 D825                   MOV.L       L798+36,R8 ; L488
+    00000ABA DA26                   MOV.L       L798+40,R10; _font_modle
     00000ABC 60A2                   MOV.L       @R10,R0
     00000ABE 8810                   CMP/EQ      #16,R0
-    00000AC0 8F0B                   BF/S        L767
+    00000AC0 8F0B                   BF/S        L771
     00000AC2 6403                   MOV         R0,R4
       dl2_main.c   489                            if (font_modle == 16)
       dl2_main.c   490                            {
       dl2_main.c   491                                    usr_font = open_font("\\\\fls0\\FONT8.dlf");
-    00000AC4 D424                   MOV.L       L794+44,R4 ; L487
+    00000AC4 D424                   MOV.L       L798+44,R4 ; L487
     00000AC6 4B0B                   JSR         @R11
     00000AC8 0009                   NOP
-      dl2_main.c   492                                    show_dialog(" 字体 ", "已更换为小字体.", 0, DLG_BTN_OK);
+      dl2_main.c   492                                    show_dialog(" Font ", "Changed to 8.", 0, DLG_BTN_OK);
     00000ACA E702                   MOV         #2,R7
-    00000ACC D523                   MOV.L       L794+48,R5 ; L489
+    00000ACC D523                   MOV.L       L798+48,R5 ; L489
     00000ACE E600                   MOV         #0,R6
     00000AD0 2C02                   MOV.L       R0,@R12
     00000AD2 4E0B                   JSR         @R14
     00000AD4 6483                   MOV         R8,R4
       dl2_main.c   493                                    font_modle = 8;
-    00000AD6 A00D                   BRA         L779
+    00000AD6 A00D                   BRA         L783
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   34
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   34
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
     00000AD8 E408                   MOV         #8,R4
-    00000ADA              L767:                             
+    00000ADA              L771:                             
       dl2_main.c   494                            }
       dl2_main.c   495                            else if (font_modle == 8)
     00000ADA 6043                   MOV         R4,R0
     00000ADC 8808                   CMP/EQ      #8,R0
-    00000ADE 8B0B                   BF          L769
+    00000ADE 8B0B                   BF          L773
       dl2_main.c   496                            {
       dl2_main.c   497    
       dl2_main.c   498                                    usr_font = open_font("\\\\fls0\\FONT12.dlf");
-    00000AE0 D41F                   MOV.L       L794+52,R4 ; L491
+    00000AE0 D41F                   MOV.L       L798+52,R4 ; L491
     00000AE2 4B0B                   JSR         @R11
     00000AE4 0009                   NOP
-      dl2_main.c   499                                    show_dialog(" 字体 ", "已更换为中字体.", 0, DLG_BTN_OK);
+      dl2_main.c   499                                    show_dialog(" Font ", "Changed to 12.", 0, DLG_BTN_OK);
     00000AE6 E702                   MOV         #2,R7
-    00000AE8 D51E                   MOV.L       L794+56,R5 ; L492
+    00000AE8 D51E                   MOV.L       L798+56,R5 ; L565
     00000AEA E600                   MOV         #0,R6
     00000AEC 2C02                   MOV.L       R0,@R12
     00000AEE 4E0B                   JSR         @R14
     00000AF0 6483                   MOV         R8,R4
       dl2_main.c   500                                    font_modle = 12;
     00000AF2 E40C                   MOV         #12,R4
-    00000AF4              L779:                             
-    00000AF4 AF94                   BRA         L752
+    00000AF4              L783:                             
+    00000AF4 AF94                   BRA         L756
     00000AF6 2A42                   MOV.L       R4,@R10
-    00000AF8              L769:                             
+    00000AF8              L773:                             
       dl2_main.c   501                            }
       dl2_main.c   502                            else if (font_modle == 12)
     00000AF8 880C                   CMP/EQ      #12,R0
-    00000AFA 8B91                   BF          L752
+    00000AFA 8B91                   BF          L756
       dl2_main.c   503                            {
       dl2_main.c   504    
       dl2_main.c   505                                    usr_font = open_font("\\\\fls0\\FONT16.dlf");
-    00000AFC D41A                   MOV.L       L794+60,R4 ; L494
+    00000AFC D41A                   MOV.L       L798+60,R4 ; L494
     00000AFE 4B0B                   JSR         @R11
     00000B00 0009                   NOP
-      dl2_main.c   506                                    show_dialog(" 字体 ", "已更换为大字体.", 0, DLG_BTN_OK);
+      dl2_main.c   506                                    show_dialog(" Font ", "Changed to 16.", 0, DLG_BTN_OK);
     00000B02 E702                   MOV         #2,R7
-    00000B04 D519                   MOV.L       L794+64,R5 ; L495
+    00000B04 D519                   MOV.L       L798+64,R5 ; L495
     00000B06 E600                   MOV         #0,R6
     00000B08 2C02                   MOV.L       R0,@R12
     00000B0A 4E0B                   JSR         @R14
     00000B0C 6483                   MOV         R8,R4
       dl2_main.c   507                                    font_modle = 16;
     00000B0E E410                   MOV         #16,R4
-    00000B10 AF86                   BRA         L752
+    00000B10 AF86                   BRA         L756
     00000B12 2A42                   MOV.L       R4,@R10
-    00000B14              L766:                             
+    00000B14              L770:                             
       dl2_main.c   508                            }
       dl2_main.c   509                            
       dl2_main.c   510                    }
@@ -2236,30 +2236,30 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
       dl2_main.c   512                    else if (menu_index==3)
     00000B14 60D3                   MOV         R13,R0
     00000B16 8803                   CMP/EQ      #3,R0
-    00000B18 8B82                   BF          L752
+    00000B18 8B82                   BF          L756
       dl2_main.c   513                    {
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   35
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   35
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
       dl2_main.c   514                            // about
-      dl2_main.c   515                            show_dialog(" 关于 ","DLv2.1,作者直径君和diaowinner,此程序以MPL开源,github.com/dia
-                         +owinner/DL",0,DLG_BTN_OK);
+      dl2_main.c   515                            show_dialog("About ","DLv2.1,more info please visit: github.com/diaowinner/DL",0,D
+                         +LG_BTN_OK);
     00000B1A E702                   MOV         #2,R7
-    00000B1C D814                   MOV.L       L794+68,R8 ; L395
+    00000B1C D814                   MOV.L       L798+68,R8 ; L568
     00000B1E E600                   MOV         #0,R6
-    00000B20 DA14                   MOV.L       L794+72,R10; L567
+    00000B20 DA14                   MOV.L       L798+72,R10; L569
     00000B22 65A3                   MOV         R10,R5
     00000B24 4E0B                   JSR         @R14
     00000B26 6483                   MOV         R8,R4
-    00000B28 AF7A                   BRA         L752
+    00000B28 AF7A                   BRA         L756
     00000B2A 0009                   NOP
-    00000B2C              L794:                             
+    00000B2C              L798:                             
     00000B2C <00000000>             .DATA.L     _Bdisp_AllClr_VRAM
     00000B30 <00000000>             .DATA.L     L556
     00000B34 <00000000>             .DATA.L     _PrintXY
@@ -2274,41 +2274,41 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000B58 <00000000>             .DATA.L     L487
     00000B5C <00000000>             .DATA.L     L489
     00000B60 <00000000>             .DATA.L     L491
-    00000B64 <00000000>             .DATA.L     L492
+    00000B64 <00000000>             .DATA.L     L565
     00000B68 <00000000>             .DATA.L     L494
     00000B6C <00000000>             .DATA.L     L495
-    00000B70 <00000000>             .DATA.L     L395
-    00000B74 <00000000>             .DATA.L     L567
-    00000B78              L754:                             
+    00000B70 <00000000>             .DATA.L     L568
+    00000B74 <00000000>             .DATA.L     L569
+    00000B78              L758:                             
       dl2_main.c   516                    }
       dl2_main.c   517    
       dl2_main.c   518            }
       dl2_main.c   519            // clean up
       dl2_main.c   520            free(page_offset);
-    00000B78 D30B                   MOV.L       L796+2,R3  ; _page_offset
-    00000B7A D20C                   MOV.L       L796+6,R2  ; _free
+    00000B78 D30B                   MOV.L       L800+2,R3  ; _page_offset
+    00000B7A D20C                   MOV.L       L800+6,R2  ; _free
     00000B7C 420B                   JSR         @R2
     00000B7E 6432                   MOV.L       @R3,R4
       dl2_main.c   521            close_font(sys_font);
-    00000B80 D10B                   MOV.L       L796+10,R1 ; _sys_font
-    00000B82 D30C                   MOV.L       L796+14,R3 ; _close_font
+    00000B80 D10B                   MOV.L       L800+10,R1 ; _sys_font
+    00000B82 D30C                   MOV.L       L800+14,R3 ; _close_font
     00000B84 430B                   JSR         @R3
     00000B86 6412                   MOV.L       @R1,R4
       dl2_main.c   522            close_font(usr_font);
-    00000B88 D20A                   MOV.L       L796+14,R2 ; _close_font
+    00000B88 D20A                   MOV.L       L800+14,R2 ; _close_font
     00000B8A 420B                   JSR         @R2
     00000B8C 64C2                   MOV.L       @R12,R4
-    00000B8E              L585:
+    00000B8E              L587:
       dl2_main.c   523    
       dl2_main.c   524            return 0;
     00000B8E E000                   MOV         #0,R0
       dl2_main.c   525    }
-    00000B90 9109                   MOV.W       L796,R1    ; H'0200
+    00000B90 9109                   MOV.W       L800,R1    ; H'0200
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   36
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   36
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -2323,7 +2323,7 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000BA0 6DF6                   MOV.L       @R15+,R13
     00000BA2 000B                   RTS
     00000BA4 6EF6                   MOV.L       @R15+,R14
-    00000BA6              L796:                             
+    00000BA6              L800:                             
     00000BA6 0200                   .DATA.W     H'0200
     00000BA8 <00000000>             .DATA.L     _page_offset
     00000BAC <00000000>             .DATA.L     _free
@@ -2344,10 +2344,10 @@ P_T 00000000              _InitializeSystem:               ; function: Initializ
                                                            ; frame size=0
       dl2_main.c   537    {
       dl2_main.c   538        return INIT_ADDIN_APPLICATION(isAppli, OptionNum);
-    00000000 D301                   MOV.L       L797+2,R3  ; _INIT_ADDIN_APPLICATION
+    00000000 D301                   MOV.L       L801+2,R3  ; _INIT_ADDIN_APPLICATION
     00000002 432B                   JMP         @R3
     00000004 0009                   NOP
-    00000006              L797:                             
+    00000006              L801:                             
     00000006 0000                   .DATA.W     0
     00000008 <00000000>             .DATA.L     _INIT_ADDIN_APPLICATION
       dl2_main.c   539    }
@@ -2374,7 +2374,7 @@ D   00000000              _font_modle:                     ; static: font_modle
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   37
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   37
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
@@ -2403,12 +2403,12 @@ C   00000000              L406:
     00000021 00                     .DATA.B     H'00
     00000022 00000002               .RES.W      1
     00000024              L483:
-    00000024 2020                   .SDATA      "  "
-    00000026 B5B1C7B0D2             .DATA.B     H'B5,H'B1,H'C7,H'B0,H'D2,H'B3
-             B3           
-    0000002C 253034642F             .SDATA      "%04d/%04d"
-             25303464     
-    00000035 00                     .DATA.B     H'00
+    00000024 5061676520             .SDATA      "Page %04d of%04d"
+             2530346420   
+             6F66253034   
+             64           
+    00000034 00                     .DATA.B     H'00
+    00000035 00000001               .RES.B      1
     00000036 00000002               .RES.W      1
     00000038              L487:
     00000038 5C5C666C73             .SDATA      "\\fls0\FONT8.dlf"
@@ -2419,39 +2419,38 @@ C   00000000              L406:
     00000049 00000001               .RES.B      1
     0000004A 00000002               .RES.W      1
     0000004C              L488:
-    0000004C 20                     .SDATA      " "
-    0000004D D7D6CCE5               .DATA.B     H'D7,H'D6,H'CC,H'E5
-    00000051 20                     .SDATA      " "
+    0000004C 20466F6E74             .SDATA      " Font "
+             20           
     00000052 00                     .DATA.B     H'00
     00000053 00000001               .RES.B      1
     00000054              L489:
-    00000054 D2D1B8FCBB             .DATA.B     H'D2,H'D1,H'B8,H'FC,H'BB,H'BB,H'CE,H'AA,H'D0,H'A1,H'D7,H'D6,H'CC,H'E5
-             BBCEAAD0A1   
-             D7D6CCE5     
-    00000062 2E                     .SDATA      "."
-    00000063 00                     .DATA.B     H'00
+    00000054 4368616E67             .SDATA      "Changed to 8."
+             656420746F   
+             20382E       
+    00000061 00                     .DATA.B     H'00
+    00000062 00000002               .RES.W      1
     00000064              L491:
     00000064 5C5C666C73             .SDATA      "\\fls0\FONT12.dlf"
              305C464F4E   
              5431322E64   
              6C66         
     00000075 00                     .DATA.B     H'00
+    00000076 00000002               .RES.W      1
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   38
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   38
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
-    00000076 00000002               .RES.W      1
     00000078              L492:
-    00000078 D2D1B8FCBB             .DATA.B     H'D2,H'D1,H'B8,H'FC,H'BB,H'BB,H'CE,H'AA,H'D6,H'D0,H'D7,H'D6,H'CC,H'E5
-             BBCEAAD6D0   
-             D7D6CCE5     
-    00000086 2E                     .SDATA      "."
-    00000087 00                     .DATA.B     H'00
+    00000078 4368616E67             .SDATA      "Changed to 12"
+             656420746F   
+             203132       
+    00000085 00                     .DATA.B     H'00
+    00000086 00000002               .RES.W      1
     00000088              L494:
     00000088 5C5C666C73             .SDATA      "\\fls0\FONT16.dlf"
              305C464F4E   
@@ -2460,20 +2459,18 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000099 00                     .DATA.B     H'00
     0000009A 00000002               .RES.W      1
     0000009C              L495:
-    0000009C D2D1B8FCBB             .DATA.B     H'D2,H'D1,H'B8,H'FC,H'BB,H'BB,H'CE,H'AA,H'B4,H'F3,H'D7,H'D6,H'CC,H'E5
-             BBCEAAB4F3   
-             D7D6CCE5     
-    000000AA 2E                     .SDATA      "."
-    000000AB 00                     .DATA.B     H'00
+    0000009C 4368616E67             .SDATA      "Changed to 16."
+             656420746F   
+             2031362E     
+    000000AA 00                     .DATA.B     H'00
+    000000AB 00000001               .RES.B      1
     000000AC              L497:
     000000AC 00                     .DATA.B     H'00
     000000AD 00000001               .RES.B      1
     000000AE 00000002               .RES.W      1
     000000B0              L498:
-    000000B0 20                     .SDATA      " "
-    000000B1 CAE4C8EBD2             .DATA.B     H'CA,H'E4,H'C8,H'EB,H'D2,H'B3,H'C2,H'EB
-             B3C2EB       
-    000000B9 20                     .SDATA      " "
+    000000B0 496E707574             .SDATA      "Input Page"
+             2050616765   
     000000BA 00                     .DATA.B     H'00
     000000BB 00000001               .RES.B      1
     000000BC              L499:
@@ -2481,68 +2478,57 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     000000BE 00                     .DATA.B     H'00
     000000BF 00000001               .RES.B      1
     000000C0              L503:
-    000000C0 B6C1C8A1CA             .DATA.B     H'B6,H'C1,H'C8,H'A1,H'CA,H'E9,H'C7,H'A9,H'00
-             E9C7A900     
+    000000C0 526561644D             .SDATA      "ReadMark"
+             61726B       
+    000000C8 00                     .DATA.B     H'00
     000000C9 00000001               .RES.B      1
     000000CA 00000002               .RES.W      1
     000000CC              L506:
-    000000CC B1A3B4E6CA             .DATA.B     H'B1,H'A3,H'B4,H'E6,H'CA,H'E9,H'C7,H'A9,H'00
-             E9C7A900     
+    000000CC 536176654D             .SDATA      "SaveMark"
+             61726B       
+    000000D4 00                     .DATA.B     H'00
     000000D5 00000001               .RES.B      1
     000000D6 00000002               .RES.W      1
     000000D8              L513:
-    000000D8 20                     .SDATA      " "
-    000000D9 B4EDCEF3               .DATA.B     H'B4,H'ED,H'CE,H'F3
-    000000DD 20                     .SDATA      " "
-    000000DE 00                     .DATA.B     H'00
-    000000DF 00000001               .RES.B      1
+    000000D8 4552524F52             .SDATA      "ERROR"
+    000000DD 00                     .DATA.B     H'00
+    000000DE 00000002               .RES.W      1
     000000E0              L514:
-    000000E0 20                     .SDATA      " "
-    000000E1 D5D2B2BBB5             .DATA.B     H'D5,H'D2,H'B2,H'BB,H'B5,H'BD,H'CE,H'C4,H'BC,H'FE
-             BDCEC4BCFE   
-    000000EB 20                     .SDATA      " "
+    000000E0 4E6F207375             .SDATA      "No such file"
+             6368206669   
+             6C65         
     000000EC 00                     .DATA.B     H'00
+    000000ED 00000001               .RES.B      1
+    000000EE 00000002               .RES.W      1
+    000000F0              L515:
+    000000F0 50726F6365             .SDATA      "Processing"
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   39
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   39
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
-    000000ED 00000001               .RES.B      1
-    000000EE 00000002               .RES.W      1
-    000000F0              L515:
-    000000F0 20                     .SDATA      " "
-    000000F1 B7D6D2B3D6             .DATA.B     H'B7,H'D6,H'D2,H'B3,H'D6,H'D0
-             D0           
-    000000F7 20                     .SDATA      " "
-    000000F8 00                     .DATA.B     H'00
-    000000F9 00000001               .RES.B      1
-    000000FA 00000002               .RES.W      1
+             7373696E67   
+    000000FA 00                     .DATA.B     H'00
+    000000FB 00000001               .RES.B      1
     000000FC              L516:
-    000000FC 20                     .SDATA      " "
-    000000FD C7EBC9D4B5             .DATA.B     H'C7,H'EB,H'C9,H'D4,H'B5,H'C8
-             C8           
-    00000103 20                     .SDATA      " "
-    00000104 00                     .DATA.B     H'00
-    00000105 00000001               .RES.B      1
-    00000106 00000002               .RES.W      1
+    000000FC 506C656173             .SDATA      "Please wait"
+             6520776169   
+             74           
+    00000107 00                     .DATA.B     H'00
     00000108              L518:
-    00000108 20                     .SDATA      " "
-    00000109 D2B3CAFDB9             .DATA.B     H'D2,H'B3,H'CA,H'FD,H'B9,H'FD,H'B6,H'E0
-             FDB6E0       
-    00000111 20                     .SDATA      " "
-    00000112 00                     .DATA.B     H'00
-    00000113 00000001               .RES.B      1
+    00000108 4D6F726520             .SDATA      "More Page"
+             50616765     
+    00000111 00                     .DATA.B     H'00
+    00000112 00000002               .RES.W      1
     00000114              L519:
-    00000114 20                     .SDATA      " "
-    00000115 C4DAB4E6B2             .DATA.B     H'C4,H'DA,H'B4,H'E6,H'B2,H'BB,H'D7,H'E3
-             BBD7E3       
-    0000011D 20                     .SDATA      " "
-    0000011E 00                     .DATA.B     H'00
-    0000011F 00000001               .RES.B      1
+    00000114 4D656D6F72             .SDATA      "MemoryOut"
+             794F7574     
+    0000011D 00                     .DATA.B     H'00
+    0000011E 00000002               .RES.W      1
     00000120              L551:
     00000120 5C5C666C73             .SDATA      "\\fls0\FONT8.dlf not found."
              305C464F4E   
@@ -2568,124 +2554,107 @@ SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
     00000168              L558:
     00000168 747874                 .SDATA      "txt"
     0000016B 00                     .DATA.B     H'00
+    0000016C              L559:
+    0000016C 4E6F207468             .SDATA      "No this file on StorMem"
+             6973206669   
+             6C65206F6E   
+             2053746F72   
+             4D656D       
+    00000183 00                     .DATA.B     H'00
+    00000184              L561:
+    00000184 4E6F207468             .SDATA      "No this file on SDCard"
+             6973206669   
+             6C65206F6E   
+             2053444361   
+             7264         
+    0000019A 00                     .DATA.B     H'00
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   40
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   40
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
-    0000016C              L559:
-    0000016C 20                     .SDATA      " "
-    0000016D C9C1B4E6D6             .DATA.B     H'C9,H'C1,H'B4,H'E6,H'D6,H'D0,H'CE,H'DE,H'B4,H'CB,H'C0,H'E0,H'CE,H'C4,H'BC,H'FE
-             D0CEDEB4CB   
-             C0E0CEC4BC   
-             FE           
-    0000017D 20                     .SDATA      " "
-    0000017E 00                     .DATA.B     H'00
-    0000017F 00000001               .RES.B      1
-    00000180              L561:
-    00000180 205344                 .SDATA      " SD"
-    00000183 BFA8D6D0CE             .DATA.B     H'BF,H'A8,H'D6,H'D0,H'CE,H'DE,H'B4,H'CB,H'C0,H'E0,H'CE,H'C4,H'BC,H'FE
-             DEB4CBC0E0   
-             CEC4BCFE     
-    00000191 20                     .SDATA      " "
-    00000192 00                     .DATA.B     H'00
-    00000193 00000001               .RES.B      1
-    00000194              L567:
-    00000194 444C76322E             .SDATA      "DLv2.1,"
-             312C         
-    0000019B D7F7D5DFD6             .DATA.B     H'D7,H'F7,H'D5,H'DF,H'D6,H'B1,H'BE,H'B6,H'BE,H'FD,H'BA,H'CD
-             B1BEB6BEFD   
-             BACD         
-    000001A7 6469616F77             .SDATA      "diaowinner,"
-             696E6E6572   
-             2C           
-    000001B2 B4CBB3CCD0             .DATA.B     H'B4,H'CB,H'B3,H'CC,H'D0,H'F2,H'D2,H'D4
-             F2D2D4       
-    000001BA 4D504C                 .SDATA      "MPL"
-    000001BD BFAAD4B4               .DATA.B     H'BF,H'AA,H'D4,H'B4
-    000001C1 2C67697468             .SDATA      ",github.com/diaowinner/DL"
+    0000019B 00000001               .RES.B      1
+    0000019C              L565:
+    0000019C 4368616E67             .SDATA      "Changed to 12."
+             656420746F   
+             2031322E     
+    000001AA 00                     .DATA.B     H'00
+    000001AB 00000001               .RES.B      1
+    000001AC              L568:
+    000001AC 41626F7574             .SDATA      "About "
+             20           
+    000001B2 00                     .DATA.B     H'00
+    000001B3 00000001               .RES.B      1
+    000001B4              L569:
+    000001B4 444C76322E             .SDATA      "DLv2.1,more info please visit: github.com/diaowinner/DL"
+             312C6D6F72   
+             6520696E66   
+             6F20706C65   
+             6173652076   
+             697369743A   
+             2067697468   
              75622E636F   
              6D2F646961   
              6F77696E6E   
              65722F444C   
-    000001DA 00                     .DATA.B     H'00
-    000001DB 00000001               .RES.B      1
-    000001DC              L392:
-    000001DC 20                     .SDATA      " "
-    000001DD B4F2BFAAC9             .DATA.B     H'B4,H'F2,H'BF,H'AA,H'C9,H'C1,H'B4,H'E6,H'CE,H'C4,H'BC,H'FE
-             C1B4E6CEC4   
-             BCFE         
-    000001E9 20                     .SDATA      " "
-    000001EA 00                     .DATA.B     H'00
-    000001EB 00000001               .RES.B      1
-    000001EC              L393:
-    000001EC 20                     .SDATA      " "
-    000001ED B4F2BFAA               .DATA.B     H'B4,H'F2,H'BF,H'AA
-    000001F1 5344                   .SDATA      "SD"
-    000001F3 BFA8CEC4BC             .DATA.B     H'BF,H'A8,H'CE,H'C4,H'BC,H'FE
-             FE           
-    000001F9 20                     .SDATA      " "
-    000001FA 00                     .DATA.B     H'00
-    000001FB 00000001               .RES.B      1
-    000001FC              L394:
-    000001FC 20                     .SDATA      " "
-    000001FD B8FCB8C4D4             .DATA.B     H'B8,H'FC,H'B8,H'C4,H'D4,H'C4,H'B6,H'C1,H'D7,H'D6,H'CC,H'E5
+    000001EB 00                     .DATA.B     H'00
+    000001EC              L392:
+    000001EC 4F70656E20             .SDATA      "Open Storage"
+             53746F7261   
+             6765         
+    000001F8 00                     .DATA.B     H'00
+    000001F9 00000001               .RES.B      1
+    000001FA 00000002               .RES.W      1
+    000001FC              L393:
+    000001FC 4F70656E20             .SDATA      "Open SDcard"
+             5344636172   
+             64           
+    00000207 00                     .DATA.B     H'00
+    00000208              L394:
+    00000208 4368616E67             .SDATA      "Change Font"
+             6520466F6E   
+             74           
+    00000213 00                     .DATA.B     H'00
+    00000214              L395:
+    00000214 2041626F75             .SDATA      " About"
+             74           
+    0000021A 00                     .DATA.B     H'00
+    0000021B 00000001               .RES.B      1
+    0000021C              L397:
+    0000021C 436E676520             .SDATA      "Cnge Font"
+             466F6E74     
+    00000225 00                     .DATA.B     H'00
+    00000226 00000002               .RES.W      1
+    00000228              L398:
+    00000228 4A756D7020             .SDATA      "Jump To"
+             546F         
+    0000022F 00                     .DATA.B     H'00
+    00000230              L399:
 
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE   41
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE   41
 
 
 SCT OFFSET   CODE       C LABEL     INSTRUCTION OPERAND    COMMENT
 
-             C4B6C1D7D6   
-             CCE5         
-    00000209 20                     .SDATA      " "
-    0000020A 00                     .DATA.B     H'00
-    0000020B 00000001               .RES.B      1
-    0000020C              L395:
-    0000020C 20                     .SDATA      " "
-    0000020D B9D8D3DA               .DATA.B     H'B9,H'D8,H'D3,H'DA
-    00000211 20                     .SDATA      " "
-    00000212 00                     .DATA.B     H'00
-    00000213 00000001               .RES.B      1
-    00000214              L397:
-    00000214 20                     .SDATA      " "
-    00000215 B8FCB8C4D7             .DATA.B     H'B8,H'FC,H'B8,H'C4,H'D7,H'D6,H'CC,H'E5
-             D6CCE5       
-    0000021D 20                     .SDATA      " "
-    0000021E 00                     .DATA.B     H'00
-    0000021F 00000001               .RES.B      1
-    00000220              L398:
-    00000220 20                     .SDATA      " "
-    00000221 CCF8D2B3               .DATA.B     H'CC,H'F8,H'D2,H'B3
-    00000225 20                     .SDATA      " "
-    00000226 00                     .DATA.B     H'00
-    00000227 00000001               .RES.B      1
-    00000228              L399:
-    00000228 20                     .SDATA      " "
-    00000229 B6C1C8A1CA             .DATA.B     H'B6,H'C1,H'C8,H'A1,H'CA,H'E9,H'C7,H'A9
-             E9C7A9       
-    00000231 20                     .SDATA      " "
-    00000232 00                     .DATA.B     H'00
-    00000233 00000001               .RES.B      1
-    00000234              L400:
-    00000234 20                     .SDATA      " "
-    00000235 B1A3B4E6CA             .DATA.B     H'B1,H'A3,H'B4,H'E6,H'CA,H'E9,H'C7,H'A9
-             E9C7A9       
-    0000023D 20                     .SDATA      " "
-    0000023E 00                     .DATA.B     H'00
-    0000023F 00000001               .RES.B      1
-    00000240              L401:
-    00000240 20                     .SDATA      " "
-    00000241 CDCBB3F6               .DATA.B     H'CD,H'CB,H'B3,H'F6
-    00000245 20                     .SDATA      " "
-    00000246 00                     .DATA.B     H'00
+    00000230 5265616420             .SDATA      "Read Mark"
+             4D61726B     
+    00000239 00                     .DATA.B     H'00
+    0000023A 00000002               .RES.W      1
+    0000023C              L400:
+    0000023C 5361766520             .SDATA      "Save Mark"
+             4D61726B     
+    00000245 00                     .DATA.B     H'00
+    00000246 00000002               .RES.W      1
+    00000248              L401:
+    00000248 45786974               .SDATA      "Exit"
+    0000024C 00                     .DATA.B     H'00
 B   00000000              _page_offset:                    ; static: page_offset
     00000000 00000004               .RES.L      1
     00000004              _file_name:                      ; static: file_name
@@ -2704,7 +2673,38 @@ B_B 00000000              _BR_Size:                        ; static: BR_Size
 
 
 
-SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 16-May-2020 12:41:02  PAGE    1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SH SERIES C/C++ Compiler (Ver. 6.0C)                                                                 17-May-2020 11:39:35  PAGE    1
 
 
 ******** STATISTICS INFORMATION ********
@@ -2729,7 +2729,7 @@ COMPILED SOURCE LINE:      541
 PROGRAM  SECTION (P):                               00000BB8 Byte(s)
 PROGRAM  SECTION (P_BR_Size):                       00000000 Byte(s)
 PROGRAM  SECTION (P_TOP):                           0000000C Byte(s)
-CONSTANT SECTION (C):                               00000247 Byte(s)
+CONSTANT SECTION (C):                               0000024D Byte(s)
 CONSTANT SECTION (C_BR_Size):                       00000000 Byte(s)
 CONSTANT SECTION (C_TOP):                           00000000 Byte(s)
 DATA     SECTION (D):                               0000003C Byte(s)
@@ -2739,7 +2739,7 @@ BSS      SECTION (B):                               0000001C Byte(s)
 BSS      SECTION (B_BR_Size):                       00000004 Byte(s)
 BSS      SECTION (B_TOP):                           00000000 Byte(s)
 
- TOTAL PROGRAM SIZE: 00000E67 Byte(s)
+ TOTAL PROGRAM SIZE: 00000E6D Byte(s)
 
 
 
@@ -2747,7 +2747,7 @@ BSS      SECTION (B_TOP):                           00000000 Byte(s)
 
 NUMBER OF EXTERNAL REFERENCE SYMBOLS:           35
 NUMBER OF EXTERNAL DEFINITION SYMBOLS:          22
-NUMBER OF INTERNAL/EXTERNAL SYMBOLS:           191
+NUMBER OF INTERNAL/EXTERNAL SYMBOLS:           193
 
 
 
@@ -2773,5 +2773,5 @@ NUMBER OF INTERNAL/EXTERNAL SYMBOLS:           191
 *** COMMAND PARAMETER ***
 
 
-  -subcommand=C:\Users\ADMINI~1\AppData\Local\Temp\hmkACC9.tmp 
+  -subcommand=C:\Users\ADMINI~1\AppData\Local\Temp\hmk823F.tmp 
 
