@@ -6,11 +6,11 @@ if exist CHREADER.G1A  del CHREADER.G1A
 
 cd debug
 if exist FXADDINror.bin  del FXADDINror.bin
-"F:\SDKcalc\OS\SH\Bin\Hmake.exe" Addin.mak
+"C:\CASIOSDK\OS\SH\Bin\Hmake.exe" Addin.mak
 cd ..
 if not exist debug\FXADDINror.bin  goto error
 
-"F:\SDKcalc\Tools\MakeAddinHeader363.exe" "E:\DLsrc"
+"C:\CASIOSDK\Tools\MakeAddinHeader363.exe" "C:\Mac\Home\Desktop\DL-2.1.3Ð¡×ÖÐÞ¸´°æ\src"
 if not exist CHREADER.G1A  goto error
 echo Build has completed.
 goto end

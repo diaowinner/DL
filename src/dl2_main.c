@@ -1,8 +1,5 @@
 /******************************************************************
-* DLiterature  v2.1                                               *
-*******************************************************************
-*    Copyright 2013 Anderain Lovelace                             *
-*    anderain.develop@gmail.com                                   *
+* DLiterature  v2.1.3  大小写修复版           *
 *******************************************************************/
 
 #include "dl2_all.h"
@@ -38,10 +35,11 @@ void save_page_mark ()
 
 	file = open_file(mark_file_name,_OPENMODE_WRITE);
 	
-	write_file(file,&page_now,sizeof(int));
-	write_file(file,mark,sizeof(int)*MARK_SIZE);
-
-	close_file(file);
+    if(file >= 0) {
+	    write_file(file,&page_now,sizeof(int));
+	    write_file(file,mark,sizeof(int)*MARK_SIZE);
+	    close_file(file);
+    }
 }
 
 
@@ -110,9 +108,6 @@ int split_page ()
 		{
 			if ((*p) & 0x80)
 			{
-#ifdef SPLIT_TEST
-				print_chs_char(x,y,0,*p,*(p+1));	
-#endif
 				p+=2;
 				page_bytes+=2;
 				x += usr_font->cwidth;
@@ -125,18 +120,10 @@ int split_page ()
 			}
 			else if (*p == 0)
 			{
-				if (last_page)
-				{
-					x = SCR_WIDTH,y = SCR_HEIGHT;
-				}
-				else
-					break;
+				break;
 			}
 			else
 			{
-#ifdef SPLIT_TEST
-				print_asc_char(x,y,0,*p);	
-#endif
 				++p;
 				page_bytes++;
 			}
@@ -146,26 +133,20 @@ int split_page ()
 				y += usr_font->height;
 				if (y + usr_font->height > SCR_HEIGHT)
 				{
-					// page_end
 					y = 0;
 					bytes_read += page_bytes;
-					// save page offset
 					if (page_size>=PAGE_MAX)
 					{
 						free(buf);	
 						return -1;
 					}
-#ifdef SPLIT_TEST
-					waitkey();all_clr();
-#endif
 					page_offset[page_size++] = page_bytes;
 					page_bytes = 0;
 					if (*p==0) break;
 				}
-			}// if
+			}
 		}
-		if (bytes_read==0)
-			last_page = TRUE;
+		if (bytes_read==0) break;
 		else
 			file_pos += bytes_read;
 	}
@@ -198,12 +179,14 @@ int select_page_mark (const char * title)
 		if (redraw)
 		{
 			int i,y=sys_font->height+4,x=0;
+            all_clr();
+	        print_chs_str(left,0,0,title);
 			for (i=0;i<MARK_SIZE;++i,y+=sys_font->height)
 			{
 				sprintf(buf," -%d- %04d/%04d  ",i,mark[i]+1,page_size);
 				print_chs_str(x,y,index==i,buf);
 			}
-			redraw = TRUE;
+			redraw = FALSE;
 		}
 		GetKey(&key);
 		if (key==KEY_CTRL_UP)
@@ -231,6 +214,7 @@ void start_read ()
 	uint	key;
 	int		redraw = 1;
 	int		menu_index = 0;
+    FONTFILE * temp_loader = NULL;
 
 	file_pos = get_page_offset();
 	
@@ -296,30 +280,27 @@ void start_read ()
 			if (menu_index==-1) continue;
 			else if (menu_index == 0)
 			{
-				close_font(usr_font);
-				if (font_modle == 16)
-				{
-					usr_font = open_font("\\\\fls0\\FONT8.dlf");
-					show_dialog(" 字体 ", "已更换为小字体.", 0, DLG_BTN_OK);
-					font_modle = 8;
-				}
-				else if (font_modle == 8)
-				{
-	
-					usr_font = open_font("\\\\fls0\\FONT12.dlf");
-					show_dialog(" 字体 ", "已更换为中字体.", 0, DLG_BTN_OK);
-					font_modle = 12;
-				}
-				else if (font_modle == 12)
-				{
-	
-					usr_font = open_font("\\\\fls0\\FONT16.dlf");
-					show_dialog(" 字体 ", "已更换为大字体.", 0, DLG_BTN_OK);
-					font_modle = 16;
-				}
+				/* 【修复重点：阅读内切换逻辑】 */
+				if (font_modle == 12) {
+                    // 想切小字体，既然菜单显示正常，直接借用 sys_font 绝对不出错
+                    usr_font = (FONTFILE*)sys_font;
+                    font_modle = 8;
+                    show_dialog(" 字体 ", "已更换为小字体.", 0, DLG_BTN_OK);
+                } else {
+                    // 尝试切回 12 号，自动兼容大小写
+                    temp_loader = open_font("\\\\fls0\\FONT12.dlf");
+                    if (temp_loader == NULL) temp_loader = open_font("\\\\fls0\\font12.dlf");
 
-
-
+                    if (temp_loader != NULL) {
+                        usr_font = temp_loader;
+                        font_modle = 12;
+                        show_dialog(" 字体 ", "已更换为中字体.", 0, DLG_BTN_OK);
+                    } else {
+                        // 实在不行就继续用小字体顶着，决不能变白
+                        usr_font = (FONTFILE*)sys_font;
+                        show_dialog(" 提示 ", "无法加载，维持原样.", DLG_ICON_NO, DLG_BTN_OK);
+                    }
+                }
 			}
 			else if (menu_index==1)
 			{
@@ -439,21 +420,27 @@ int show_menu (int def_index,int count,const char * item[],int x,int y)
 
 int AddIn_main(int isAppli, unsigned short OptionNum)
 {
-	int menu_index = 0,r,temp_file_name[128];
-	
-	//all_clr();
+	int menu_index = 0,r;
+    char temp_file_name[128];
+    FONTFILE * temp_loader = NULL;
 
-	sys_font = open_font(DEF_FONT_FILE_NAME);
+	/* 【初始化：菜单设为 8，阅读设为 12】 */
+    // 菜单强制用 8 号字，自动兼容大小写
+	sys_font = open_font("\\\\fls0\\FONT8.dlf");
+	if (sys_font == NULL) sys_font = open_font("\\\\fls0\\font8.dlf");
+
+    // 阅读默认用 12 号字
+	usr_font = open_font("\\\\fls0\\FONT12.dlf");
+    if (usr_font == NULL) usr_font = open_font("\\\\fls0\\font12.dlf");
+
+    // 如果阅读用的 12 号字加载失败了，强行把阅读器指向菜单的 8 号字内存指针。
+    // 这样绘图函数检查 if(def_font==NULL) 就绝对不会触发，文字必出！
+	if (usr_font == NULL) usr_font = (FONTFILE*)sys_font;
+    if (sys_font == NULL) sys_font = (FONTFILE*)usr_font;
+
 	if (sys_font == NULL)
 	{
-		printmini(0,0,(uchar*)DEF_FONT_FILE_NAME " not found.",MINI_OVER);
-		waitkey();
-		return 0;
-	}
-	usr_font = open_font("\\\\fls0\\FONT12.dlf");
-	if (usr_font == NULL)
-	{
-		printmini(0,0,(uchar*)"FONT12.dlf not found.",MINI_OVER);
+		printmini(0,0,(uchar*)"ERROR: All fonts missing!",MINI_OVER);
 		waitkey();
 		return 0;
 	}
@@ -485,49 +472,39 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
 		}
 		else if (menu_index==2)
 		{
-			close_font(usr_font);
-			if (font_modle == 16)
-			{
-				usr_font = open_font("\\\\fls0\\FONT8.dlf");
+            /* 【主循环切换：逻辑同理】 */
+			if (font_modle == 12) {
+                // 切 8 号，既然菜单在用，直接借用，决不读硬盘
+				usr_font = (FONTFILE*)sys_font; 
 				show_dialog(" 字体 ", "已更换为小字体.", 0, DLG_BTN_OK);
 				font_modle = 8;
-			}
-			else if (font_modle == 8)
-			{
+			} else {
+                // 切 12 号，自动兼容大小写
+				temp_loader = open_font("\\\\fls0\\FONT12.dlf");
+                if (temp_loader == NULL) temp_loader = open_font("\\\\fls0\\font12.dlf");
 
-				usr_font = open_font("\\\\fls0\\FONT12.dlf");
-				show_dialog(" 字体 ", "已更换为中字体.", 0, DLG_BTN_OK);
-				font_modle = 12;
+                if (temp_loader != NULL) {
+                    usr_font = temp_loader;
+                    font_modle = 12;
+                    show_dialog(" 字体 ", "已更换为中字体.", 0, DLG_BTN_OK);
+                } else {
+                    usr_font = (FONTFILE*)sys_font;
+                }
 			}
-			else if (font_modle == 12)
-			{
-
-				usr_font = open_font("\\\\fls0\\FONT16.dlf");
-				show_dialog(" 字体 ", "已更换为大字体.", 0, DLG_BTN_OK);
-				font_modle = 16;
-			}
-			
 		}
-	
 		else if (menu_index==3)
 		{
-			// about
-			show_dialog(" 关于 ","DLv2.1,作者直径君和diaowinner,此程序以MPL开源,github.com/diaowinner/DL",0,DLG_BTN_OK);
+			show_dialog(" 关于 ","DL v2.1.3 Stable Fix. github.com/diaowinner/DL",0,DLG_BTN_OK);
 		}
-
 	}
-	// clean up
+
 	free(page_offset);
+    // 这里也要做保护，不要关闭同一个指针两次
+	if (usr_font != sys_font) close_font(usr_font);
 	close_font(sys_font);
-	close_font(usr_font);
 
 	return 0;
 }
-
-
-
-
-
 
 #pragma section _BR_Size
 unsigned long BR_Size;
@@ -538,4 +515,3 @@ int InitializeSystem(int isAppli, unsigned short OptionNum)
     return INIT_ADDIN_APPLICATION(isAppli, OptionNum);
 }
 #pragma section
-
